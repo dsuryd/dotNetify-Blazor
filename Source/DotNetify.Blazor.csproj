@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <IsPackable>true</IsPackable>
+    <LangVersion>7.3</LangVersion>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <RootNamespace>DotNetify.Blazor</RootNamespace>
+    <Version>1.0.0-RC1</Version>
+    <PackageId>DotNetify.Blazor</PackageId>
+    <Authors>Dicky Suryadi</Authors>
+    <Product>DotNetify.Blazor</Product>
+    <Description>Real-time, reactive MVVM library for Blazor web assembly apps.</Description>
+    <Copyright>Copyright 2019-2020</Copyright>
+    <PackageProjectUrl>https://dotnetify.net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/dsuryd/dotNetify</RepositoryUrl>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIcon>dotnetify.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.4" />
+     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+     <None Include="wwwroot\dotnetify-blazor.js" />
+     <None Include="LICENSE.md">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+     </None>
+     <None Include="wwwroot\dotnetify.png">
+       <Pack>True</Pack>
+       <PackagePath></PackagePath>
+     </None>
+  </ItemGroup>
+</Project>
