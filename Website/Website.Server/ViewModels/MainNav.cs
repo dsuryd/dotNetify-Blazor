@@ -22,7 +22,7 @@ namespace Website.Server
                },
                new NavGroup
                {
-                  Label = "Further Examples",
+                  Label = "Examples with Elements",
                   Routes = new NavRoute[]
                   {
                      new NavRoute("Dashboard", "dashboard"),
@@ -36,16 +36,11 @@ namespace Website.Server
                   Routes = new NavRoute[]
                   {
                      new NavRoute (".NET Client", "dotnetclient"),
-                     //new NavRoute ("Connection Management", this.GetRoute (nameof (Route.Connection))),
                      new NavRoute ("CRUD", "crud"),
                      new NavRoute ("Dependency Injection", "di"),
                      new NavRoute ("Filter", "filter"),
-                     //new NavRoute ("Local Mode", this.GetRoute (nameof (Route.LocalMode))),
                      new NavRoute ("Middleware", "middleware"),
-                     new NavRoute ("Multicast","multicast"),
-                     //new NavRoute ("Routing", this.GetRoute (nameof (Route.Routing))),
-                     //new NavRoute ("Security", this.GetRoute (nameof (Route.Security))),
-                     //new NavRoute ("Web API Mode", this.GetRoute (nameof (Route.WebApiMode))),
+                     new NavRoute ("Multicast","multicast")
                   },
                   IsExpanded = true
                }

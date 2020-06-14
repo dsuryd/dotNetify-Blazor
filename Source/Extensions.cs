@@ -6,11 +6,16 @@ namespace DotNetify.Blazor
 {
    public static class Extensions
    {
-      public static IServiceCollection UseDotNetifyBlazor(this IServiceCollection services)
+      /// <summary>
+      /// Adds DotNetify-Blazor services to the service collection.
+      /// </summary>
+      public static IServiceCollection AddDotNetifyBlazor(this IServiceCollection services)
       {
          services.AddTransient(typeof(IVMProxy), typeof(VMProxy));
          return services;
       }
+
+      #region Internal
 
       internal static T As<T>(this object arg) => arg.As(s => JsonConvert.DeserializeObject<T>(s));
 
@@ -32,10 +37,7 @@ namespace DotNetify.Blazor
             throw new JsonSerializationException($"Cannot deserialize {arg} to {typeof(T)}", ex);
          }
       }
-
-      /// <summary>
-      /// Converts a boolean value to its string literal "true" or "false".
-      /// </summary>
-      public static string ToBoolString(this bool arg) => arg.ToString().ToLower();
    }
+
+   #endregion Internal
 }

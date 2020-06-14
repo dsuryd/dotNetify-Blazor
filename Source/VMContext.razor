@@ -7,11 +7,27 @@
 </d-vm-context>
 
 @code {
+   /// <summary>
+   /// Name of the view model to connect with.
+   /// </summary>
    [Parameter] public string VM { get; set; }
-   [Parameter] public object Options { get; set; }
-   [Parameter] public RenderFragment ChildContent { get; set; }
+
+   /// <summary>
+   /// Configuration options that can be sent along with request to connect to a server-side view model.
+   /// </summary>
+   [Parameter] public VMConnectOptions Options { get; set; }
+
+   /// <summary>
+   /// Occurs on receiving state update from the server-side view model.
+   /// </summary>
    [Parameter] public Action<TState> OnStateChange { get; set; }
+
+   /// <summary>
+   /// Occurs on receiving a custom event from a DotNetify-Element's web component.
+   /// </summary>
    [Parameter] public Action<ElementEvent> OnElementEvent { get; set; }
+
+   [Parameter] public RenderFragment ChildContent { get; set; }
 
    private readonly string[] DomSelectorPrefixes = new string[] { "#", ".", "[" };
 

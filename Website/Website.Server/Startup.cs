@@ -12,8 +12,8 @@ namespace Website.Server
       // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
       public void ConfigureServices(IServiceCollection services)
       {
-         services.AddCors(options => options.AddPolicy(name: "BlazorClient", builder => builder
-            .WithOrigins("http://localhost:8080")
+         services.AddCors(options => options.AddPolicy(name: "CorsPolicy", builder => builder
+            .WithOrigins("http://localhost:8080")  // Website.Client URL.
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials()));
@@ -29,7 +29,7 @@ namespace Website.Server
       // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
       public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
       {
-         app.UseCors("BlazorClient");
+         app.UseCors("CorsPolicy");
          app.UseWebSockets();
 
          app.UseDotNetify(config =>

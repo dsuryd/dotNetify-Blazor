@@ -1,10 +1,9 @@
-﻿@page "/dashboard"
-@using Newtonsoft.Json;
+﻿@page "/dashboard" 
 
-<VMContext VM="Dashboard" OnStateChange=@((object e) => { state = e; StateHasChanged(); })>
-    @if (state == null)
+<VMContext VM="Dashboard" OnStateChange=@((object _) => { isLoading = false; StateHasChanged(); })>
+    @if (isLoading)
     {
-        <p><em>Loading...</em></p>
+        <div class="spinner lds-hourglass" />
     }
     else
     {
@@ -48,5 +47,5 @@
 </VMContext>
 
 @code {
-    private object state;
+    private bool isLoading = true;
 }

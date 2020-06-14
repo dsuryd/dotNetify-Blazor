@@ -9,7 +9,7 @@ namespace Website.Client
       public static async Task Main(string[] args)
       {
          var builder = WebAssemblyHostBuilder.CreateDefault(args);
-         builder.Services.UseDotNetifyBlazor();
+         builder.Services.AddDotNetifyBlazor();
          builder.RootComponents.Add<App>("app");
          await builder.Build().RunAsync();
       }

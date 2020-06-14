@@ -5,7 +5,7 @@ namespace DotNetify.Blazor
 {
    public class JSCallback
    {
-      private Action<object> _callback;
+      private readonly Action<object> _callback;
 
       public JSCallback(Action<object> callback)
       {
