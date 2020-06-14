@@ -1,67 +1,40 @@
 ﻿@page "/form"
 
-<VMContext  VM="CustomerForm" TState="object" OnElementEvent="@HandleElementEvent">
+<VMContext VM="CustomerForm" TState="object" OnElementEvent="HandleElementEvent">
     <d-panel>
         <d-data-grid id="Contacts"></d-data-grid>
-        <d-form id="_Form" plaintext="@IsViewing">
-            <d-panel>
-                <d-panel horizontal="true">
-                    <d-panel horizontal="true">
-                        <d-button id="_Edit" label="Edit" enable="@IsViewing"></d-button>
-                        <d-button id="Submit" label="Update" submit="true" show="@IsEditing"></d-button>
-                        <d-button id="_Cancel" label="Cancel" cancel="true" secondary="true" show="@IsEditing"></d-button>
-                    </d-panel>
-                    <d-panel right="true">
-                        <d-button id="_New" label="New Customer" enable="@IsViewing"></d-button>
-                    </d-panel>
-                </d-panel>
-                <d-tab margin="1.5rem 0">
-                    <d-tab-item itemkey="basic" label="Basic Info">
-                        <d-panel horizontal="true" nogap="true">
-                            <d-panel horizontal="true">
-                                <d-cell header="Person" flex="true">
-                                    <PersonForm />
-                                </d-cell>
-                                <d-cell header="Phone" flex="1" borders="top, right, bottom">
-                                    <PhoneForm />
-                                </d-cell>
-                            </d-panel>
-                        </d-panel>
-                    </d-tab-item>
-                    <d-tab-item itemkey="address" label="Address">
-                        <d-panel>
-                            <d-cell header="Primary Address">
-                                <AddressForm />
-                            </d-cell>
-                        </d-panel>
-                    </d-tab-item>
-                </d-tab>
-            </d-panel>
-            <NewFormDialog Show="@showDialog" OnClosed="@ToggleDialog"></NewFormDialog>
-        </d-form>
+        @if (editMode)
+        {
+            <d-form id="_Form">
+                <FormBody EditMode="true" />
+            </d-form>
+        }
+        else
+        {
+            <d-form id="_Form" plaintext="true">
+                <FormBody EditMode="false" />
+            </d-form>
+            @if (showDialog)
+            {
+                <NewFormDialog OnClosed="@ToggleDialog"></NewFormDialog>
+            }
+        }
     </d-panel>
 </VMContext>
 
 @code {
-   private bool hasState = false;
-   private bool editMode = false;
+   private bool editMode;
    private bool showDialog = false;
-
-   private string IsEditing => editMode.ToString().ToLower();
-   private string IsViewing => (!editMode).ToString().ToLower();
 
    private void HandleElementEvent(ElementEvent elementEvent)
    {
        if (elementEvent.TargetId == "_Edit" || elementEvent.TargetId == "_Cancel" || elementEvent.TargetId == "Submit")
-       {
            editMode = !editMode;
-           StateHasChanged();
-       }
        else if (elementEvent.TargetId == "_New")
-       {
            ToggleDialog();
-       }
-   }
+
+       StateHasChanged();
+   } 
 
    private void ToggleDialog()
    {

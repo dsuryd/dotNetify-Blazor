@@ -6,17 +6,17 @@
 </VMContext>
 
 @code {
-    HelloWorldState state;
+   private HelloWorldState state;
 
-    class HelloWorldState
-    {
-        public string Greetings { get; set; }
-        public string ServerTime { get; set; }
-    }
+   private class HelloWorldState
+   {
+       public string Greetings { get; set; }
+       public string ServerTime { get; set; }
+   }
 
-    void HandleStateChange(HelloWorldState newState)
-    {
-        state = newState;
-        StateHasChanged();
-    }
+   private void HandleStateChange(HelloWorldState newState)
+   {
+       state = newState;
+       StateHasChanged();
+   }
 }

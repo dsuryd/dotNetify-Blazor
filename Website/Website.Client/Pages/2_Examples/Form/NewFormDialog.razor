@@ -1,5 +1,5 @@
 ﻿<VMContext VM="NewCustomerForm" TState="object" OnElementEvent="HandleElementEvent">
-    <d-modal id="_Dialog" header="New Customer" open="@IsOpen" large="true">
+    <d-modal id="_Dialog" header="New Customer" open="true" large="true">
         <d-tab>
             <d-tab-item key="Person" label="Person">
                 <PersonForm />
@@ -21,16 +21,11 @@
 </VMContext>
 
 @code {
-   [Parameter] public Action OnClosed { get; set; }
-   [Parameter] public bool Show { get; set; }
+    [Parameter] public Action OnClosed { get; set; }
 
-   private string IsOpen => Show.ToString().ToLower();
-
-   private void HandleElementEvent(ElementEvent e)
-   {
-       if (e.TargetId == "_Cancel" || e.TargetId == "Submit")
-       {
-           OnClosed?.Invoke();
-       }
-   }
+    private void HandleElementEvent(ElementEvent e)
+    {
+        if (e.TargetId == "_Cancel" || e.TargetId == "Submit")
+        OnClosed?.Invoke();
+    }
 }

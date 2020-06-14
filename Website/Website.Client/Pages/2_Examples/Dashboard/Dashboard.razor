@@ -1,6 +1,6 @@
 ﻿@page "/dashboard" 
 
-<VMContext VM="Dashboard" OnStateChange=@((object _) => { isLoading = false; StateHasChanged(); })>
+<VMContext VM="Dashboard" OnStateChange="(object _) => { isLoading = false; StateHasChanged(); }">
     @if (isLoading)
     {
         <div class="spinner lds-hourglass" />
@@ -35,12 +35,10 @@
                         </d-panel>
                     </d-panel>
                 </d-card>
-                <d-panel horizontal="true" center="true">
-                    <d-card style="width: 500px">
-                        <h4>Server Usage</h4>
-                        <d-bar-chart id="ServerUsage" height="70px"></d-bar-chart>
-                    </d-card>
-                </d-panel>
+                <d-card>
+                    <h4>Server Usage</h4>
+                    <d-bar-chart id="ServerUsage" height="50px"></d-bar-chart>
+                </d-card>
             </d-panel>
         </d-panel>
     }

@@ -3,34 +3,34 @@
         <p>@state?.Greetings</p>
         <input type="text" @bind="person.FirstName" />
         <input type="text" @bind="person.LastName" />
-        <button @onclick="@HandleSubmitAsync">Submit</button>
+        <button @onclick="@HandleSubmit">Submit</button>
     </div>
 </VMContext>
 
 @code {
-    VMContext<ServerUpdateState> vm;
-    ServerUpdateState state;
-    Person person = new Person();
+   private VMContext<ServerUpdateState> vm;
+   private ServerUpdateState state;
+   private Person person = new Person();
 
-    class ServerUpdateState
-    {
-        public string Greetings { get; set; }
-    }
+   private class ServerUpdateState
+   {
+       public string Greetings { get; set; }
+   }
 
-    class Person
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-    }
+   private class Person
+   {
+       public string FirstName { get; set; }
+       public string LastName { get; set; }
+   }
 
-    async Task HandleSubmitAsync()
-    {
-        await vm.DispatchAsync("Submit", person);
-    }
+   private void HandleSubmit()
+   {
+       _ = vm.DispatchAsync("Submit", person);
+   }
 
-    void HandleStateChange(ServerUpdateState newState)
-    {
-        state = newState;
-        StateHasChanged();
-    }
+   private void HandleStateChange(ServerUpdateState newState)
+   {
+       state = newState;
+       StateHasChanged();
+   }
 }
