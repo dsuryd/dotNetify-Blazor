@@ -1,0 +1,21 @@
+﻿<d-tab margin="1.5rem 0">
+    <d-tab-item itemkey="basic" label="Basic Info">
+        <d-panel horizontal="true" nogap="true">
+            <d-panel horizontal="true">
+                <d-cell header="Person" flex="true">
+                    <PersonForm />
+                </d-cell>
+                <d-cell header="Phone" flex="1" borders="top, right, bottom">
+                    <PhoneForm />
+                </d-cell>
+            </d-panel>
+        </d-panel>
+    </d-tab-item>
+    <d-tab-item itemkey="address" label="Address">
+        <d-panel>
+            <d-cell header="Primary Address">
+                <AddressForm />
+            </d-cell>
+        </d-panel>
+    </d-tab-item>
+</d-tab>

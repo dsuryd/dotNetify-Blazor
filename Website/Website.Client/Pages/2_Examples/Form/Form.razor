@@ -3,28 +3,34 @@
 <VMContext VM="CustomerForm" TState="object" OnElementEvent="HandleElementEvent">
     <d-panel>
         <d-data-grid id="Contacts"></d-data-grid>
-        @if (editMode)
+        <d-form id="_Form" @key="IsViewing" plaintext="@IsViewing">
+            <d-panel>
+                <d-panel horizontal="true">
+                    <d-panel horizontal="true">
+                        <d-button id="_Edit" label="Edit" enable="@IsViewing"></d-button>
+                        <d-button id="Submit" label="Update" submit="true" show="@IsEditing"></d-button>
+                        <d-button id="_Cancel" label="Cancel" cancel="true" secondary="true" show="@IsEditing"></d-button>
+                    </d-panel>
+                    <d-panel right="true">
+                        <d-button id="_New" label="New Customer" enable="@IsViewing"></d-button>
+                    </d-panel>
+                </d-panel>
+                <FormTabs />
+            </d-panel>
+        </d-form>
+        @if (showDialog)
         {
-            <d-form id="_Form">
-                <FormBody EditMode="true" />
-            </d-form>
-        }
-        else
-        {
-            <d-form id="_Form" plaintext="true">
-                <FormBody EditMode="false" />
-            </d-form>
-            @if (showDialog)
-            {
-                <NewFormDialog OnClosed="@ToggleDialog"></NewFormDialog>
-            }
+            <NewFormDialog OnClosed="@ToggleDialog"></NewFormDialog>
         }
     </d-panel>
 </VMContext>
 
 @code {
    private bool editMode;
-   private bool showDialog = false;
+   private bool showDialog;
+
+   private string IsEditing => editMode.ToString().ToLower();
+   private string IsViewing => (!editMode).ToString().ToLower();
 
    private void HandleElementEvent(ElementEvent elementEvent)
    {
@@ -34,7 +40,7 @@
            ToggleDialog();
 
        StateHasChanged();
-   } 
+   }
 
    private void ToggleDialog()
    {
