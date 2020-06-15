@@ -1,0 +1,58 @@
+﻿<d-panel class="card">
+    <d-panel class="card-body">
+        <h4>Activities</h4>
+        @foreach (var activity in Activities)
+        {
+            <d-panel horizontal="true" css=@getCss(activity)>
+                <div>
+                    <span class="user-icon">@getInitial(activity.PersonName)</span>
+                    @activity.PersonName
+                </div>
+                <d-panel right="true" middle="true">
+                    <div>
+                        @activity.Status
+                        <span class="status-icon" />
+                    </div>
+                </d-panel>
+            </d-panel>
+        }
+    </d-panel>
+</d-panel>
+
+@code {
+   [Parameter] public Dashboard.Activity[] Activities { get; set; }
+
+   private static readonly string[] statusColors = new string[] { "", "silver", "limegreen", "red", "gray", "orange" };
+   private static readonly string[] userIconColors = new string[] { "#00ce6f", "#a95df0", "#2ea7eb" };
+
+   private char getInitial(string name) => name.ToUpper()[0];
+
+   private string getCss(Dashboard.Activity activity)
+   {
+       string iconColor = userIconColors[getInitial(activity.PersonName) % 3];
+       string statusColor = statusColors[activity.StatusId];
+
+       return $@"
+            .user-icon {{
+                display: inline-flex;
+                flex-direction: column;
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                color: white;
+                background: {iconColor};
+                font-weight: bold;
+                margin-right: 1rem;
+                text-align: center;
+            }}
+            .status-icon {{
+                height: 14px;
+                width: 14px;
+                margin-left: 1rem;
+                background-color: {statusColor};
+                border-radius: 50%;
+                display: inline-block;
+            }}
+        ";
+   }
+}

@@ -3,7 +3,7 @@ dotnetify_blazor = {
     _eventListeners: [],
     addEventListener: function (event, elem, callbackHelper) {
         if (typeof elem === 'string') elem = document.querySelector(elem);
-        if (!(elem && typeof elem.addEventListener === 'function')) throw "Cannot listen to event '" + event + "': invalid ElementRef";
+        if (!(elem && typeof elem.addEventListener === 'function')) throw "Cannot listen to event '" + event + "': invalid ElementReference";
 
         // Blazor component inside React container must be temporarily moved out until the container is rendered,
         // otherwise it will re-rendered as React children and lose its association with the Blazor app.
@@ -52,7 +52,16 @@ dotnetify_blazor = {
             }
         }
 
-        const callback = e => callbackHelper.invokeMethodAsync('Callback', JSON.stringify(e.detail));
+        const callback = e => {
+            try {
+                callbackHelper.invokeMethodAsync('Callback', JSON.stringify(e.detail));
+            }
+            catch (ex) {
+                // Ignore expected exception from input elements emitting its DOM ref.
+                if (e.detail.eventName !== "onInputRef")
+                    console.error(ex, e.detail);
+            }
+        }
         if (!dotnetify_blazor._eventListeners.some(x => x.elem === elem && x.event === event)) {
             dotnetify_blazor._eventListeners.push({ elem, event, remove: () => elem.removeEventListener(event, callback) });
             elem.addEventListener(event, callback);

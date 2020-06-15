@@ -45,6 +45,7 @@ namespace Website.Server
             app.UseWebAssemblyDebugging();
          }
 
+         app.UsePathBase("/" + MainNav.PATH_BASE);
          app.UseBlazorFrameworkFiles();
          app.UseStaticFiles();
 
