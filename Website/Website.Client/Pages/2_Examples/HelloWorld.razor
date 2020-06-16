@@ -1,0 +1,51 @@
+﻿@page "/helloworld"
+
+<VMContext @ref="vm" VM="HelloWorldVM" OnStateChange="(HelloWorldState newState) => { state = newState; StateHasChanged(); }">
+  <d-panel>
+    <d-panel horizontal="true" css=">div{flex: 1}">
+      <div>
+        <label>First name:</label>
+        <input type="text" class="form-control" @bind="FirstName">
+      </div>
+      <div>
+        <label>Last name:</label>
+        <input type="text" class="form-control" @bind="LastName">
+      </div>
+    </d-panel>
+    <div>
+      Full name is <b>@state.FullName</b>
+    </div>
+  </d-panel> 
+</VMContext>
+
+@code {
+   private HelloWorldState state = new HelloWorldState();
+   private VMContext<HelloWorldState> vm;
+
+   private class HelloWorldState
+   {
+       public string FirstName { get; set; }
+       public string LastName { get; set; }
+       public string FullName { get; set; }
+   }
+
+   private string FirstName
+   {
+       get { return state.FirstName; }
+       set
+       {
+           state.FirstName = value;
+           _ = vm.DispatchAsync(nameof(HelloWorld.FirstName), value);
+       }
+   }
+
+   private string LastName
+   {
+       get { return state.LastName; }
+       set
+       {
+           state.LastName = value;
+           _ = vm.DispatchAsync(nameof(HelloWorld.LastName), value);
+       }
+   }
+}

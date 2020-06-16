@@ -19,6 +19,7 @@ namespace Website.Server
                   Routes = new NavRoute[]
                   {
                      new NavRoute("Counter", PATH_BASE + "/counter"),
+                     new NavRoute("Hello World", PATH_BASE + "/helloworld"),
                   },
                   IsExpanded = true
                },

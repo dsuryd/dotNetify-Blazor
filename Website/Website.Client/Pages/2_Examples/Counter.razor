@@ -2,7 +2,7 @@
 
 <h1>Counter</h1>
 
-<VMContext @ref="@vm" VM="Counter" OnStateChange="(CounterState state) => HandleStateChange(state)">
+<VMContext @ref="vm" VM="Counter" OnStateChange="(CounterState state) => HandleStateChange(state)">
     <p>Current count: @state?.CurrentCount</p>
 
     <button class="btn btn-primary" @onclick="IncrementCountAsync">Click me</button>
