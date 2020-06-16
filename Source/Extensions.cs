@@ -1,4 +1,21 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿/*
+Copyright 2020 Dicky Suryadi
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+ */
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.JSInterop;
 using Newtonsoft.Json;
 using System;
 
@@ -9,9 +26,16 @@ namespace DotNetify.Blazor
       /// <summary>
       /// Adds DotNetify-Blazor services to the service collection.
       /// </summary>
-      public static IServiceCollection AddDotNetifyBlazor(this IServiceCollection services)
+      public static IServiceCollection AddDotNetifyBlazor(this IServiceCollection services, Action<ClientConfiguration> options = null)
       {
          services.AddTransient(typeof(IVMProxy), typeof(VMProxy));
+
+         var config = new ClientConfiguration();
+         options?.Invoke(config);
+
+         var jsInterop = new JSInterop(services.BuildServiceProvider().GetRequiredService<IJSRuntime>());
+         _ = jsInterop.ConfigureDotNetifyAsync(config);
+
          return services;
       }
 

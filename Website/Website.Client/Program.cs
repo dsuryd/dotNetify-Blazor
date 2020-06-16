@@ -10,7 +10,12 @@ namespace Website.Client
       {
          var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-         builder.Services.AddDotNetifyBlazor();
+         builder.Services.AddDotNetifyBlazor(config =>
+         {
+#if DEBUG
+            config.Debug = true;
+#endif
+         });
 
          builder.RootComponents.Add<App>("app");
          await builder.Build().RunAsync();

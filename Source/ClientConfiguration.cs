@@ -14,25 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-using Microsoft.JSInterop;
-using System;
-
 namespace DotNetify.Blazor
 {
-   public class JSCallback
+   public class ClientConfiguration
    {
-      private readonly Action<object> _callback;
+      /// <summary>
+      /// Enable debug output on the browser's developer console.
+      /// </summary>
+      public bool Debug { get; set; }
 
-      public JSCallback(Action<object> callback)
-      {
-         _callback = callback;
-      }
-
-      [JSInvokable]
-      public string Callback(object arg)
-      {
-         _callback(arg);
-         return string.Empty;
-      }
+      /// <summary>
+      /// DotNetify hub server URL.
+      /// </summary>
+      public string HubServerUrl { get; set; }
    }
 }

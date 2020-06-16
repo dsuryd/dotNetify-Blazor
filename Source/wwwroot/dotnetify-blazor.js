@@ -67,8 +67,13 @@ dotnetify_blazor = {
             elem.addEventListener(event, callback);
         }
     },
+    configureDotNetify: function (config) {
+        dotnetify.debug = config.debug;
+        if (config.hubServerUrl)
+            dotnetify.hubServerUrl = config.hubServerUrl;
+    },
     dispatch: function (elem, state) {
-        if (!(elem && elem.vm)) throw "ElementRef must reference 'd-vm-context'";
+        if (!(elem && elem.vm)) throw "ElementReference must reference 'd-vm-context'";
         elem.vm.$dispatch(JSON.parse(state));
     },
     removeAllEventListeners: function (elem) {
