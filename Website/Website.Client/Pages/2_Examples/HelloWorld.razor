@@ -14,13 +14,13 @@
       </div>
     </section>
     <div>
-      Full name is <b>@state?.FullName</b>
+      Full name is <b>@state.FullName</b>
     </div>
   </d-panel> 
 </VMContext>
 
 @code {
-   private IHelloWorldState state;
+   private IHelloWorldState state = TypeProxy.CreateInstance<IHelloWorldState>();
    private VMContext<IHelloWorldState> vm;
 
    public interface IHelloWorldState
@@ -32,7 +32,7 @@
 
    private string FirstName
    {
-       get { return state?.FirstName; }
+       get { return state.FirstName; }
        set
        {
            state.FirstName = value;
@@ -42,7 +42,7 @@
 
    private string LastName
    {
-       get { return state?.LastName; }
+       get { return state.LastName; }
        set
        {
            state.LastName = value;

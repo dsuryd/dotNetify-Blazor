@@ -20,7 +20,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace DotNetify.Blazor
 {
-   public interface IVMProxy : IDisposable
+   internal interface IVMProxy : IDisposable
    {
       /// <summary>
       /// Reference to the associated 'd-vm-context' HTML markup.

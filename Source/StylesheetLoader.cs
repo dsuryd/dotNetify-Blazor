@@ -22,15 +22,6 @@ using System.Text.RegularExpressions;
 
 namespace DotNetify.Blazor
 {
-   public interface IStylesheet
-   {
-      /// <summary>
-      /// Reads a stylesheet.
-      /// </summary>
-      /// <param name="fileName">Stylesheet file name.</param>
-      public string Read(string fileName);
-   }
-
    public class StylesheetLoader : IStylesheet
    {
       private readonly List<KeyValuePair<string, string>> _stylesheets = new List<KeyValuePair<string, string>>();

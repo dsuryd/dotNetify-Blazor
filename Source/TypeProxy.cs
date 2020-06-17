@@ -23,13 +23,13 @@ namespace DotNetify.Blazor
       public void Set<T>(string propName, T value) => _propValues[propName] = value;
    }
 
-   public static class ObjectBuilder
+   public static class TypeProxy
    {
       private static ModuleBuilder _builder;
       private static readonly Dictionary<string, Type> _createdTypes = new Dictionary<string, Type>();
       private static readonly object _sync = new object();
 
-      public static Type CreateObjectType<T>()
+      public static Type CreateType<T>()
       {
          lock (_sync)
          {
@@ -69,9 +69,9 @@ namespace DotNetify.Blazor
          }
       }
 
-      public static T Create<T>() where T : class
+      public static T CreateInstance<T>() where T : class
       {
-         return (T) Activator.CreateInstance(CreateObjectType<T>());
+         return (T) Activator.CreateInstance(CreateType<T>());
       }
 
       private static ModuleBuilder GetModuleBuilder()

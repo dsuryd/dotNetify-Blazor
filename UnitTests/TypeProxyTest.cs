@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace UnitTests
 {
    [TestClass]
-   public class ObjectBuilderTest
+   public class TypeProxyTest
    {
       public interface IState
       {
@@ -22,7 +22,7 @@ namespace UnitTests
       [TestMethod]
       public void Build_CanCreateObject()
       {
-         var obj = ObjectBuilder.Create<IState>();
+         var obj = TypeProxy.CreateInstance<IState>();
 
          obj.StringValue = "hello";
          obj.IntValue = int.MaxValue;
@@ -42,7 +42,7 @@ namespace UnitTests
       [TestMethod]
       public void Build_CanSerializeObject()
       {
-         var obj = ObjectBuilder.Create<IState>();
+         var obj = TypeProxy.CreateInstance<IState>();
 
          obj.StringValue = "hello";
          obj.IntValue = int.MaxValue;
@@ -59,7 +59,7 @@ namespace UnitTests
       {
          string data = "{\"StringValue\":\"hello\",\"IntValue\":2147483647,\"DoubleValue\":3.141592653589793,\"StringEnumerable\":[\"Alpha\",\"Omega\"],\"IntEnumerable\":[-2147483648,2147483647]}";
 
-         Type objType = ObjectBuilder.CreateObjectType<IState>();
+         Type objType = TypeProxy.CreateType<IState>();
          IState obj = (IState) JsonConvert.DeserializeObject(data, objType);
 
          Assert.AreEqual("hello", obj.StringValue);
