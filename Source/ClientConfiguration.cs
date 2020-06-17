@@ -15,6 +15,7 @@ limitations under the License.
  */
 
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace DotNetify.Blazor
 {
@@ -33,6 +34,7 @@ namespace DotNetify.Blazor
       /// <summary>
       /// Assemblies to look for stylesheet files.
       /// </summary>
+      [JsonIgnore]
       public Assembly[] StylesheetAssemblies { get; set; }
    }
 }
