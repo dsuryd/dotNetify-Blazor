@@ -51,7 +51,13 @@ namespace DotNetify.Blazor
 
       #region Internal
 
-      internal static T As<T>(this object arg) => arg.As(s => JsonConvert.DeserializeObject<T>(s));
+      internal static T As<T>(this object arg)
+      {
+         if (typeof(T).IsInterface)
+            return arg.As(s => (T) JsonConvert.DeserializeObject(s, ObjectBuilder.CreateObjectType<T>()));
+
+         return arg.As(s => JsonConvert.DeserializeObject<T>(s));
+      }
 
       internal static T As<T>(this object arg, Func<string, T> deserialize)
       {

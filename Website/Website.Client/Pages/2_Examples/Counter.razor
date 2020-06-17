@@ -2,22 +2,22 @@
 
 <h1>Counter</h1>
 
-<VMContext @ref="vm" VM="Counter" OnStateChange="(CounterState state) => HandleStateChange(state)">
+<VMContext @ref="vm" VM="Counter" OnStateChange="(ICounterState state) => HandleStateChange(state)">
     <p>Current count: @state?.CurrentCount</p>
 
     <button class="btn btn-primary" @onclick="IncrementCountAsync">Click me</button>
 </VMContext>
 
 @code {
-   CounterState state;
-   VMContext<CounterState> vm;
+   ICounterState state;
+   VMContext<ICounterState> vm;
 
-   public class CounterState
+   public interface ICounterState
    {
-       public int CurrentCount { get; set; }
+       int CurrentCount { get; set; }
    }
 
-   void HandleStateChange(CounterState newState )
+   void HandleStateChange(ICounterState newState )
    {
        state = newState;
        StateHasChanged();

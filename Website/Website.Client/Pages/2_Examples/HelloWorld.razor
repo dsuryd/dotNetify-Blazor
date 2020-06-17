@@ -1,7 +1,7 @@
 ﻿@page "/helloworld"
 @inject IStylesheet Stylesheet
 
-<VMContext @ref="vm" VM="HelloWorldVM" OnStateChange="(HelloWorldState newState) => { state = newState; StateHasChanged(); }">
+<VMContext @ref="vm" VM="HelloWorldVM" OnStateChange="(IHelloWorldState newState) => { state = newState; StateHasChanged(); }">
   <d-panel css="@Stylesheet.Read("HelloWorld")">
     <section>
       <div>
@@ -14,25 +14,25 @@
       </div>
     </section>
     <div>
-      Full name is <b>@state.FullName</b>
+      Full name is <b>@state?.FullName</b>
     </div>
   </d-panel> 
 </VMContext>
 
 @code {
-   private HelloWorldState state = new HelloWorldState();
-   private VMContext<HelloWorldState> vm;
+   private IHelloWorldState state;
+   private VMContext<IHelloWorldState> vm;
 
-   private class HelloWorldState
+   public interface IHelloWorldState
    {
-       public string FirstName { get; set; }
-       public string LastName { get; set; }
-       public string FullName { get; set; }
+       string FirstName { get; set; }
+       string LastName { get; set; }
+       string FullName { get; set; }
    }
 
    private string FirstName
    {
-       get { return state.FirstName; }
+       get { return state?.FirstName; }
        set
        {
            state.FirstName = value;
@@ -42,7 +42,7 @@
 
    private string LastName
    {
-       get { return state.LastName; }
+       get { return state?.LastName; }
        set
        {
            state.LastName = value;
