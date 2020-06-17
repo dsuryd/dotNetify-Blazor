@@ -37,7 +37,6 @@ namespace DotNetify.Blazor
             {
                using Stream stream = assembly.GetManifestResourceStream(stylesheetFile);
                using StreamReader reader = new StreamReader(stream);
-               System.Diagnostics.Trace.WriteLine(stylesheetFile);
                return new KeyValuePair<string, string>(stylesheetFile, reader.ReadToEnd());
             });
 

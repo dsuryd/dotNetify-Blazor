@@ -20,6 +20,10 @@
     <PackageIcon>dotnetify.png</PackageIcon>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
   </ItemGroup>

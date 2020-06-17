@@ -47,7 +47,7 @@ namespace DotNetify.Blazor
 
       public async Task ConfigureDotNetifyAsync(ClientConfiguration clientConfiguration)
       {
-         await _jsRuntime.InvokeAsync<object>("dotnetify_blazor.configureDotNetify", clientConfiguration);
+         await _jsRuntime.InvokeAsync<object>("dotnetify_blazor.configure", clientConfiguration);
       }
 
       public async Task DispatchAsync(ElementReference elementRef, string data)

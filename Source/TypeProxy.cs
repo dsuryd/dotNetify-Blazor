@@ -1,4 +1,20 @@
-﻿using System;
+﻿/*
+Copyright 2020 Dicky Suryadi
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -6,11 +22,27 @@ using System.Reflection.Emit;
 
 namespace DotNetify.Blazor
 {
-   public abstract class BaseObject<TInterface>
+   /// <summary>
+   /// Use this attribute on a property to make any changed value to be dispatched to the server view model.
+   /// </summary>
+   [AttributeUsage(AttributeTargets.Property | AttributeTargets.Interface)]
+   public class WatchAttribute : Attribute
+   {
+   }
+
+   /// <summary>
+   /// Required interface for view model state that wants to use watch attributes.
+   /// </summary>
+   public interface IVMState
+   {
+      IVMProxy VMProxy { get; set; }
+   }
+
+   public abstract class BaseObject<TInterface> : IVMState
    {
       private readonly Dictionary<string, object> _propValues = new Dictionary<string, object>();
 
-      internal TInterface Interface { get; set; }
+      public IVMProxy VMProxy { get; set; }
 
       public T Get<T>(string propName)
       {
@@ -21,8 +53,17 @@ namespace DotNetify.Blazor
       }
 
       public void Set<T>(string propName, T value) => _propValues[propName] = value;
+
+      public void SetWithWatch<T>(string propName, T value)
+      {
+         _propValues[propName] = value;
+         VMProxy?.DispatchAsync(propName, value);
+      }
    }
 
+   /// <summary>
+   /// Creates proxies for types, but limited to public properties.
+   /// </summary>
    public static class TypeProxy
    {
       private static ModuleBuilder _builder;
@@ -114,7 +155,9 @@ namespace DotNetify.Blazor
             {
                var setMethod = prop.GetSetMethod();
 
-               var baseStubMethod = baseType.GetMethod("Set").MakeGenericMethod(setMethod.GetParameters().First().ParameterType);
+               var baseTypeSetMethodName = prop.GetCustomAttribute<WatchAttribute>() != null ? "SetWithWatch" : "Set";
+
+               var baseStubMethod = baseType.GetMethod(baseTypeSetMethodName).MakeGenericMethod(setMethod.GetParameters().First().ParameterType);
                var paramTypes = setMethod.GetParameters().Select(paramInfo => paramInfo.ParameterType).ToArray();
                var methodBuilder = typeBuilder.DefineMethod(setMethod.Name, MethodAttributes.Public | MethodAttributes.Virtual, typeof(void), paramTypes);
                ILGenerator il = methodBuilder.GetILGenerator();

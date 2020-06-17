@@ -42,7 +42,7 @@ namespace DotNetify.Blazor
          foreach (var assembly in config.StylesheetAssemblies)
             stylesheetLoader.Load(assembly);
 
-         // Execute scripts to set specified dotNetify configuration.
+         // Execute scripts to set dotNetify configuration.
          var jsInterop = new JSInterop(services.BuildServiceProvider().GetRequiredService<IJSRuntime>());
          _ = jsInterop.ConfigureDotNetifyAsync(config);
 

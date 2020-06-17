@@ -19,8 +19,14 @@ namespace UnitTests
          IEnumerable<int> IntEnumerable { get; set; }
       }
 
+      public interface IWatchedState
+      {
+         [Watch]
+         public string StringValue { get; set; }
+      }
+
       [TestMethod]
-      public void Build_CanCreateObject()
+      public void TypeProxy_CanCreateObjectFromInterface()
       {
          var obj = TypeProxy.CreateInstance<IState>();
 
@@ -40,7 +46,7 @@ namespace UnitTests
       }
 
       [TestMethod]
-      public void Build_CanSerializeObject()
+      public void TypeProxy_CanSerializeObject()
       {
          var obj = TypeProxy.CreateInstance<IState>();
 
@@ -55,7 +61,7 @@ namespace UnitTests
       }
 
       [TestMethod]
-      public void Build_CanDeserializeObject()
+      public void TypeProxy_CanDeserializeObject()
       {
          string data = "{\"StringValue\":\"hello\",\"IntValue\":2147483647,\"DoubleValue\":3.141592653589793,\"StringEnumerable\":[\"Alpha\",\"Omega\"],\"IntEnumerable\":[-2147483648,2147483647]}";
 

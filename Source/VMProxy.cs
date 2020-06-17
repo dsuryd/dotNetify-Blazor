@@ -36,6 +36,8 @@ namespace DotNetify.Blazor
          set => _vmContextElemRef = value;
       }
 
+      public bool ServerUpdate { get; set; }
+
       public VMProxy(IJSRuntime jsRuntime)
       {
          _jsInterop = new JSInterop(jsRuntime);
@@ -59,15 +61,20 @@ namespace DotNetify.Blazor
       public Task HandleStateChangeAsync<TState>(Action<TState> stateChangeCallback)
       {
          if (!_vmContextElemRef.HasValue)
-            throw new ArgumentNullException(nameof(ElementReference));
+            throw new ArgumentNullException(nameof(ElementRef));
 
-         return HandleDomEventAsync("onStateChange", ElementRef, stateChangeCallback);
+         return HandleDomEventAsync("onStateChange", ElementRef, (TState state) =>
+         {
+            if (state is IVMState)
+               (state as IVMState).VMProxy = this;
+            stateChangeCallback(state);
+         });
       }
 
       public Task HandleElementEventAsync(Action<ElementEvent> eventCallback)
       {
          if (!_vmContextElemRef.HasValue)
-            throw new ArgumentNullException(nameof(ElementReference));
+            throw new ArgumentNullException(nameof(ElementRef));
 
          return HandleDomEventAsync("onElementEvent", ElementRef, eventCallback);
       }

@@ -6,11 +6,11 @@
     <section>
       <div>
         <label>First name:</label>
-        <input type="text" class="form-control" @bind="FirstName">
+        <input type="text" class="form-control" @bind="state.FirstName">
       </div>
       <div>
         <label>Last name:</label>
-        <input type="text" class="form-control" @bind="LastName">
+        <input type="text" class="form-control" @bind="state.LastName">
       </div>
     </section>
     <div>
@@ -25,28 +25,8 @@
 
    public interface IHelloWorldState
    {
-       string FirstName { get; set; }
-       string LastName { get; set; }
+       [Watch] string FirstName { get; set; }
+       [Watch] string LastName { get; set; }
        string FullName { get; set; }
-   }
-
-   private string FirstName
-   {
-       get { return state.FirstName; }
-       set
-       {
-           state.FirstName = value;
-           _ = vm.DispatchAsync(nameof(HelloWorld.FirstName), value);
-       }
-   }
-
-   private string LastName
-   {
-       get { return state.LastName; }
-       set
-       {
-           state.LastName = value;
-           _ = vm.DispatchAsync(nameof(HelloWorld.LastName), value);
-       }
    }
 }
