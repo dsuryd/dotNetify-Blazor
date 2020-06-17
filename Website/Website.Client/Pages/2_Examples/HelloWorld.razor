@@ -1,8 +1,9 @@
 ﻿@page "/helloworld"
+@inject IStylesheet Stylesheet
 
 <VMContext @ref="vm" VM="HelloWorldVM" OnStateChange="(HelloWorldState newState) => { state = newState; StateHasChanged(); }">
-  <d-panel>
-    <d-panel horizontal="true" css=">div{flex: 1}">
+  <d-panel css="@Stylesheet.Read("HelloWorld")">
+    <section>
       <div>
         <label>First name:</label>
         <input type="text" class="form-control" @bind="FirstName">
@@ -11,7 +12,7 @@
         <label>Last name:</label>
         <input type="text" class="form-control" @bind="LastName">
       </div>
-    </d-panel>
+    </section>
     <div>
       Full name is <b>@state.FullName</b>
     </div>

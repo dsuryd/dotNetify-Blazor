@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "wwwroot/dotnetify-blazor.min.js",
+    "inputFiles": [
+      "wwwroot/dotnetify-blazor.js"
+    ]
+  }
+]

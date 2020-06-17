@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
+using System.Reflection;
+
 namespace DotNetify.Blazor
 {
    public class ClientConfiguration
@@ -27,5 +29,10 @@ namespace DotNetify.Blazor
       /// DotNetify hub server URL.
       /// </summary>
       public string HubServerUrl { get; set; }
+
+      /// <summary>
+      /// Assemblies to look for stylesheet files.
+      /// </summary>
+      public Assembly[] StylesheetAssemblies { get; set; }
    }
 }

@@ -14,10 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
+using System;
+using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
 using Newtonsoft.Json;
-using System;
 
 namespace DotNetify.Blazor
 {
@@ -28,11 +29,20 @@ namespace DotNetify.Blazor
       /// </summary>
       public static IServiceCollection AddDotNetifyBlazor(this IServiceCollection services, Action<ClientConfiguration> options = null)
       {
-         services.AddTransient(typeof(IVMProxy), typeof(VMProxy));
-
          var config = new ClientConfiguration();
+         var stylesheetLoader = new StylesheetLoader();
+
+         services.AddTransient<IVMProxy, VMProxy>();
+         services.AddSingleton<IStylesheet>(stylesheetLoader);
+
          options?.Invoke(config);
 
+         // Load stylesheet files from the specified assembly(ies).
+         config.StylesheetAssemblies ??= new Assembly[] { Assembly.GetCallingAssembly() };
+         foreach (var assembly in config.StylesheetAssemblies)
+            stylesheetLoader.Load(assembly);
+
+         // Execute scripts to set specified dotNetify configuration.
          var jsInterop = new JSInterop(services.BuildServiceProvider().GetRequiredService<IJSRuntime>());
          _ = jsInterop.ConfigureDotNetifyAsync(config);
 
@@ -42,10 +52,6 @@ namespace DotNetify.Blazor
       #region Internal
 
       internal static T As<T>(this object arg) => arg.As(s => JsonConvert.DeserializeObject<T>(s));
-
-      internal static T As<T>(this object arg, JsonSerializerSettings settings) => arg.As(s => JsonConvert.DeserializeObject<T>(s, settings));
-
-      internal static T As<T>(this object arg, params JsonConverter[] converters) => arg.As(s => JsonConvert.DeserializeObject<T>(s, converters));
 
       internal static T As<T>(this object arg, Func<string, T> deserialize)
       {
