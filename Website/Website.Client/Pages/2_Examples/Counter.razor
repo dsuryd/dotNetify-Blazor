@@ -1,30 +1,17 @@
 ﻿@page "/counter"
 
 <h1>Counter</h1>
-
-<VMContext @ref="vm" VM="Counter" OnStateChange="(ICounterState state) => HandleStateChange(state)">
+<VMContext VM="Counter" OnStateChange="(ICounterState newState) => { state = newState; StateHasChanged(); }">
     <p>Current count: @state?.CurrentCount</p>
-
-    <button class="btn btn-primary" @onclick="IncrementCountAsync">Click me</button>
+    <button class="btn btn-primary" @onclick="state.IncrementCount">Click me</button>
 </VMContext>
 
 @code {
-   ICounterState state;
-   VMContext<ICounterState> vm;
+   ICounterState state = TypeProxy.CreateInstance<ICounterState>();
 
    public interface ICounterState
    {
        int CurrentCount { get; set; }
-   }
-
-   void HandleStateChange(ICounterState newState )
-   {
-       state = newState;
-       StateHasChanged();
-   }
-
-   async void IncrementCountAsync()
-   {
-       await vm.DispatchAsync("IncrementCount");
+       void IncrementCount();
    }
 }

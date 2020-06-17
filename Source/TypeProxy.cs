@@ -22,20 +22,11 @@ using System.Reflection.Emit;
 
 namespace DotNetify.Blazor
 {
-   /// <summary>
-   /// Use this attribute on a property to make any changed value to be dispatched to the server view model.
-   /// </summary>
-   [AttributeUsage(AttributeTargets.Property | AttributeTargets.Interface)]
-   public class WatchAttribute : Attribute
+   public class TypeProxyException : Exception
    {
-   }
-
-   /// <summary>
-   /// Required interface for view model state that wants to use watch attributes.
-   /// </summary>
-   public interface IVMState
-   {
-      IVMProxy VMProxy { get; set; }
+      public TypeProxyException(string message) : base(message)
+      {
+      }
    }
 
    public abstract class BaseObject<TInterface> : IVMState
@@ -59,6 +50,12 @@ namespace DotNetify.Blazor
          _propValues[propName] = value;
          VMProxy?.DispatchAsync(propName, value);
       }
+
+      public void DispatchMethod(string methodName, List<object> args)
+      {
+         var value = args?.FirstOrDefault();
+         VMProxy?.DispatchAsync(methodName, value);
+      }
    }
 
    /// <summary>
@@ -72,6 +69,9 @@ namespace DotNetify.Blazor
 
       public static Type CreateType<T>()
       {
+         if (!typeof(T).IsInterface)
+            throw new TypeProxyException("TypeProxy is only for interface.");
+
          lock (_sync)
          {
             Type ifaceType = typeof(T);
@@ -100,6 +100,7 @@ namespace DotNetify.Blazor
                typesToBuild.ForEach(type =>
                {
                   typeBuilder.BuildProperties(type, baseType);
+                  typeBuilder.BuildMethods(type, baseType);
                });
 
                objectType = typeBuilder.CreateTypeInfo();
@@ -169,6 +170,75 @@ namespace DotNetify.Blazor
 
                propBuilder.SetSetMethod(methodBuilder);
             }
+         }
+      }
+
+      private static void BuildMethods(this TypeBuilder typeBuilder, Type ifaceType, Type baseType)
+      {
+         foreach (MethodInfo method in ifaceType.GetMethods(BindingFlags.Instance | BindingFlags.Public).Where(method => !method.IsSpecialName))
+         {
+            if (method.ReturnType != typeof(void))
+               throw new TypeProxyException($"Could not create proxy for '{ifaceType.Name}' because method '{method.Name}' is not a void method.");
+
+            var baseMethod = baseType.GetMethod("DispatchMethod");
+            var paramTypes = method.GetParameters().Select(paramInfo => paramInfo.ParameterType).ToArray();
+            var methodBuilder = typeBuilder.DefineMethod(method.Name, MethodAttributes.Public | MethodAttributes.Virtual, method.ReturnType, paramTypes);
+
+            var genericArgumentArray = method.GetGenericArguments();
+            if (genericArgumentArray.Any())
+               methodBuilder.DefineGenericParameters(genericArgumentArray.Select(arg => arg.Name).ToArray());
+
+            ILGenerator il = methodBuilder.GetILGenerator();
+
+            il.BuildArgumentList(method.GetParameters());
+            il.Emit(OpCodes.Ldarg_0);
+            il.Emit(OpCodes.Ldstr, method.Name);
+            il.Emit(OpCodes.Ldloc_0);
+
+            il.Emit(OpCodes.Call, baseMethod);
+            il.Emit(OpCodes.Ret);
+         }
+      }
+
+      private static void BuildArgumentList(this ILGenerator il, ParameterInfo[] methodParams)
+      {
+         var addListMethod = typeof(List<object>).GetMethod("Add", new Type[] { typeof(object) });
+         var byRefValueTypes = new Dictionary<Type, Action<Type>>
+            {
+                {typeof(bool),      t => il.Emit(OpCodes.Ldind_U1) },
+                {typeof(short),     t => il.Emit(OpCodes.Ldind_I2) },
+                {typeof(int),       t => il.Emit(OpCodes.Ldind_I4) },
+                {typeof(float),     t => il.Emit(OpCodes.Ldind_R4) },
+                {typeof(double),    t => il.Emit(OpCodes.Ldind_R8) },
+                {typeof(decimal),   t => il.Emit(OpCodes.Ldobj, t) }
+            };
+
+         il.DeclareLocal(typeof(List<object>), true);
+         il.Emit(OpCodes.Newobj, typeof(List<object>).GetConstructor(Type.EmptyTypes));
+         il.Emit(OpCodes.Stloc_0);
+
+         for (int i = 0; i < methodParams.Length; i++)
+         {
+            var methodParam = methodParams[i];
+
+            il.Emit(OpCodes.Ldloc_0);
+            il.Emit(OpCodes.Ldarg, i + 1);
+
+            if (methodParam.ParameterType.IsByRef || methodParam.IsOut)
+            {
+               var type = methodParam.ParameterType.GetElementType();
+               if (byRefValueTypes.ContainsKey(type))
+               {
+                  byRefValueTypes[type](type);
+                  il.Emit(OpCodes.Box, type);
+               }
+               else
+                  il.Emit(OpCodes.Ldind_Ref);
+            }
+            else if (methodParam.ParameterType.IsValueType || methodParam.ParameterType.IsGenericParameter)
+               il.Emit(OpCodes.Box, methodParams[i].ParameterType);
+
+            il.EmitCall(OpCodes.Callvirt, addListMethod, null);
          }
       }
 

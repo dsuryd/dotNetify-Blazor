@@ -16,6 +16,7 @@ limitations under the License.
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -58,6 +59,32 @@ namespace DotNetify.Blazor
       public async Task RemoveAllEventListenersAsync(ElementReference elementRef)
       {
          await _jsRuntime.InvokeAsync<object>("dotnetify_blazor.removeAllEventListeners", elementRef);
+      }
+   }
+
+   internal static class JSInteropExtensions
+   {
+      public static T As<T>(this object arg)
+      {
+         if (typeof(T).IsInterface)
+            return arg.As(s => (T) JsonConvert.DeserializeObject(s, TypeProxy.CreateType<T>()));
+
+         return arg.As(s => JsonConvert.DeserializeObject<T>(s));
+      }
+
+      public static T As<T>(this object arg, Func<string, T> deserialize)
+      {
+         if (typeof(T) == typeof(object))
+            return (T) arg;
+
+         try
+         {
+            return typeof(T) == typeof(string) ? (T) (object) $"{arg}" : deserialize($"{arg}");
+         }
+         catch (Exception ex)
+         {
+            throw new JsonSerializationException($"Cannot deserialize {arg} to {typeof(T)}", ex);
+         }
       }
    }
 }

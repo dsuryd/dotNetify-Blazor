@@ -1,7 +1,7 @@
 ﻿@page "/helloworld"
 @inject IStylesheet Stylesheet
 
-<VMContext @ref="vm" VM="HelloWorldVM" OnStateChange="(IHelloWorldState newState) => { state = newState; StateHasChanged(); }">
+<VMContext VM="HelloWorldVM" OnStateChange="(IHelloWorldState newState) => { state = newState; StateHasChanged(); }">
   <d-panel css="@Stylesheet.Read("HelloWorld")">
     <section>
       <div>
@@ -21,7 +21,6 @@
 
 @code {
    private IHelloWorldState state = TypeProxy.CreateInstance<IHelloWorldState>();
-   private VMContext<IHelloWorldState> vm;
 
    public interface IHelloWorldState
    {

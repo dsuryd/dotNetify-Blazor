@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DotNetify.Blazor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using NSubstitute;
 
 namespace UnitTests
 {
@@ -19,14 +21,29 @@ namespace UnitTests
          IEnumerable<int> IntEnumerable { get; set; }
       }
 
-      public interface IWatchedState
+      public interface IStateWithWatch
       {
          [Watch]
          public string StringValue { get; set; }
       }
 
+      public interface IStateWithMethods
+      {
+         public void Submit();
+
+         public void SubmitString(string arg);
+
+         public void SubmitInt(int arg);
+
+         public void SubmitDouble(double arg);
+
+         public void SubmitList(List<string> arg);
+
+         public void SubmitDynamic(dynamic arg);
+      }
+
       [TestMethod]
-      public void TypeProxy_CanCreateObjectFromInterface()
+      public void TypeProxy_CanCreateObject()
       {
          var obj = TypeProxy.CreateInstance<IState>();
 
@@ -75,6 +92,70 @@ namespace UnitTests
          Assert.AreEqual("Omega", obj.StringEnumerable.Last());
          Assert.AreEqual(int.MinValue, obj.IntEnumerable.First());
          Assert.AreEqual(int.MaxValue, obj.IntEnumerable.Last());
+      }
+
+      [TestMethod]
+      public void TypeProxy_CanWatchObject()
+      {
+         var obj = TypeProxy.CreateInstance<IStateWithWatch>();
+         string watched = null;
+
+         var mockVMProxy = Substitute.For<IVMProxy>();
+         mockVMProxy.DispatchAsync(Arg.Any<string>(), Arg.Any<object>()).Returns(args =>
+         {
+            watched = nameof(IStateWithWatch.StringValue);
+            return Task.CompletedTask;
+         });
+         (obj as IVMState).VMProxy = mockVMProxy;
+
+         obj.StringValue = "hello";
+         Assert.AreEqual(nameof(IStateWithWatch.StringValue), watched);
+      }
+
+      [TestMethod]
+      public void TypeProxy_CanCreateObjectMethod()
+      {
+         var obj = TypeProxy.CreateInstance<IStateWithMethods>();
+         string name = null;
+         object value = null;
+
+         var mockVMProxy = Substitute.For<IVMProxy>();
+         mockVMProxy.DispatchAsync(Arg.Any<string>(), Arg.Any<object>()).Returns(args =>
+         {
+            name = args[0].ToString();
+            value = args[1];
+            return Task.CompletedTask;
+         });
+         (obj as IVMState).VMProxy = mockVMProxy;
+
+         obj.Submit();
+         Assert.AreEqual(nameof(IStateWithMethods.Submit), name);
+         Assert.IsNull(value);
+
+         var stringValue = "hello world";
+         obj.SubmitString(stringValue);
+         Assert.AreEqual(nameof(IStateWithMethods.SubmitString), name);
+         Assert.AreEqual(stringValue, value);
+
+         var intValue = int.MaxValue;
+         obj.SubmitInt(intValue);
+         Assert.AreEqual(nameof(IStateWithMethods.SubmitInt), name);
+         Assert.AreEqual(intValue, value);
+
+         var doubleValue = Math.PI;
+         obj.SubmitDouble(doubleValue);
+         Assert.AreEqual(nameof(IStateWithMethods.SubmitDouble), name);
+         Assert.AreEqual(doubleValue, value);
+
+         var listValue = new List<string> { "Hello", "World" };
+         obj.SubmitList(listValue);
+         Assert.AreEqual(nameof(IStateWithMethods.SubmitList), name);
+         Assert.AreEqual(listValue, value);
+
+         var dynamicValue = new { FirstName = "Hello", LastName = "World" };
+         obj.SubmitDynamic(dynamicValue);
+         Assert.AreEqual(nameof(IStateWithMethods.SubmitDynamic), name);
+         Assert.AreEqual(dynamicValue, value);
       }
    }
 }

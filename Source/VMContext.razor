@@ -47,8 +47,11 @@ limitations under the License.*@
 
    protected override async Task OnAfterRenderAsync(bool firstRender)
    {
-       await vm.HandleStateChangeAsync<TState>(state => OnStateChange?.Invoke(state));
-       await vm.HandleElementEventAsync(args => HandleElementEvent(args));
+       if (firstRender)
+       { 
+           await vm.HandleStateChangeAsync<TState>(state => OnStateChange?.Invoke(state));
+           await vm.HandleElementEventAsync(args => HandleElementEvent(args));
+       }
    }
 
    public void Dispose()

@@ -18,11 +18,10 @@ using System;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
-using Newtonsoft.Json;
 
 namespace DotNetify.Blazor
 {
-   public static class Extensions
+   public static class ServiceExtensions
    {
       /// <summary>
       /// Adds DotNetify-Blazor services to the service collection.
@@ -48,32 +47,5 @@ namespace DotNetify.Blazor
 
          return services;
       }
-
-      #region Internal
-
-      internal static T As<T>(this object arg)
-      {
-         if (typeof(T).IsInterface)
-            return arg.As(s => (T) JsonConvert.DeserializeObject(s, TypeProxy.CreateType<T>()));
-
-         return arg.As(s => JsonConvert.DeserializeObject<T>(s));
-      }
-
-      internal static T As<T>(this object arg, Func<string, T> deserialize)
-      {
-         if (typeof(T) == typeof(object))
-            return (T) arg;
-
-         try
-         {
-            return typeof(T) == typeof(string) ? (T) (object) $"{arg}" : deserialize($"{arg}");
-         }
-         catch (Exception ex)
-         {
-            throw new JsonSerializationException($"Cannot deserialize {arg} to {typeof(T)}", ex);
-         }
-      }
    }
-
-   #endregion Internal
 }

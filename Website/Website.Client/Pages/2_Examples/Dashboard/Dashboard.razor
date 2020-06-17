@@ -1,6 +1,6 @@
 ﻿@page "/dashboard" 
 
-    <VMContext VM="Dashboard" OnStateChange="(DashboardState state) => { this.state = state; StateHasChanged(); }">
+    <VMContext VM="Dashboard" OnStateChange="(IDashboardState state) => { this.state = state; StateHasChanged(); }">
         @if (state == null)
         {
             <div class="spinner lds-hourglass" />
@@ -37,7 +37,7 @@
                     </d-card>
                     <d-panel horizontal="true">
                         <d-panel flex="40%">
-                            <ActivitiesCard Activities="@state.RecentActivities" />
+                            <ActivitiesCard Activities="@state?.RecentActivities" />
                         </d-panel>
                         <d-panel flex="60%">
                             <d-card>
@@ -52,7 +52,7 @@
     </VMContext>
 
 @code {
-   private DashboardState state;
+   private IDashboardState state;
 
    public class Activity
    {
@@ -62,8 +62,8 @@
        public int StatusId { get; set; }
    }
 
-   private class DashboardState
+   public interface IDashboardState
    {
-       public Activity[] RecentActivities { get; set; }
+       Activity[] RecentActivities { get; set; }
    }
 }

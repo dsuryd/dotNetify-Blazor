@@ -1,36 +1,25 @@
-﻿<VMContext @ref="@vm" VM="ServerUpdate" TState="ServerUpdateState" OnStateChange="@HandleStateChange">
+﻿<VMContext VM="ServerUpdate" OnStateChange="(IServerUpdateState newState) => { state = newState; StateHasChanged(); }">
     <div>
         <p>@state?.Greetings</p>
         <input type="text" @bind="person.FirstName" />
         <input type="text" @bind="person.LastName" />
-        <button @onclick="@HandleSubmit">Submit</button>
+        <button @onclick="() => state.Submit(person)">Submit</button>
     </div>
 </VMContext>
 
 @code {
-   private VMContext<ServerUpdateState> vm;
-   private ServerUpdateState state;
-   private Person person = new Person();
+    private IServerUpdateState state;
+    private Person person = new Person();
 
-   private class ServerUpdateState
-   {
-       public string Greetings { get; set; }
-   }
+    public interface IServerUpdateState
+    {
+        string Greetings { get; set; }
+        void Submit(Person person);
+    }
 
-   private class Person
-   {
-       public string FirstName { get; set; }
-       public string LastName { get; set; }
-   }
-
-   private void HandleSubmit()
-   {
-       _ = vm.DispatchAsync("Submit", person);
-   }
-
-   private void HandleStateChange(ServerUpdateState newState)
-   {
-       state = newState;
-       StateHasChanged();
-   }
+    public class Person
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+    }
 }
