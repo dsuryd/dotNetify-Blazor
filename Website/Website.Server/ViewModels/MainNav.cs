@@ -20,6 +20,7 @@ namespace Website.Server
                   {
                      new NavRoute("Counter", PATH_BASE + "/counter"),
                      new NavRoute("Hello World", PATH_BASE + "/helloworld"),
+                     new NavRoute("Control Types", PATH_BASE + "/controltypes"),
                   },
                   IsExpanded = true
                },
