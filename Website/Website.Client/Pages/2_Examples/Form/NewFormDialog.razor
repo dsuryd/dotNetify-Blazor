@@ -1,16 +1,18 @@
 ﻿<VMContext VM="NewCustomerForm" TState="object" OnElementEvent="HandleElementEvent">
-    <d-modal id="_Dialog" header="New Customer" open="@isOpen" large="true">
-        <d-tab>
-            <d-tab-item key="Person" label="Person">
-                <PersonForm />
-            </d-tab-item>
-            <d-tab-item key="Phone" label="Phone">
-                <PhoneForm />
-            </d-tab-item>
-            <d-tab-item key="Address" label="Address">
-                <AddressForm />
-            </d-tab-item>
-        </d-tab>
+    <d-modal id="_Dialog" header="New Customer" open="@isOpen" large="true" style="position: fixed">
+        <d-panel css="min-height: 22rem">
+            <d-tab>
+                <d-tab-item key="Person" label="Person">
+                    <PersonForm />
+                </d-tab-item>
+                <d-tab-item key="Phone" label="Phone">
+                    <PhoneForm />
+                </d-tab-item>
+                <d-tab-item key="Address" label="Address">
+                    <AddressForm />
+                </d-tab-item>
+            </d-tab>
+        </d-panel>
         <footer>
             <d-panel horizontal="true" right="true">
                 <d-button id="_Cancel" label="Cancel" cancel="true" secondary="true"></d-button>

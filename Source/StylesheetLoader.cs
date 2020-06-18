@@ -50,7 +50,8 @@ namespace DotNetify.Blazor
       public string Read(string fileName)
       {
          var stylesheet = _stylesheets.FirstOrDefault(x => x.Key.Contains(fileName));
-         return Regex.Replace(stylesheet.Value, @"\s+", string.Empty);
+         // Remove whitespaces, except those between words.
+         return Regex.Replace(stylesheet.Value, @"(?!\b\s+\b)\s+", string.Empty);
       }
    }
 }

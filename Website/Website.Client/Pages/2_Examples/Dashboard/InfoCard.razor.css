@@ -1,0 +1,24 @@
+﻿d-card {
+  display: flex;
+  .card-body {
+    padding: 0.5rem 1.5rem;
+    min-width: 12rem;
+  }
+  > label,
+  > h3 {
+    display: none;
+  }
+}
+
+h3 {
+  font: 600 2rem Helvetica;
+}
+
+i {
+  font-size: 3rem;
+  max-width: 6rem;
+  padding: 1.5rem;
+  opacity: 0.8;
+  color: white;
+  background: $icon-bg-color;
+}

@@ -1,6 +1,8 @@
-﻿<d-element id="@Id" css="i {background: @Color}">
-    <d-card horizontal="true" css=".card-body {padding:.5rem 1.5rem; min-width: 12rem} h3 {font:600 2rem Helvetica}">
-        <d-card-image css="i {font-size:3rem; padding:1.5rem; color:white; opacity:.8}">
+﻿@inject IStylesheet Stylesheet
+ 
+<d-element id="@Id" css="@getCss()">
+    <d-card horizontal="true">
+        <d-card-image>
             <i class="material-icons info-icon" slot="icon"></i>
         </d-card-image>
         <label slot="label"></label>
@@ -11,4 +13,6 @@
 @code {
     [Parameter] public string Id { get; set; }
     [Parameter] public string Color { get; set; }
+
+   public string getCss() => Stylesheet.Read("InfoCard").Replace("$icon-bg-color", Color);
 }

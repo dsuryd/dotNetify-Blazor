@@ -51,12 +51,8 @@ dotnetify_blazor = {
     }
 
     const callback = e => {
-      try {
-        callbackHelper.invokeMethodAsync('Callback', JSON.stringify(e.detail));
-      } catch (ex) {
-        // Ignore expected exception from input elements emitting its DOM ref.
-        if (e.detail.eventName !== 'onInputRef') console.error(ex, e.detail);
-      }
+      // Ignore expected exception from input elements emitting its DOM ref.
+      if (e.detail.eventName !== 'onInputRef') callbackHelper.invokeMethodAsync('Callback', JSON.stringify(e.detail));
     };
     if (!dotnetify_blazor._eventListeners.some(x => x.elem === elem && x.event === event)) {
       dotnetify_blazor._eventListeners.push({ elem, event, remove: () => elem.removeEventListener(event, callback) });
