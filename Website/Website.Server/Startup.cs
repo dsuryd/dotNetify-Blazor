@@ -24,6 +24,7 @@ namespace Website.Server
          services.AddDotNetify();
          services.AddDotNetifyPulse();
 
+         services.AddMvc();
          services.AddLogging();
          services.AddTransient<ILiveDataService, MockLiveDataService>();
          services.AddScoped<ICustomerRepository, CustomerRepository>();
@@ -64,6 +65,7 @@ namespace Website.Server
          app.UseEndpoints(endpoints =>
          {
             endpoints.MapHub<DotNetifyHub>("/dotnetify");
+            endpoints.MapControllers();
             endpoints.MapFallbackToFile("index.html");
          });
       }

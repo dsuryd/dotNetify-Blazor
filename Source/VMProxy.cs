@@ -19,7 +19,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using Newtonsoft.Json;
 
 namespace DotNetify.Blazor
 {
@@ -27,7 +26,6 @@ namespace DotNetify.Blazor
    {
       private readonly JSInterop _jsInterop;
       private readonly HashSet<Delegate> _delegates = new HashSet<Delegate>();
-      private readonly JsonSerializerSettings _jsonSerializerSettings;
       private ElementReference? _vmContextElemRef;
 
       public ElementReference ElementRef
@@ -41,10 +39,6 @@ namespace DotNetify.Blazor
       public VMProxy(IJSRuntime jsRuntime)
       {
          _jsInterop = new JSInterop(jsRuntime);
-         _jsonSerializerSettings = new JsonSerializerSettings
-         {
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-         };
       }
 
       public void Dispose()
@@ -91,7 +85,7 @@ namespace DotNetify.Blazor
       public async Task DispatchAsync(string propertyName, object propertyValue = null)
       {
          var data = new Dictionary<string, object>() { { propertyName, propertyValue } };
-         await _jsInterop.DispatchAsync(ElementRef, JsonConvert.SerializeObject(data, _jsonSerializerSettings));
+         await _jsInterop.DispatchAsync(ElementRef, data.Serialize());
       }
    }
 }

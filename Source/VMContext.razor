@@ -16,7 +16,7 @@ limitations under the License.*@
 @inject IVMProxy vm
 @typeparam TState
 
-<d-vm-context @ref="vm.ElementRef" vm="@VM" options="@Options">
+<d-vm-context @ref="vm.ElementRef" options="@Options.Serialize(true)" vm="@VM">
     @ChildContent
 </d-vm-context>
 

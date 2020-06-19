@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
+using System.Collections.Generic;
+
 namespace DotNetify.Blazor
 {
    /// <summary>
@@ -24,11 +26,16 @@ namespace DotNetify.Blazor
       /// <summary>
       /// Arguments to initialize the view model.
       /// </summary>
-      public object VMArg { get; set; }
+      public Dictionary<string, object> VMArg { get; set; }
 
       /// <summary>
       /// Request headers.
       /// </summary>
-      public object Headers { get; set; }
+      public Dictionary<string, object> Headers { get; set; }
+
+      /// <summary>
+      /// Use HTTP Web API endpoint instead of SignalR hub.
+      /// </summary>
+      public bool WebApi { get; set; }
    }
 }

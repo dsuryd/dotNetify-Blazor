@@ -17,6 +17,7 @@ limitations under the License.
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Threading.Tasks;
 
@@ -28,6 +29,17 @@ namespace DotNetify.Blazor
    public class JSInterop
    {
       private readonly IJSRuntime _jsRuntime;
+
+      internal static readonly JsonSerializerSettings _serializerSettings = new JsonSerializerSettings
+      {
+         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+      };
+
+      internal static readonly JsonSerializerSettings _serializerCamelCaseSettings = new JsonSerializerSettings
+      {
+         ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+         ContractResolver = new CamelCasePropertyNamesContractResolver()
+      };
 
       public JSInterop(IJSRuntime jsRuntime)
       {
@@ -85,6 +97,14 @@ namespace DotNetify.Blazor
          {
             throw new JsonSerializationException($"Cannot deserialize {arg} to {typeof(T)}", ex);
          }
+      }
+
+      public static string Serialize<T>(this T arg, bool camelCase = false)
+      {
+         if (typeof(T) == typeof(string))
+            return arg.ToString();
+
+         return JsonConvert.SerializeObject(arg, camelCase ? JSInterop._serializerCamelCaseSettings : JSInterop._serializerSettings);
       }
    }
 }
