@@ -1,31 +1,40 @@
 ﻿@page "/helloworld"
 @inject IStylesheet Stylesheet
 
-<VMContext VM="HelloWorldVM" OnStateChange="(IHelloWorldState newState) => { state = newState; StateHasChanged(); }">
-  <d-panel css="@Stylesheet.Read("HelloWorld")">
-    <section>
-      <div>
-        <label>First name:</label>
-        <input type="text" class="form-control" @bind="state.FirstName">
-      </div>
-      <div>
-        <label>Last name:</label>
-        <input type="text" class="form-control" @bind="state.LastName">
-      </div>
-    </section>
-    <div>
-      Full name is <b>@state.FullName</b>
-    </div>
-  </d-panel> 
+<VMContext VM="HelloWorldVM" OnStateChange="(IHelloWorldState state) => UpdateState(state)">
+@if (state != null)
+{
+    <d-panel css="@Stylesheet["HelloWorld"]">
+        <section>
+            <div>
+            <label>First name:</label>
+            <input type="text" class="form-control" @bind="state.FirstName">
+            </div>
+            <div>
+            <label>Last name:</label>
+            <input type="text" class="form-control" @bind="state.LastName">
+            </div>
+        </section>
+        <div>
+            Full name is <b>@state.FullName</b>
+        </div>
+    </d-panel> 
+}
 </VMContext>
 
 @code {
-   private IHelloWorldState state = TypeProxy.CreateInstance<IHelloWorldState>();
+   private IHelloWorldState state;
 
    public interface IHelloWorldState
    {
        [Watch] string FirstName { get; set; }
        [Watch] string LastName { get; set; }
        string FullName { get; set; }
+   }
+
+   public void UpdateState(IHelloWorldState state)
+   {
+       this.state = state;
+       StateHasChanged();
    }
 }

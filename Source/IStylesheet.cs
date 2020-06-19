@@ -19,9 +19,9 @@ namespace DotNetify.Blazor
    public interface IStylesheet
    {
       /// <summary>
-      /// Reads a stylesheet.
+      /// Gets the content of a stylesheet embedded resource. It doesn't need the full name, only a sufficiently unique substring.
       /// </summary>
-      /// <param name="fileName">Stylesheet file name.</param>
-      public string Read(string fileName);
+      /// <param name="embeddedResourceName">Name of the embedded resource containing the stylesheet.</param>
+      string this[string embeddedResourceName] { get; }
    }
 }

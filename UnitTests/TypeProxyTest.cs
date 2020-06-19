@@ -45,7 +45,7 @@ namespace UnitTests
       [TestMethod]
       public void TypeProxy_CanCreateObject()
       {
-         var obj = TypeProxy.CreateInstance<IState>();
+         var obj = TypeProxy.Create<IState>();
 
          obj.StringValue = "hello";
          obj.IntValue = int.MaxValue;
@@ -65,7 +65,7 @@ namespace UnitTests
       [TestMethod]
       public void TypeProxy_CanSerializeObject()
       {
-         var obj = TypeProxy.CreateInstance<IState>();
+         var obj = TypeProxy.Create<IState>();
 
          obj.StringValue = "hello";
          obj.IntValue = int.MaxValue;
@@ -97,7 +97,7 @@ namespace UnitTests
       [TestMethod]
       public void TypeProxy_CanWatchObject()
       {
-         var obj = TypeProxy.CreateInstance<IStateWithWatch>();
+         var obj = TypeProxy.Create<IStateWithWatch>();
          string watched = null;
 
          var mockVMProxy = Substitute.For<IVMProxy>();
@@ -115,7 +115,7 @@ namespace UnitTests
       [TestMethod]
       public void TypeProxy_CanCreateObjectMethod()
       {
-         var obj = TypeProxy.CreateInstance<IStateWithMethods>();
+         var obj = TypeProxy.Create<IStateWithMethods>();
          string name = null;
          object value = null;
 

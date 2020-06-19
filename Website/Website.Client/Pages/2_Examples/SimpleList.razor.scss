@@ -1,0 +1,60 @@
+﻿& {
+  padding: 0 1rem;
+
+  .alert {
+      display: flex;
+      align-items: center;
+      .material-icons {
+          font-size: 24px;
+          width: 2rem;
+      }
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    > * {
+      margin-right: 1rem;
+    }
+    input[type='text'] {
+      max-width: 15rem;
+    }
+  }
+  table {
+    font-size: unset;
+    width: 100%;
+    max-width: 1268px;
+    td,
+    th {
+      padding: 0.5rem 0;
+      padding-right: 2rem;
+      border-bottom: 1px solid #ddd;
+      width: 50%;
+    }
+    th {
+      font-weight: 500;
+    }
+    td:last-child,
+    th:last-child {
+      width: 5rem;
+      > div {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+    }
+    tr:hover {
+      background: #efefef;
+    }
+    i.material-icons {
+      font-size: 1.2rem;
+    }
+    span.editable:hover {
+      &:after {
+        font-family: 'Material Icons';
+        content: 'edit';
+      }
+    }
+  }
+}

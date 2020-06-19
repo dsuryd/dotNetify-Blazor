@@ -1,4 +1,5 @@
 using DotNetify;
+using DotNetify.DevApp;
 using DotNetify.Pulse;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +29,7 @@ namespace Website.Server
          services.AddLogging();
          services.AddTransient<ILiveDataService, MockLiveDataService>();
          services.AddScoped<ICustomerRepository, CustomerRepository>();
+         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
       }
 
       // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

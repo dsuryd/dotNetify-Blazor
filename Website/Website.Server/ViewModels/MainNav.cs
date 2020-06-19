@@ -18,9 +18,9 @@ namespace Website.Server
                   Label = "Basic Examples",
                   Routes = new NavRoute[]
                   {
-                     new NavRoute("Counter", PATH_BASE + "/counter"),
                      new NavRoute("Hello World", PATH_BASE + "/helloworld"),
                      new NavRoute("Control Types", PATH_BASE + "/controltypes"),
+                     new NavRoute("Simple List", PATH_BASE + "/simplelist"),
                   },
                   IsExpanded = true
                },

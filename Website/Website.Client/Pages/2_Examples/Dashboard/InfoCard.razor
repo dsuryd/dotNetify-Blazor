@@ -14,5 +14,5 @@
     [Parameter] public string Id { get; set; }
     [Parameter] public string Color { get; set; }
 
-   public string getCss() => Stylesheet.Read("InfoCard").Replace("$icon-bg-color", Color);
+    public string getCss() => Stylesheet["InfoCard"].Replace("$icon-bg-color", Color);
 }

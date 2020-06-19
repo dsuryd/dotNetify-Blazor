@@ -11,12 +11,15 @@
     <None Remove="Pages\2_Examples\ControlTypes.razor.scss" />
     <None Remove="Pages\2_Examples\Dashboard\InfoCard.razor.scss" />
     <None Remove="Pages\2_Examples\HelloWorld.razor.scss" />
+    <None Remove="Pages\2_Examples\SimpleList.razor.css" />
+    <None Remove="Pages\2_Examples\SimpleList.razor.scss" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Pages\2_Examples\ControlTypes.razor.scss" />
     <EmbeddedResource Include="Pages\2_Examples\Dashboard\InfoCard.razor.scss" />
     <EmbeddedResource Include="Pages\2_Examples\HelloWorld.razor.scss" />
+    <EmbeddedResource Include="Pages\2_Examples\SimpleList.razor.scss" />
   </ItemGroup>
 
   <ItemGroup>

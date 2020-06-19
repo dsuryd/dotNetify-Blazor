@@ -21,6 +21,10 @@
      <Reference Include="DotNetify.DevApp.ViewModels">
        <HintPath>DotNetify.DevApp.ViewModels.dll</HintPath>
      </Reference>
+   </ItemGroup>
+
+   <ItemGroup>
+     <Folder Include="Services\" />
    </ItemGroup>      
 
 </Project>

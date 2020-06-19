@@ -27,6 +27,23 @@ namespace DotNetify.Blazor
       private readonly List<KeyValuePair<string, string>> _stylesheets = new List<KeyValuePair<string, string>>();
 
       /// <summary>
+      /// Gets the content of a stylesheet embedded resource. It doesn't need the full name, only a sufficiently unique substring.
+      /// </summary>
+      /// <param name="embeddedResourceName">Name of the embedded resource containing the stylesheet.</param>
+      public string this[string embeddedResourceName]
+      {
+         get
+         {
+            var stylesheet = _stylesheets.FirstOrDefault(x => x.Key.Contains(embeddedResourceName));
+            if (string.IsNullOrEmpty(stylesheet.Key))
+               throw new FileNotFoundException($"No embedded stylesheet resource by the name of '{embeddedResourceName}'.");
+
+            // Remove whitespaces, except those between words.
+            return Regex.Replace(stylesheet.Value, @"(?!\b\s+\b)\s+", string.Empty);
+         }
+      }
+
+      /// <summary>
       /// Loads all stylesheets in an assembly.
       /// </summary>
       internal void Load(Assembly assembly)
@@ -41,20 +58,6 @@ namespace DotNetify.Blazor
             });
 
          _stylesheets.AddRange(stylesheets);
-      }
-
-      /// <summary>
-      /// Reads a stylesheet.
-      /// </summary>
-      /// <param name="fileName">Stylesheet file name.</param>
-      public string Read(string fileName)
-      {
-         var stylesheet = _stylesheets.FirstOrDefault(x => x.Key.Contains(fileName));
-         if (string.IsNullOrEmpty(stylesheet.Key))
-            throw new FileNotFoundException($"No embedded stylesheet resource by the name of '{fileName}'.");
-
-         // Remove whitespaces, except those between words.
-         return Regex.Replace(stylesheet.Value, @"(?!\b\s+\b)\s+", string.Empty);
       }
    }
 }

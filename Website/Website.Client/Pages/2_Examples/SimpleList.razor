@@ -1,0 +1,158 @@
+﻿@page "/simplelist" 
+@inject IStylesheet Stylesheet
+@inject IJSRuntime JSRuntime
+
+<VMContext VM="SimpleListVM" OnStateChange="(ISimpleListState state) => UpdateState(state)">
+@if (state != null)
+{
+    <d-panel css="@Stylesheet["SimpleList"]">
+        <d-alert info="true">
+            <i class="material-icons">info_outlined</i>
+            This is a multicast list. Your edits will appear on all other browser views in real-time.
+        </d-alert>
+        <header>
+            <input type="text" class="form-control" placeholder="First name" @bind="firstName" />
+            <input type="text" class="form-control" placeholder="Last name" @bind="lastName" />
+            <button type="button" class="btn btn-primary" @onclick="OnAdd">Add</button>
+        </header>
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var employee in state.Employees)
+                {
+                    <tr>
+                        <td>
+                            <div>
+                                @if (editFirstNameId != employee.Id)
+                                {
+                                    <span class="editable" 
+                                          @onclick="_ => OnEditFirstName(employee.Id)">
+                                        @employee.FirstName
+                                    </span>
+                                }
+                                else
+                                {                                 
+                                    <input id="input-first-name"
+                                           type="text"
+                                           class="form-control" 
+                                           value="@employee.FirstName" 
+                                           @onblur="_ => { editFirstNameId = null; StateHasChanged(); }"
+                                           @onchange="e => OnChangeFirstName(e, employee)" />
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @if (editLastNameId != employee.Id)
+                                {
+                                    <span class="editable" 
+                                          @onclick="_ => OnEditLastName(employee.Id)">
+                                        @employee.LastName
+                                    </span>
+                                }
+                                else
+                                {
+                                    <input id="input-last-name"
+                                           type="text" 
+                                           class="form-control" 
+                                           value="@employee.LastName" 
+                                           @onblur="_ => { editLastNameId = null; StateHasChanged(); }"
+                                           @onchange="e => OnChangeLastName(e, employee)"  />
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <div @onclick="_ => state.Remove(employee.Id)">
+                                <i class="material-icons">clear</i>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </d-panel>
+}
+</VMContext>
+
+@code {
+   private ISimpleListState state;
+   private string firstName;
+   private string lastName;
+   private int? editFirstNameId;
+   private int? editLastNameId;
+
+   public interface ISimpleListState
+   {
+       IEnumerable<Employee> Employees { get; set; }
+       void Add(string fullName);
+       void Update(dynamic employee);
+       void Remove(int Id);
+   }
+
+   public class Employee
+   {
+       public int Id { get; set; }
+       public string FirstName { get; set; }
+       public string LastName { get; set; }
+   }
+
+   protected override void OnAfterRender(bool firstRender)
+   {
+       if (editFirstNameId != null)
+           JSRuntime.InvokeVoidAsync("app.setFocus", "input-first-name");
+       else if (editLastNameId != null)
+           JSRuntime.InvokeVoidAsync("app.setFocus", "input-last-name");
+   }
+
+   private void UpdateState(ISimpleListState state)
+   {
+       this.state = state;
+       StateHasChanged();
+   }
+
+   private void OnAdd()
+   {
+       string fullName = $"{this.firstName} {this.lastName}";
+       if (!string.IsNullOrWhiteSpace(fullName))
+           state.Add(fullName);
+
+       firstName = lastName = string.Empty;
+       StateHasChanged();
+   }
+
+   private void OnEditFirstName(int employeeId)
+   {
+       editFirstNameId = employeeId;
+       editLastNameId = null;
+       StateHasChanged();
+   }
+
+   private void OnEditLastName(int employeeId)
+   {
+       editLastNameId = employeeId;
+       editFirstNameId = null;
+       StateHasChanged();
+   }
+
+   private void OnChangeFirstName(ChangeEventArgs e, Employee employee)
+   {
+       employee.FirstName = e.Value.ToString();
+       state.Update(new { Id = employee.Id, FirstName = employee.FirstName });
+       editFirstNameId = null;
+       StateHasChanged();
+   }
+
+   private void OnChangeLastName(ChangeEventArgs e, Employee employee)
+   {
+       employee.LastName = e.Value.ToString();
+       state.Update(new { Id = employee.Id, LastName = employee.LastName });
+       editLastNameId = null;
+       StateHasChanged();
+   }
+}

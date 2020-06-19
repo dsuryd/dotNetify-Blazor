@@ -19,6 +19,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("DotNetify.Blazor.UnitTests")]
 
 namespace DotNetify.Blazor
 {
@@ -67,7 +70,7 @@ namespace DotNetify.Blazor
       private static readonly Dictionary<string, Type> _createdTypes = new Dictionary<string, Type>();
       private static readonly object _sync = new object();
 
-      public static Type CreateType<T>()
+      internal static Type CreateType<T>()
       {
          if (!typeof(T).IsInterface)
             throw new TypeProxyException("TypeProxy is only for interface.");
@@ -111,7 +114,10 @@ namespace DotNetify.Blazor
          }
       }
 
-      public static T CreateInstance<T>() where T : class
+      /// <summary>
+      /// Creates a concrete class instance of an interface to communicate with the server-side view model.
+      /// </summary>
+      public static T Create<T>() where T : class
       {
          return (T) Activator.CreateInstance(CreateType<T>());
       }
