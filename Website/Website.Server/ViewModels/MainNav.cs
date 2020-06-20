@@ -26,6 +26,15 @@ namespace Website.Server
                },
                new NavGroup
                {
+                  Label = "Further Examples",
+                  Routes = new NavRoute[]
+                  {
+                     new NavRoute("Composite View", PATH_BASE + "/compositeview")
+                  },
+                  IsExpanded = true
+               },
+               new NavGroup
+               {
                   Label = "Examples with Elements",
                   Routes = new NavRoute[]
                   {

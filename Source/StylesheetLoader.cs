@@ -22,7 +22,7 @@ using System.Text.RegularExpressions;
 
 namespace DotNetify.Blazor
 {
-   public class StylesheetLoader : IStylesheet
+   internal class StylesheetLoader : IStylesheet
    {
       private readonly List<KeyValuePair<string, string>> _stylesheets = new List<KeyValuePair<string, string>>();
 
@@ -39,7 +39,7 @@ namespace DotNetify.Blazor
                throw new FileNotFoundException($"No embedded stylesheet resource by the name of '{embeddedResourceName}'.");
 
             // Remove whitespaces, except those between words.
-            return Regex.Replace(stylesheet.Value, @"(?!\b\s+\b)\s+", string.Empty);
+            return Regex.Replace(stylesheet.Value, @"(?!\b\s+\b)(?!\s\d)(?!\s[-\+])\s+", string.Empty);
          }
       }
 

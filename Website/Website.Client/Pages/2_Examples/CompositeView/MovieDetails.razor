@@ -1,0 +1,37 @@
+﻿<VMContext VM="MovieDetailsVM" OnStateChange="(IMovieDetailsState state) => UpdateState(state)">
+@if (state != null)
+{
+    <div class="card">
+        <header class="card-header">
+            <b>@state.Movie.Movie</b>
+            <div>@state.Movie.Year</div>
+        </header>
+        <section class="card-body">
+            <b>Director</b>
+            <p>@state.Movie.Director</p>
+            <b>Cast</b>
+            <div>
+                @foreach (var cast in state.Movie.Cast.Split(","))
+                {
+                    <div>@cast</div>
+                }
+            </div>
+        </section>
+    </div>
+}
+</VMContext>
+
+@code {
+   private IMovieDetailsState state;
+
+   public interface IMovieDetailsState
+   {
+       MovieTable.MovieRecord Movie { get; set; }
+   }
+
+   private void UpdateState(IMovieDetailsState state)
+   {
+       this.state = state;
+       StateHasChanged();
+   }
+}

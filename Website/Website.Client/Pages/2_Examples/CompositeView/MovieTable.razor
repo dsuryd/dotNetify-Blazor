@@ -1,0 +1,68 @@
+﻿<VMContext VM="MovieTableVM" OnStateChange="(IMovieTableState state) => UpdateState(state)">
+@if (state != null)
+{
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    @foreach (var header in state.Headers)
+                    {
+                        <th @key="header">@header</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var data in state.Data)
+                {
+                    <tr @key="data.Rank"
+                        class="@(state.SelectedKey == data.Rank ? "selected" : "")"
+                        @onclick="_ => state.SelectedKey = data.Rank">
+                        <td>@data.Rank</td>
+                        <td>@data.Movie</td>
+                        <td>@data.Year</td>
+                        <td>@data.Director</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="pagination">
+            @foreach (var page in state.Pagination)
+            {
+                <div @key="page" 
+                     class="@(state.SelectedPage == page ? "current" : "")"
+                     @onclick="_ => state.SelectedPage = page">
+                    @(page)
+                </div>
+            }
+        </div>
+    </div>
+}
+</VMContext>
+
+@code {
+   private IMovieTableState state;
+
+   public interface IMovieTableState
+   {
+       string[] Headers { get; set; }
+       MovieRecord[] Data { get; set; }
+       int[] Pagination { get; set; }
+       [Watch] int SelectedKey { get; set; }
+       [Watch] int SelectedPage { get; set; }
+   }
+
+   public class MovieRecord
+   {
+       public int Rank { get; set; }
+       public string Movie { get; set; }
+       public int Year { get; set; }
+       public string Director { get; set; }
+       public string Cast { get; set; }
+   }
+
+   private void UpdateState(IMovieTableState state)
+   {
+       this.state = state;
+       StateHasChanged();
+   }
+}

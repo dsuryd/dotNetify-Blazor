@@ -1,0 +1,114 @@
+﻿<VMContext VM="FilterableMovieTableVM.MovieFilterVM" OnStateChange="(IMovieFilterState state) => UpdateState(state)">
+@if (state != null)
+{
+    <form>
+        <div class="filter card">
+            <div class="card-header">Filters</div>
+            <div class="card-body">
+                <select class="form-control" 
+                        value="@filter" 
+                        @onchange="e => UpdateFilterDropdown(e.Value.ToString())">
+                    @foreach (var text in movieProps)
+                    {
+                        <option value="@text">@text</option>
+                    }
+                </select>
+                <div class="operation">
+                    @foreach (var op in operations)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                    type="radio"
+                                    id="@op"
+                                    value="@op"
+                                    checked="@(operation == op)"
+                                    @onchange="_ => operation = op">
+                            <label class="form-check-label" for="@op">@op</label>
+                        </div>
+                    }
+                </div>
+                <input class="form-control" @bind="text" @bind:event="oninput" >
+                <div>
+                    @foreach (var filter in filters)
+                    {
+                        <div class="chip" @key="filter.Id">
+                            @filter.Property @filter.Operation @filter.Text
+                            <div @onclick="_ => HandleDelete(filter.Id)">
+                                <i class="material-icons">clear</i>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary" @onclick="HandleApply" disabled="@string.IsNullOrWhiteSpace(text)">Apply</button>
+            </div>
+        </div>
+    </form>
+}
+</VMContext>
+
+@code {
+   private IMovieFilterState state;
+   private List<Filter> filters = new List<Filter>();
+   private int filterId = 0;
+   private string filter = "Any";
+   private string[] movieProps = new string[] { "Any", "Rank", "Movie", "Year", "Cast", "Director" };
+   private string operation = "contains";
+   private string[] operations = new string[] { "contains" };
+   private string text = "";
+
+   public interface IMovieFilterState
+   {
+       void Apply(Filter filter);
+       void Delete(int filterId);
+   }
+
+   public class Filter
+   {
+       public int Id { get; set; }
+       public string Property { get; set; }
+       public string Operation { get; set; }
+       public string Text { get; set; }
+   }
+
+   private void HandleApply()
+   {
+       var newId = filterId + 1;
+       var newFilter = new Filter { Id = newId, Property = filter, Operation = operation, Text = text };
+
+       filterId = newId;
+       filters.Add(newFilter);
+       text = "";
+
+       state.Apply(newFilter);
+       UpdateFilterDropdown("Any"); // Reset filter dropdown.
+   }
+
+   private void HandleDelete(int filterId)
+   {
+       state.Delete(filterId);
+       filters = filters.Where(filter => filter.Id != filterId).ToList();
+   }
+
+   private void UpdateFilterDropdown(string filter)
+   {
+       this.filter = filter;
+       if (filter == "Rank" || filter == "Year")
+       {
+           this.operations = new string[] { "equals", ">=", "<=" };
+           this.operation = "equals";
+       }
+       else
+       {
+           this.operations = new string[] { "contains" };
+           this.operation = "contains";
+       }
+   }
+
+   private void UpdateState(IMovieFilterState state)
+   {
+       this.state = state;
+       StateHasChanged();
+   }
+}

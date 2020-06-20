@@ -1,0 +1,16 @@
+﻿@page "/compositeview"
+@inject IStylesheet Stylesheet
+
+<VMContext VM="CompositeViewVM" TState="object">
+    <d-panel css="@Stylesheet["CompositeView"]" horizontal="true">
+        <section>
+            <VMContext VM="FilterableMovieTableVM" TState="object">
+                <MovieTable />
+            </VMContext>
+        </section>
+        <aside>
+            <MovieDetails />
+            <MovieFilter />
+        </aside>
+    </d-panel>
+</VMContext> 
