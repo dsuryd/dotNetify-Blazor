@@ -46,15 +46,21 @@
     }
     tr:hover {
       background: #efefef;
+      span.editable {
+          &:after {
+            font-family: 'Material Icons';
+            content: 'edit';
+            color: #ccc;
+          }
+      }
+      span.editable:hover {
+          &:after {
+              color: black;
+          }
+      }
     }
     i.material-icons {
       font-size: 1.2rem;
-    }
-    span.editable:hover {
-      &:after {
-        font-family: 'Material Icons';
-        content: 'edit';
-      }
     }
   }
 }
