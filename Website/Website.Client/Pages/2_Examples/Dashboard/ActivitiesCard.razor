@@ -1,27 +1,25 @@
 ﻿@inject IStylesheet Stylesheet
 
-<d-panel class="card" flex="1">
-    <d-panel class="card-body">
-        <d-panel>
-            <h4>Activities</h4>
-            @foreach (var activity in Activities)
-            {
-                <d-panel horizontal="true" css=@getCss(activity)>
+<d-card css="height: 100%">
+    <d-panel>
+        <h4>Activities</h4>
+        @foreach (var activity in Activities)
+        {
+            <d-panel horizontal="true" css=@getCss(activity)>
+                <div>
+                    <span class="user-icon">@getInitial(activity.PersonName)</span>
+                    @activity.PersonName
+                </div>
+                <d-panel right="true" middle="true">
                     <div>
-                        <span class="user-icon">@getInitial(activity.PersonName)</span>
-                        @activity.PersonName
+                        @activity.Status
+                        <span class="status-icon" />
                     </div>
-                    <d-panel right="true" middle="true">
-                        <div>
-                            @activity.Status
-                            <span class="status-icon" />
-                        </div>
-                    </d-panel>
                 </d-panel>
-            }
-        </d-panel>
+            </d-panel>
+        }
     </d-panel>
-</d-panel>
+</d-card>
 
 @code {
    [Parameter] public Dashboard.Activity[] Activities { get; set; }
