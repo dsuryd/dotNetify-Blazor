@@ -1,4 +1,8 @@
-﻿section {
+﻿& {
+  max-width: 1268px;
+}
+
+section {
   display: flex;
   > div {
     flex: 1;

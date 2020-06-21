@@ -1,0 +1,23 @@
+﻿.user-icon {
+  display: inline-flex;
+  flex-direction: column;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  color: white;
+
+  background: $icon-color;
+  font-weight: bold;
+  margin-right: 1rem;
+  text-align: center;
+}
+
+.status-icon {
+  height: 14px;
+  width: 14px;
+  margin-left: 1rem;
+
+  background-color: $status-color;
+  border-radius: 50%;
+  display: inline-block;
+}
