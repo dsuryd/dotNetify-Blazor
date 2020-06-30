@@ -6,12 +6,42 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Services\AFITop100.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Docs\CRUD.md" />
+    <None Remove="Docs\DI.md" />
+    <None Remove="Docs\DotNetClient.md" />
+    <None Remove="Docs\Filter.md" />
+    <None Remove="Docs\Middleware.md" />
+    <None Remove="Docs\Multicast.md" />
+    <None Remove="Docs\Overview.md" />
+    <None Remove="Docs\Security.md" />
+    <None Remove="Docs\WebApiMode.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Docs\CRUD.md" />
+    <EmbeddedResource Include="Docs\DI.md" />
+    <EmbeddedResource Include="Docs\DotNetClient.md" />
+    <EmbeddedResource Include="Docs\Filter.md" />
+    <EmbeddedResource Include="Docs\Middleware.md" />
+    <EmbeddedResource Include="Docs\Multicast.md" />
+    <EmbeddedResource Include="Docs\Overview.md" />
+    <EmbeddedResource Include="Docs\Security.md" />
+    <EmbeddedResource Include="Docs\WebApiMode.md" />
+    <EmbeddedResource Include="Services\AFITop100.json" />
+  </ItemGroup>
+
+  <ItemGroup>
      <PackageReference Include="Bogus" Version="22.1.3" />
      <PackageReference Include="DotNetify.Elements" Version="1.3.0" />
      <PackageReference Include="DotNetify.Pulse" Version="1.0.0" />
-     <PackageReference Include="DotNetify.SignalR" Version="4.0.0" />
+     <PackageReference Include="DotNetify.SignalR" Version="4.1.0" />
      <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.0" />
      <PackageReference Include="System.Linq.Dynamic.Core" Version="1.1.5" />
+     <PackageReference Include="UAParser" Version="3.1.44" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,10 +52,6 @@
      <Reference Include="DotNetify.DevApp.ViewModels">
        <HintPath>DotNetify.DevApp.ViewModels.dll</HintPath>
      </Reference>
-   </ItemGroup>
-
-   <ItemGroup>
-     <Folder Include="Services\" />
    </ItemGroup>      
 
 </Project>

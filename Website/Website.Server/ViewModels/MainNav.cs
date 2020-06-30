@@ -53,9 +53,10 @@ namespace Website.Server
                      new NavRoute ("Dependency Injection", PATH_BASE + "/di"),
                      new NavRoute ("Filter", PATH_BASE + "/filter"),
                      new NavRoute ("Middleware", PATH_BASE + "/middleware"),
-                     new NavRoute ("Multicast", PATH_BASE + "/multicast")
+                     new NavRoute ("Multicast", PATH_BASE + "/multicast"),
+                     new NavRoute ("Security", PATH_BASE + "/security")
                   },
-                  IsExpanded = false
+                  IsExpanded = true
                }
             })
          );

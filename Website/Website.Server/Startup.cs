@@ -1,5 +1,4 @@
 using DotNetify;
-using DotNetify.DevApp;
 using DotNetify.Pulse;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,10 +26,11 @@ namespace Website.Server
 
          services.AddMvc();
          services.AddLogging();
-         services.AddTransient<ILiveDataService, MockLiveDataService>();
+         services.AddScoped<ILiveDataService, MockLiveDataService>();
          services.AddScoped<ICustomerRepository, CustomerRepository>();
          services.AddScoped<IEmployeeRepository, EmployeeRepository>();
          services.AddScoped<IMovieService, MovieService>();
+         services.AddScoped<IWebStoreService, WebStoreService>();
       }
 
       // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +48,6 @@ namespace Website.Server
                  logger.LogInformation(log);
            });
            config.RegisterAssembly(GetType().Assembly);
-           config.RegisterAssembly("DotNetify.DevApp.ViewModels");
         });
 
          // Real-time logging: http://localhost:8090/blazor/pulse.
