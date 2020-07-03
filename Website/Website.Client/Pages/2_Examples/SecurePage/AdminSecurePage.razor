@@ -1,0 +1,63 @@
+﻿@inject HttpClient Http
+
+<VMContext VM="AdminSecurePageVM" Options="connectOptions" OnStateChange="(IAdminSecurePageState state) => UpdateState(state)">
+@if (state != null)
+{
+    <section>
+        <h5>Admin-only view:</h5>
+        <div>@state.TokenIssuer</div>
+        <div>@state.TokenValidFrom</div>
+        <div>@state.TokenValidTo</div>
+        <br />
+        <button class="btn btn-secondary" @onclick="HandleRefreshAsync">Refresh Token</button>
+    </section>
+}
+</VMContext>
+
+@code {
+   [Parameter] public string AccessToken { get; set; }
+   [Parameter] public EventCallback OnExpiredAccess { get; set; }
+
+   private IAdminSecurePageState state;
+   private VMConnectOptions connectOptions;
+
+   public interface IAdminSecurePageState
+   {
+       string TokenIssuer { get; set; }
+       string TokenValidFrom { get; set; }
+       string TokenValidTo { get; set; }
+
+       void Dispatch(Dictionary<string, object> properties);
+   }
+
+   protected override void OnInitialized()
+   {
+       this.connectOptions = new VMConnectOptions
+       {
+           Headers = new Dictionary<string, object>
+           {
+               { "Authorization", "Bearer " + AccessToken }
+           }
+       };
+   }
+
+   private async Task HandleRefreshAsync(MouseEventArgs e)
+   {
+       var response = await Login.FetchTokenAsync(Http, "admin", "dotnetify");
+       if (response.IsSuccessStatusCode)
+       {
+           var result = await JsonSerializer.DeserializeAsync<Login.TokenResponse>(await response.Content.ReadAsStreamAsync());
+           this.state.Dispatch(new Dictionary<string, object>
+           {
+               { "$headers", new { Authorization = "Bearer " + result.access_token } },
+               { "Refresh", true }
+           });
+       }
+   }
+
+   private void UpdateState(IAdminSecurePageState state)
+   {
+       this.state = state;
+       StateHasChanged();
+   }
+}

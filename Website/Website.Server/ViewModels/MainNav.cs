@@ -29,7 +29,8 @@ namespace Website.Server
                   Label = "Further Examples",
                   Routes = new NavRoute[]
                   {
-                     new NavRoute("Composite View", PATH_BASE + "/compositeview")
+                     new NavRoute("Composite View", PATH_BASE + "/compositeview"),
+                     new NavRoute("Secure Page", PATH_BASE + "/securepage")
                   },
                   IsExpanded = true
                },
@@ -56,7 +57,7 @@ namespace Website.Server
                      new NavRoute ("Multicast", PATH_BASE + "/multicast"),
                      new NavRoute ("Security", PATH_BASE + "/security")
                   },
-                  IsExpanded = true
+                  IsExpanded = false
                }
             })
          );

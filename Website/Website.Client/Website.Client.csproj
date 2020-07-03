@@ -13,6 +13,7 @@
     <None Remove="Pages\2_Examples\Dashboard\ActivitiesCard.razor.scss" />
     <None Remove="Pages\2_Examples\Dashboard\InfoCard.razor.scss" />
     <None Remove="Pages\2_Examples\HelloWorld.razor.scss" />
+    <None Remove="Pages\2_Examples\SecurePage\Login.razor.scss" />
     <None Remove="Pages\2_Examples\SimpleList.razor.css" />
     <None Remove="Pages\2_Examples\SimpleList.razor.scss" />
   </ItemGroup>
@@ -23,6 +24,7 @@
     <EmbeddedResource Include="Pages\2_Examples\Dashboard\ActivitiesCard.razor.scss" />
     <EmbeddedResource Include="Pages\2_Examples\Dashboard\InfoCard.razor.scss" />
     <EmbeddedResource Include="Pages\2_Examples\HelloWorld.razor.scss" />
+    <EmbeddedResource Include="Pages\2_Examples\SecurePage\Login.razor.scss" />
     <EmbeddedResource Include="Pages\2_Examples\SimpleList.razor.scss" />
   </ItemGroup>
 

@@ -1,0 +1,33 @@
+﻿> div {
+  padding: 0 1rem;
+  max-width: 1268px;
+  display: flex;
+  > * {
+    flex: 1;
+    margin-right: 1rem;
+  }
+  b {
+    color: #ce4844;
+    font-weight: 500;
+  }
+  label {
+    font-weight: 500;
+    margin-top: 1rem;
+  }
+  .card-body > div:last-child {
+    margin-bottom: 2rem;
+  }
+  .card-body > strong {
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .card-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

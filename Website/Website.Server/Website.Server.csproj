@@ -35,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+     <PackageReference Include="AspNet.Security.OpenIdConnect.Server" Version="2.0.0" />
      <PackageReference Include="Bogus" Version="22.1.3" />
      <PackageReference Include="DotNetify.Elements" Version="1.3.0" />
      <PackageReference Include="DotNetify.Pulse" Version="1.0.0" />
@@ -46,12 +47,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Website.Client\Website.Client.csproj" />
-  </ItemGroup>
-
-   <ItemGroup>
-     <Reference Include="DotNetify.DevApp.ViewModels">
-       <HintPath>DotNetify.DevApp.ViewModels.dll</HintPath>
-     </Reference>
-   </ItemGroup>      
+  </ItemGroup>      
 
 </Project>

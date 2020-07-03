@@ -1,0 +1,52 @@
+﻿<VMContext VM="SecurePageVM" Options="@connectOptions" OnStateChange="(ISecurePageState state) => UpdateState(state)">
+@if (state != null)
+{
+    <div class="card">
+        <div class="card-header">
+            <h4>@state.SecureCaption</h4>
+        </div>
+        <div class="card-body">
+            <p>
+                <b>@state.SecureData</b>
+            </p>
+            <AdminSecurePage AccessToken="@AccessToken" OnExpiredAccess="HandleExpiredAccess" />
+        </div>
+    </div>
+}
+</VMContext>
+
+@code {
+   [Parameter] public string AccessToken { get; set; }
+   [Parameter] public EventCallback OnExpiredAccess { get; set; }
+
+   private ISecurePageState state;
+   private VMConnectOptions connectOptions;
+
+   public interface ISecurePageState
+   {
+       string SecureCaption { get; set; }
+       string SecureData { get; set; }
+   }
+
+   protected override void OnInitialized()
+   {
+       this.connectOptions = new VMConnectOptions
+       {
+           Headers = new Dictionary<string, object>
+           {
+               { "Authorization", "Bearer " + AccessToken }
+           }
+       };
+   }
+
+   private async Task HandleExpiredAccess()
+   {
+       await OnExpiredAccess.InvokeAsync(null);
+   }
+
+   private void UpdateState(ISecurePageState state)
+   {
+       this.state = state;
+       StateHasChanged();
+   }
+}

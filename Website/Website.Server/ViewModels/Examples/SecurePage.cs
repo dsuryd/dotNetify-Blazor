@@ -57,13 +57,16 @@ namespace Website.Server
       public string TokenValidFrom { get; set; }
       public string TokenValidTo { get; set; }
 
-      public Action Refresh => () => { };
+      public void Refresh()
+      {
+         /* no op */
+      }
 
       public void SetAccessToken(SecurityToken accessToken)
       {
          TokenIssuer = $"Token issuer: \"{accessToken.Issuer}\"";
-         TokenValidFrom = $"Valid from: {accessToken.ValidFrom.ToString("R")}";
-         TokenValidTo = $"Valid to: {accessToken.ValidTo.ToString("R")}";
+         TokenValidFrom = $"Valid from: {accessToken.ValidFrom:R}";
+         TokenValidTo = $"Valid to: {accessToken.ValidTo:R}";
 
          Changed(nameof(TokenIssuer));
          Changed(nameof(TokenValidFrom));

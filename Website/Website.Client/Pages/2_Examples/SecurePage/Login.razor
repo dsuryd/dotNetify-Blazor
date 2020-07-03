@@ -1,0 +1,89 @@
+﻿@page "/securepage"
+@inject HttpClient Http
+@inject IStylesheet Stylesheet
+
+<d-panel css="@Stylesheet["Login"]">
+    <div>
+        @if (accessToken != null)
+        {
+            <div class="card logout">
+                <button class="btn btn-primary" @onclick="SignOut">Sign Out</button>
+            </div>
+            <SecurePage AccessToken="@accessToken" OnExpiredAccess="SignOut"></SecurePage>
+        }
+        else
+        {
+            <div class="card">
+                <div class="card-header">
+                    <h4>Sign in</h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <label>User name:</label>
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Type guest or admin"
+                               @bind="userName" />
+                        <b>@loginError</b>
+                    </div>
+                    <div>
+                        <label>Password:</label>
+                        <input type="password" class="form-control" @bind="password" />
+                        <b>@loginError</b>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" @onclick="Submit">Submit</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4>Not authenticated</h4>
+                </div>
+            </div>
+        }
+    </div>
+</d-panel>
+
+@code {
+   private string userName;
+   private string password = "dotnetify";
+   private string accessToken;
+   private string loginError;
+
+   internal class TokenResponse
+   {
+       public string access_token { get; set; }
+   }
+
+   private async Task Submit()
+   {
+       var response = await FetchTokenAsync(Http, this.userName, this.password);
+       if (response.IsSuccessStatusCode)
+       {
+           var result = await JsonSerializer.DeserializeAsync<TokenResponse>(await response.Content.ReadAsStreamAsync());
+           this.accessToken = result.access_token;
+           this.loginError = string.Empty;
+       }
+       else
+           this.loginError = "Invalid user name or password";
+       StateHasChanged();
+   }
+
+   private void SignOut()
+   {
+       accessToken = null;
+       StateHasChanged();
+   }
+
+   internal static Task<HttpResponseMessage> FetchTokenAsync(HttpClient http, string userName, string password)
+   {
+       var content = new Dictionary<string, string>();
+       content.Add("username", userName);
+       content.Add("password", password);
+       content.Add("grant_type", "password");
+       content.Add("client_id", "dotnetifydemo");
+
+       return http.PostAsync("/token", new FormUrlEncodedContent(content));
+   }
+}
