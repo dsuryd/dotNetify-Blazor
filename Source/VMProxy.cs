@@ -87,5 +87,10 @@ namespace DotNetify.Blazor
          var data = new Dictionary<string, object>() { { propertyName, propertyValue } };
          await _jsInterop.DispatchAsync(ElementRef, data.Serialize());
       }
+
+      public async Task DispatchAsync(Dictionary<string, object> properties)
+      {
+         await _jsInterop.DispatchAsync(ElementRef, properties.Serialize());
+      }
    }
 }

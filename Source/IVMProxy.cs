@@ -15,6 +15,7 @@ limitations under the License.
  */
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
@@ -54,6 +55,12 @@ namespace DotNetify.Blazor
       /// <param name="propertyName">Name that matches a server-side view model property.</param>
       /// <param name="propertyValue">Value to be dispatched.</param>
       Task DispatchAsync(string propertyName, object propertyValue = null);
+
+      /// <summary>
+      /// Dispatches multiple property values to server-side view model.
+      /// </summary>
+      /// <param name="properties">Dictionary of property name and values.</param>
+      Task DispatchAsync(Dictionary<string, object> properties);
 
       /// <summary>
       /// Disposes the context element.

@@ -36,6 +36,12 @@ namespace DotNetify.Blazor
    {
       private readonly Dictionary<string, object> _propValues = new Dictionary<string, object>();
 
+      private enum ReservedMethod
+      {
+         Dispatch,
+         Dispose
+      }
+
       public IVMProxy VMProxy { get; set; }
 
       public T Get<T>(string propName)
@@ -57,7 +63,18 @@ namespace DotNetify.Blazor
       public void DispatchMethod(string methodName, List<object> args)
       {
          var value = args?.FirstOrDefault();
-         VMProxy?.DispatchAsync(methodName, value);
+
+         if (methodName == nameof(ReservedMethod.Dispose))
+            VMProxy?.DisposeAsync();
+         else if (methodName == nameof(ReservedMethod.Dispatch))
+         {
+            if (value is Dictionary<string, object>)
+               VMProxy?.DispatchAsync(value as Dictionary<string, object>);
+            else
+               throw new TypeProxyException("'Dispatch' is a reserved method that requires a single argument of type Dictionary<string, object>.");
+         }
+         else
+            VMProxy?.DispatchAsync(methodName, value);
       }
    }
 
