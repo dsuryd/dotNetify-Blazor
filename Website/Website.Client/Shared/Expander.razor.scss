@@ -1,0 +1,10 @@
+﻿& {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #ddd;
+  [class^='Label__LabelContainer'] {
+    font-weight: bold;
+  }
+}

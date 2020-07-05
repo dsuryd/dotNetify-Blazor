@@ -5,11 +5,9 @@ using System.Reactive.Linq;
 using DotNetify;
 using DotNetify.Elements;
 using DotNetify.Routing;
-using DotNetify.Security;
 
 namespace Website.Server
 {
-   [Authorize]
    public class Dashboard : BaseVM, IRoutable
    {
       private IDisposable _subscription;
