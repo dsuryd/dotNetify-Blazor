@@ -1,137 +1,139 @@
 ﻿@page "/controltypes"
 @inject IStylesheet Stylesheet
 
-<VMContext VM="ControlTypesVM" OnStateChange="(IControlTypesState state) => UpdateState(state)">
-@if (state != null)
-{
-    <d-panel css="@Stylesheet["ControlTypes"]">
-        <table>
-            <tbody>
-                <tr>
-                    <td>
-                        Text box:
-                        <label>(updates on losing focus)</label>
-                    </td>
-                    <td>
-                        <input type="text" 
-                                class="form-control" 
-                                @bind="state.TextBoxValue" 
-                                placeholder="@state.TextBoxPlaceHolder">
-                        <b>@state.TextBoxResult</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Search box:
-                        <label>(updates on keystroke)</label>
-                    </td>
-                    <td>
-                        <input type="text" 
-                                class="form-control" 
-                                @bind="state.SearchBox" 
-                                @bind:event="oninput" 
-                                placeholder="@state.SearchBoxPlaceHolder">
-                        <ul class="list-group">
-                            @foreach (var result in state.SearchResults)
+<ExampleLayout VM="ControlTypesDoc">
+    <VMContext VM="ControlTypesVM" OnStateChange="(IControlTypesState state) => UpdateState(state)">
+    @if (state != null)
+    {
+        <d-panel css="@Stylesheet["ControlTypes"]">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            Text box:
+                            <label>(updates on losing focus)</label>
+                        </td>
+                        <td>
+                            <input type="text" 
+                                    class="form-control" 
+                                    @bind="state.TextBoxValue" 
+                                    placeholder="@state.TextBoxPlaceHolder">
+                            <b>@state.TextBoxResult</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Search box:
+                            <label>(updates on keystroke)</label>
+                        </td>
+                        <td>
+                            <input type="text" 
+                                    class="form-control" 
+                                    @bind="state.SearchBox" 
+                                    @bind:event="oninput" 
+                                    placeholder="@state.SearchBoxPlaceHolder">
+                            <ul class="list-group">
+                                @foreach (var result in state.SearchResults)
+                                {
+                                    <li class="list-group-item" 
+                                        @key="result" 
+                                        @onclick="_ => { state.SearchBox = result; }">
+                                        @result
+                                    </li>
+                                }
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Check box:</td>
+                        <td>
+                            <label>
+                                <input type="checkbox" @bind="state.ShowMeCheckBox">
+                                <span>Show me</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" @bind="state.EnableMeCheckBox">
+                                <span>Enable me</span>
+                            </label>
+                            @if (state.ShowMeCheckBox)
                             {
-                                <li class="list-group-item" 
-                                    @key="result" 
-                                    @onclick="_ => { state.SearchBox = result; }">
-                                    @result
-                                </li>
+                                <button class="btn btn-secondary" 
+                                        disabled="@(!state.EnableMeCheckBox)">
+                                    @state.CheckBoxResult
+                                </button>
                             }
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Check box:</td>
-                    <td>
-                        <label>
-                            <input type="checkbox" @bind="state.ShowMeCheckBox">
-                            <span>Show me</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" @bind="state.EnableMeCheckBox">
-                            <span>Enable me</span>
-                        </label>
-                        @if (state.ShowMeCheckBox)
-                        {
-                            <button class="btn btn-secondary" 
-                                    disabled="@(!state.EnableMeCheckBox)">
-                                @state.CheckBoxResult
-                            </button>
-                        }
-                    </td>
-                </tr>
-                <tr>
-                    <td>Simple drop-down list:</td>
-                    <td>
-                        <select class="form-control" @bind="state.SimpleDropDownValue">
-                            <option value="" disabled>Choose...</option>
-                            @foreach (var option in state.SimpleDropDownOptions)
-                            {
-                                <option @key="option" value="@option">@option</option>
-                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Simple drop-down list:</td>
+                        <td>
+                            <select class="form-control" @bind="state.SimpleDropDownValue">
+                                <option value="" disabled>Choose...</option>
+                                @foreach (var option in state.SimpleDropDownOptions)
+                                {
+                                    <option @key="option" value="@option">@option</option>
+                                }
 
-                        </select>
-                        <b>@state.SimpleDropDownResult</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Drop-down list:</td>
-                    <td>
-                        <select class="form-control" @bind="state.DropDownValue">
-                            <option value="0" disabled>@state.DropDownCaption</option>
-                            @foreach(var option in state.DropDownOptions)
+                            </select>
+                            <b>@state.SimpleDropDownResult</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Drop-down list:</td>
+                        <td>
+                            <select class="form-control" @bind="state.DropDownValue">
+                                <option value="0" disabled>@state.DropDownCaption</option>
+                                @foreach(var option in state.DropDownOptions)
+                                {
+                                    <option @key="option.Id" value="@option.Id">@option.Text</option>
+                                }
+                            </select>
+                            <b>@state.DropDownResult</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Radio button:</td>
+                        <td>
+                            <label>
+                                <input type="radio" 
+                                        value="green" 
+                                        checked="@state.RadioButtonValue.Equals("green")" 
+                                        @onchange="@(_ => state.RadioButtonValue = "green")">
+                                <span>Green</span>
+                            </label>
+                            <label>
+                                <input type="radio" 
+                                        value="yellow" 
+                                        checked="@state.RadioButtonValue.Equals("yellow")" 
+                                        @onchange="@(_ => state.RadioButtonValue = "yellow")">
+                                <span>Yellow</span>
+                            </label>
+                            <button class="btn @state.RadioButtonStyle">Result</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Button:</td>
+                        <td>
+                            <button class="btn btn-secondary" 
+                                    type="button" 
+                                    @onclick="_ => state.ButtonClicked(true)">
+                                Click me
+                            </button>
+                            @if (state.ClickCount > 0)
                             {
-                                <option @key="option.Id" value="@option.Id">@option.Text</option>
+                            <span style="margin-left: 2rem">
+                                You clicked me
+                                <b>@state.ClickCount</b>&nbsp;times!
+                            </span>
                             }
-                        </select>
-                        <b>@state.DropDownResult</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Radio button:</td>
-                    <td>
-                        <label>
-                            <input type="radio" 
-                                    value="green" 
-                                    checked="@state.RadioButtonValue.Equals("green")" 
-                                    @onchange="@(_ => state.RadioButtonValue = "green")">
-                            <span>Green</span>
-                        </label>
-                        <label>
-                            <input type="radio" 
-                                    value="yellow" 
-                                    checked="@state.RadioButtonValue.Equals("yellow")" 
-                                    @onchange="@(_ => state.RadioButtonValue = "yellow")">
-                            <span>Yellow</span>
-                        </label>
-                        <button class="btn @state.RadioButtonStyle">Result</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Button:</td>
-                    <td>
-                        <button class="btn btn-secondary" 
-                                type="button" 
-                                @onclick="_ => state.ButtonClicked(true)">
-                            Click me
-                        </button>
-                        @if (state.ClickCount > 0)
-                        {
-                        <span style="margin-left: 2rem">
-                            You clicked me
-                            <b>@state.ClickCount</b>&nbsp;times!
-                        </span>
-                        }
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </d-panel>
-}
-</VMContext>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </d-panel>
+    }
+    </VMContext>
+</ExampleLayout>
 
 @code {
    private IControlTypesState state;

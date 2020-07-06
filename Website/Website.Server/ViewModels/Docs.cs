@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading;
-using DotNetify;
+﻿using DotNetify;
 using DotNetify.Elements;
 
 namespace Website.Server
@@ -9,6 +7,22 @@ namespace Website.Server
    {
       public string Content => new Markdown("Website.Server.Docs.Overview.md");
    }
+
+   #region Examples
+
+   public class HelloWorldDoc : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Examples.HelloWorld.md");
+   }
+
+   public class ControlTypesDoc : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Examples.ControlTypes.md");
+   }
+
+   #endregion Examples
+
+   #region API References
 
    public class CRUD : BaseVM
    {
@@ -44,4 +58,6 @@ namespace Website.Server
    {
       public string Content => new Markdown("Website.Server.Docs.Security.md");
    }
+
+   #endregion API References
 }

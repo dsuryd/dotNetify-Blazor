@@ -1,0 +1,60 @@
+﻿@inject IStylesheet Stylesheet
+
+<VMContext VM="@VM" OnStateChange="(object state) => UpdateState(state)" OnElementEvent="HandleElementEvent">
+@if (state != null)
+{
+    <d-panel css="@Stylesheet["ArticleLayout"]">
+        <d-tab>
+            <d-tab-item itemkey="output" label="Output">
+                @ChildContent
+            </d-tab-item>
+            <d-tab-item itemkey="source" label="Source">
+                <d-tab>
+                    <d-tab-item itemkey="view" label="View">
+                        <d-panel horizontal="true">
+                            <d-panel class="article" flex="70%" css="max-width:100%!important">
+                                <d-markdown id="Content" condition="view" />
+                            </d-panel>
+                            <d-panel css="width:10%">
+                                <d-panel class="sidebar">
+                                    <d-markdown-toc id="Content" condition="view"></d-markdown-toc>
+                                </d-panel>
+                            </d-panel>
+                        </d-panel>
+                    </d-tab-item>
+                    <d-tab-item itemkey="viewmodel" label="View Model">
+                        <d-panel horizontal="true">
+                            <d-panel class="article" flex="70%" css="max-width:100%!important">
+                                <d-markdown id="Content" condition="viewmodel" />
+                            </d-panel>
+                            <d-panel css="width:10%">
+                                <d-panel class="sidebar">
+                                    <d-markdown-toc id="Content" condition="viewmodel"></d-markdown-toc>
+                                </d-panel>
+                            </d-panel>
+                        </d-panel>
+                    </d-tab-item>
+                </d-tab>
+              </d-tab-item>
+        </d-tab>
+    </d-panel>
+}
+</VMContext>
+
+@code {
+   [Parameter] public string VM { get; set; }
+   [Parameter] public RenderFragment ChildContent { get; set; }
+
+   private object state;
+
+   private void UpdateState(object state)
+   {
+       this.state = state;
+       StateHasChanged();
+   }
+
+   private void HandleElementEvent(ElementEvent e)
+   {
+       System.Diagnostics.Trace.WriteLine(string.Format("{0} {1} {2}", e.EventName, e.EventArgs, e.TargetId));
+   }
+}

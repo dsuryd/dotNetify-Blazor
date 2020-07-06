@@ -13,6 +13,8 @@
     <None Remove="Docs\CRUD.md" />
     <None Remove="Docs\DI.md" />
     <None Remove="Docs\DotNetClient.md" />
+    <None Remove="Docs\Examples\ControlTypes.md" />
+    <None Remove="Docs\Examples\HelloWorld.md" />
     <None Remove="Docs\Filter.md" />
     <None Remove="Docs\Middleware.md" />
     <None Remove="Docs\Multicast.md" />
@@ -25,6 +27,8 @@
     <EmbeddedResource Include="Docs\CRUD.md" />
     <EmbeddedResource Include="Docs\DI.md" />
     <EmbeddedResource Include="Docs\DotNetClient.md" />
+    <EmbeddedResource Include="Docs\Examples\ControlTypes.md" />
+    <EmbeddedResource Include="Docs\Examples\HelloWorld.md" />
     <EmbeddedResource Include="Docs\Filter.md" />
     <EmbeddedResource Include="Docs\Middleware.md" />
     <EmbeddedResource Include="Docs\Multicast.md" />

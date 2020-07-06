@@ -1,26 +1,28 @@
 ﻿@page "/helloworld"
 @inject IStylesheet Stylesheet
 
-<VMContext VM="HelloWorldVM" OnStateChange="(IHelloWorldState state) => UpdateState(state)">
-@if (state != null)
-{
-    <d-panel css="@Stylesheet["HelloWorld"]">
-        <section>
+<ExampleLayout VM="HelloWorldDoc">
+    <VMContext VM="HelloWorldVM" OnStateChange="(IHelloWorldState state) => UpdateState(state)">
+    @if (state != null)
+    {
+        <d-panel css="@Stylesheet["HelloWorld"]">
+            <section>
+                <div>
+                    <label>First name:</label>
+                    <input type="text" class="form-control" @bind="state.FirstName">
+                </div>
+                <div>
+                    <label>Last name:</label>
+                    <input type="text" class="form-control" @bind="state.LastName">
+                </div>
+            </section>
             <div>
-                <label>First name:</label>
-                <input type="text" class="form-control" @bind="state.FirstName">
+                Full name is <b>@state.FullName</b>
             </div>
-            <div>
-                <label>Last name:</label>
-                <input type="text" class="form-control" @bind="state.LastName">
-            </div>
-        </section>
-        <div>
-            Full name is <b>@state.FullName</b>
-        </div>
-    </d-panel> 
-}
-</VMContext>
+        </d-panel> 
+    }
+    </VMContext>
+</ExampleLayout>
 
 @code {
    private IHelloWorldState state;
@@ -32,7 +34,7 @@
        string FullName { get; set; }
    }
 
-   public void UpdateState(IHelloWorldState state)
+   private void UpdateState(IHelloWorldState state)
    {
        this.state = state;
        StateHasChanged();

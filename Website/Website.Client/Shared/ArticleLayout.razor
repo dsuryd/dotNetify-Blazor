@@ -1,28 +1,34 @@
 ﻿@inject IStylesheet Stylesheet
 
-<VMContext VM="@VM" OnStateChange=@((object e) => { state = e; StateHasChanged();  })>
-    @if(state != null)
-    {
-        <d-panel horizontal="true" css="@Stylesheet["ArticleLayout"]" gap="10%">
-            <d-panel class="article">
-                @ChildContent
-            </d-panel>
-            <d-panel css="width: 16%">
-                @if(!string.IsNullOrEmpty(Id))
-                {
-                    <d-panel class="sidebar">
-                        <d-markdown-toc id="@Id"></d-markdown-toc>
-                    </d-panel>
-                }
-            </d-panel>
+<VMContext VM="@VM" OnStateChange="(object state) => UpdateState(state)">
+@if(state != null)
+{
+    <d-panel horizontal="true" css="@Stylesheet["ArticleLayout"]" gap="10%">
+        <d-panel class="article">
+            @ChildContent
         </d-panel>
-    }
+        <d-panel css="width: 16%">
+            @if(!string.IsNullOrEmpty(Id))
+            {
+                <d-panel class="sidebar">
+                    <d-markdown-toc id="@Id"></d-markdown-toc>
+                </d-panel>
+            }
+        </d-panel>
+    </d-panel>
+}
 </VMContext>
 
 @code {
-    [Parameter] public string VM { get; set; }
-    [Parameter] public string Id { get; set; } = "Content";
-    [Parameter] public RenderFragment ChildContent { get; set; }
+   [Parameter] public string VM { get; set; }
+   [Parameter] public string Id { get; set; } = "Content";
+   [Parameter] public RenderFragment ChildContent { get; set; }
 
-    private object state;
+   private object state;
+
+   private void UpdateState(object state)
+   {
+       this.state = state;
+       StateHasChanged();
+   }
 }
