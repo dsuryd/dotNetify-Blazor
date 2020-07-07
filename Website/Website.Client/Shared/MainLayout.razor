@@ -1,7 +1,8 @@
 ﻿@inherits LayoutComponentBase
+@inject IStylesheet Stylesheet
 @inject NavigationManager NavigationManager
 
-<d-main>
+<d-main css="@Stylesheet["MainLayout"]">
     <d-nav>
         <d-panel>
             <VMContext VM="MainNav" TState="object">
@@ -20,6 +21,12 @@
             @Body
         </d-panel>
     </d-section>
+    <d-footer>
+    <div class="license-notice">
+        © 2015-2020 Dicky Suryadi. Licensed under the{" "}
+        <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache license version 2.0</a>
+    </div>
+    </d-footer>
 </d-main>
 
 @code {

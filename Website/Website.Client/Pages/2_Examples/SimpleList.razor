@@ -2,83 +2,85 @@
 @inject IStylesheet Stylesheet
 @inject IJSRuntime JSRuntime
 
-<VMContext VM="SimpleListVM" OnStateChange="(ISimpleListState state) => UpdateState(state)">
-@if (state != null)
-{
-    <d-panel css="@Stylesheet["SimpleList"]">
-        <d-alert info="true">
-            <i class="material-icons">info_outlined</i>
-            This is a multicast list. Your edits will appear on all other browser views in real-time.
-        </d-alert>
-        <header>
-            <input type="text" class="form-control" placeholder="First name" @bind="firstName" />
-            <input type="text" class="form-control" placeholder="Last name" @bind="lastName" />
-            <button type="button" class="btn btn-primary" @onclick="OnAdd">Add</button>
-        </header>
-        <table>
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var employee in state.Employees)
-                {
+<ExampleLayout VM="SimpleListDoc">
+    <VMContext VM="SimpleListVM" OnStateChange="(ISimpleListState state) => UpdateState(state)">
+    @if (state != null)
+    {
+        <d-panel css="@Stylesheet["SimpleList"]">
+            <d-alert info="true">
+                <i class="material-icons">info_outlined</i>
+                This is a multicast list. Your edits will appear on all other browser views in real-time.
+            </d-alert>
+            <header>
+                <input type="text" class="form-control" placeholder="First name" @bind="firstName" />
+                <input type="text" class="form-control" placeholder="Last name" @bind="lastName" />
+                <button type="button" class="btn btn-primary" @onclick="OnAdd">Add</button>
+            </header>
+            <table>
+                <thead>
                     <tr>
-                        <td>
-                            <div>
-                                @if (editFirstNameId != employee.Id)
-                                {
-                                    <span class="editable" 
-                                          @onclick="_ => OnEditFirstName(employee.Id)">
-                                        @employee.FirstName
-                                    </span>
-                                }
-                                else
-                                {                                 
-                                    <input id="input-first-name"
-                                           type="text"
-                                           class="form-control" 
-                                           value="@employee.FirstName" 
-                                           @onblur="_ => { editFirstNameId = null; StateHasChanged(); }"
-                                           @onchange="e => OnChangeFirstName(e, employee)" />
-                                }
-                            </div>
-                        </td>
-                        <td>
-                            <div>
-                                @if (editLastNameId != employee.Id)
-                                {
-                                    <span class="editable" 
-                                          @onclick="_ => OnEditLastName(employee.Id)">
-                                        @employee.LastName
-                                    </span>
-                                }
-                                else
-                                {
-                                    <input id="input-last-name"
-                                           type="text" 
-                                           class="form-control" 
-                                           value="@employee.LastName" 
-                                           @onblur="_ => { editLastNameId = null; StateHasChanged(); }"
-                                           @onchange="e => OnChangeLastName(e, employee)"  />
-                                }
-                            </div>
-                        </td>
-                        <td>
-                            <div @onclick="_ => state.Remove(employee.Id)">
-                                <i class="material-icons">clear</i>
-                            </div>
-                        </td>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </d-panel>
-}
-</VMContext>
+                </thead>
+                <tbody>
+                    @foreach (var employee in state.Employees)
+                    {
+                        <tr>
+                            <td>
+                                <div>
+                                    @if (editFirstNameId != employee.Id)
+                                    {
+                                        <span class="editable" 
+                                              @onclick="_ => OnEditFirstName(employee.Id)">
+                                            @employee.FirstName
+                                        </span>
+                                    }
+                                    else
+                                    {                                 
+                                        <input id="input-first-name"
+                                               type="text"
+                                               class="form-control" 
+                                               value="@employee.FirstName" 
+                                               @onblur="_ => { editFirstNameId = null; StateHasChanged(); }"
+                                               @onchange="e => OnChangeFirstName(e, employee)" />
+                                    }
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    @if (editLastNameId != employee.Id)
+                                    {
+                                        <span class="editable" 
+                                              @onclick="_ => OnEditLastName(employee.Id)">
+                                            @employee.LastName
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <input id="input-last-name"
+                                               type="text" 
+                                               class="form-control" 
+                                               value="@employee.LastName" 
+                                               @onblur="_ => { editLastNameId = null; StateHasChanged(); }"
+                                               @onchange="e => OnChangeLastName(e, employee)"  />
+                                    }
+                                </div>
+                            </td>
+                            <td>
+                                <div @onclick="_ => state.Remove(employee.Id)">
+                                    <i class="material-icons">clear</i>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </d-panel>
+    }
+    </VMContext>
+</ExampleLayout>
 
 @code {
    private ISimpleListState state;

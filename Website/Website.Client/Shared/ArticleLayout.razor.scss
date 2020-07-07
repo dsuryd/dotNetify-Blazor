@@ -6,9 +6,6 @@
   @media (max-width: 1170px) {
     margin-left: 2rem;
     max-width: calc(100% - 2rem);
-    > *:last-child {
-      display: none;
-    }
   }
   @media (max-width: 414px) {
     margin-left: 1rem;

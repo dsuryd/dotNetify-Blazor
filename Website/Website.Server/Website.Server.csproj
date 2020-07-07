@@ -13,8 +13,13 @@
     <None Remove="Docs\CRUD.md" />
     <None Remove="Docs\DI.md" />
     <None Remove="Docs\DotNetClient.md" />
+    <None Remove="Docs\Examples\CompositeView.md" />
     <None Remove="Docs\Examples\ControlTypes.md" />
+    <None Remove="Docs\Examples\Dashboard.md" />
+    <None Remove="Docs\Examples\Form.md" />
     <None Remove="Docs\Examples\HelloWorld.md" />
+    <None Remove="Docs\Examples\SecurePage.md" />
+    <None Remove="Docs\Examples\SimpleList.md" />
     <None Remove="Docs\Filter.md" />
     <None Remove="Docs\Middleware.md" />
     <None Remove="Docs\Multicast.md" />
@@ -28,6 +33,11 @@
     <EmbeddedResource Include="Docs\DI.md" />
     <EmbeddedResource Include="Docs\DotNetClient.md" />
     <EmbeddedResource Include="Docs\Examples\ControlTypes.md" />
+    <EmbeddedResource Include="Docs\Examples\CompositeView.md" />
+    <EmbeddedResource Include="Docs\Examples\Form.md" />
+    <EmbeddedResource Include="Docs\Examples\Dashboard.md" />
+    <EmbeddedResource Include="Docs\Examples\SecurePage.md" />
+    <EmbeddedResource Include="Docs\Examples\SimpleList.md" />
     <EmbeddedResource Include="Docs\Examples\HelloWorld.md" />
     <EmbeddedResource Include="Docs\Filter.md" />
     <EmbeddedResource Include="Docs\Middleware.md" />

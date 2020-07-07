@@ -15,20 +15,12 @@ namespace Website.Server
                new NavRoute("Overview", PATH_BASE + "/"),
                new NavGroup
                {
-                  Label = "Basic Examples",
+                  Label = "Examples",
                   Routes = new NavRoute[]
                   {
                      new NavRoute("Hello World", PATH_BASE + "/helloworld"),
                      new NavRoute("Control Types", PATH_BASE + "/controltypes"),
                      new NavRoute("Simple List", PATH_BASE + "/simplelist"),
-                  },
-                  IsExpanded = true
-               },
-               new NavGroup
-               {
-                  Label = "Further Examples",
-                  Routes = new NavRoute[]
-                  {
                      new NavRoute("Composite View", PATH_BASE + "/compositeview"),
                      new NavRoute("Secure Page", PATH_BASE + "/securepage")
                   },

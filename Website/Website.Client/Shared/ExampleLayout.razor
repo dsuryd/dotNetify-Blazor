@@ -3,7 +3,7 @@
 <VMContext VM="@VM" OnStateChange="(object state) => UpdateState(state)" OnElementEvent="HandleElementEvent">
 @if (state != null)
 {
-    <d-panel css="@Stylesheet["ArticleLayout"]">
+    <d-panel css="@(Stylesheet["ArticleLayout"] + "&{margin-left:6%}")">
         <d-tab>
             <d-tab-item itemkey="output" label="Output">
                 @ChildContent

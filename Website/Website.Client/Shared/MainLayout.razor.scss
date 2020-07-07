@@ -1,0 +1,20 @@
+﻿.license-notice {
+ margin-top: auto;
+  margin-left: auto;
+  padding: 5px 8px;
+  font-size: 0.8rem;
+  color: #999;
+  a {
+    color: #337ab7;
+    &:hover {
+      color: #0056b3;
+      text-decoration: none;
+    }
+    &:focus {
+      color: #337ab7;
+      > * {
+        background: #e7e7e7;
+      }
+    }
+  }
+}

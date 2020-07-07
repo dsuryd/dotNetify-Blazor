@@ -3,6 +3,13 @@
   .card-body {
     padding: 0.5rem 1.5rem;
     min-width: 12rem;
+
+    @media (max-width: 1600px) {
+         min-width: 24rem;
+    }
+    @media (max-width: 1270px) {
+         min-width: 16rem;
+    }
   }
   > label,
   > h3 {

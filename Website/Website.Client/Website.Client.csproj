@@ -18,6 +18,7 @@
     <None Remove="Pages\2_Examples\SimpleList.razor.scss" />
     <None Remove="Shared\ArticleLayout.razor.scss" />
     <None Remove="Shared\Expander.razor.scss" />
+    <None Remove="Shared\MainLayout.razor.scss" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +37,7 @@
     <EmbeddedResource Include="Pages\2_Examples\HelloWorld.razor.scss" />
     <EmbeddedResource Include="Pages\2_Examples\SecurePage\Login.razor.scss" />
     <EmbeddedResource Include="Pages\2_Examples\SimpleList.razor.scss" />
+    <EmbeddedResource Include="Shared\MainLayout.razor.scss" />
   </ItemGroup>
 
   <ItemGroup>

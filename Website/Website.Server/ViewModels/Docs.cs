@@ -20,6 +20,31 @@ namespace Website.Server
       public string Content => new Markdown("Website.Server.Docs.Examples.ControlTypes.md");
    }
 
+   public class SimpleListDoc : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Examples.SimpleList.md");
+   }
+
+   public class CompositeViewDoc : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Examples.CompositeView.md");
+   }
+
+   public class SecurePageDoc : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Examples.SecurePage.md");
+   }
+
+   public class DashboardDoc : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Examples.Dashboard.md");
+   }
+
+   public class FormDoc : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Examples.Form.md");
+   }
+
    #endregion Examples
 
    #region API References
