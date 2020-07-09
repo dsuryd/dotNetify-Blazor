@@ -32,6 +32,11 @@ limitations under the License.*@
    [Parameter] public VMConnectOptions Options { get; set; }
 
    /// <summary>
+   /// Enables web API mode.
+   /// </summary>
+   [Parameter] public bool WebApi { get; set; }
+
+   /// <summary>
    /// Occurs on receiving state update from the server-side view model.
    /// </summary>
    [Parameter] public Action<TState> OnStateChange { get; set; }
@@ -45,10 +50,19 @@ limitations under the License.*@
 
    private readonly string[] DomSelectorPrefixes = new string[] { "#", ".", "[" };
 
+   protected override void OnInitialized()
+   {
+       if (WebApi)
+       {
+           Options = Options ?? new VMConnectOptions();
+           Options.WebApi = true;
+       }
+   }
+
    protected override async Task OnAfterRenderAsync(bool firstRender)
    {
        if (firstRender)
-       { 
+       {
            await vm.HandleStateChangeAsync<TState>(state => OnStateChange?.Invoke(state));
            await vm.HandleElementEventAsync(args => HandleElementEvent(args));
        }

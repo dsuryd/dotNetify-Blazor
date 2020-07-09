@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Docs\Basics.md" />
     <None Remove="Docs\CRUD.md" />
     <None Remove="Docs\DI.md" />
     <None Remove="Docs\DotNetClient.md" />
@@ -24,6 +25,9 @@
     <None Remove="Docs\Middleware.md" />
     <None Remove="Docs\Multicast.md" />
     <None Remove="Docs\Overview.md" />
+    <None Remove="Docs\Overview\DataFlow.md" />
+    <None Remove="Docs\Overview\GetStarted.md" />
+    <None Remove="Docs\Overview\Reactive.md" />
     <None Remove="Docs\Security.md" />
     <None Remove="Docs\WebApiMode.md" />
   </ItemGroup>
@@ -42,7 +46,11 @@
     <EmbeddedResource Include="Docs\Filter.md" />
     <EmbeddedResource Include="Docs\Middleware.md" />
     <EmbeddedResource Include="Docs\Multicast.md" />
-    <EmbeddedResource Include="Docs\Overview.md" />
+    <EmbeddedResource Include="Docs\Overview\Basics.md" />
+    <EmbeddedResource Include="Docs\Overview\DataFlow.md" />
+    <EmbeddedResource Include="Docs\Overview\GetStarted.md" />
+    <EmbeddedResource Include="Docs\Overview\Overview.md" />
+    <EmbeddedResource Include="Docs\Overview\Reactive.md" />
     <EmbeddedResource Include="Docs\Security.md" />
     <EmbeddedResource Include="Docs\WebApiMode.md" />
     <EmbeddedResource Include="Services\AFITop100.json" />

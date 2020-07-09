@@ -13,6 +13,10 @@ namespace Website.Server
             new NavMenuItem[]
             {
                new NavRoute("Overview", PATH_BASE + "/"),
+               new NavRoute("Basics", PATH_BASE + "/basics"),
+               new NavRoute("Data Flow", PATH_BASE + "/dataflow"),
+               new NavRoute("Reactive", PATH_BASE + "/reactive"),
+               new NavRoute("Get Started", PATH_BASE + "/getstarted"),
                new NavGroup
                {
                   Label = "Examples",
@@ -47,7 +51,8 @@ namespace Website.Server
                      new NavRoute ("Filter", PATH_BASE + "/filter"),
                      new NavRoute ("Middleware", PATH_BASE + "/middleware"),
                      new NavRoute ("Multicast", PATH_BASE + "/multicast"),
-                     new NavRoute ("Security", PATH_BASE + "/security")
+                     new NavRoute ("Security", PATH_BASE + "/security"),
+                     new NavRoute ("Web API Mode", PATH_BASE + "/webapimode")
                   },
                   IsExpanded = false
                }

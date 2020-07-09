@@ -1,26 +1,24 @@
-## Overview
-
-DotNetify makes it super easy to connect your client-side [Blazor](https://docs.microsoft.com/en-us/aspnet/core/blazor/) app to a .NET back-end in a declarative, real-time and reactive manner. It uses [SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/) to communicate with the server through an MVVM-styled abstraction, while making sure that you still have control over what gets sent over the network.
-
-DotNetify is a good fit for building complex web applications that requires clear separation of concerns between client-side UI, presentation, and domain logic for long-term testability, maintainability and extensiblity. Furthermore, its integration with SignalR allows you to easily implement asynchronous data updates to multiple clients in real-time.
-
-DotNetify also comes with a library of HTML native web components called **DotNetify-Elements**. Some are pre-wired to talk directly to your server-side view model, which make them great for quickly implementing input forms. Others provide UI elements such as tabs, modals, collapsibles and more --- all supporting scoped CSS customization.
-
-#### Hello World
+## Basics
 
 In the most basic form, you can just use dotNetify to quickly fetch from the server the initial state of your Blazor component. You do this by nesting your component's HTML inside a **VMContext** component, and specify its **VM** attribute value with the name of the C# view model class that will provide the state.
 
 ```jsx
-<VMContext VM="HelloWorld" OnStateChange="(IHelloWorldState newState) => { state = newState; StateHasChanged(); }">
+<VMContext VM="HelloWorld" OnStateChange="(IHelloWorldState state) => UpdateState(state)">
     <div>@state?.Greetings</div>
 </VMContext>
 
 @code {
-    IHelloWorldState state;
+    private IHelloWorldState state;
 
     public interface HelloWorldState
     {
         string Greetings { get; set; }
+    }
+
+    private void UpdateState(IHelloWorldState state)
+    {
+      this.state = state;
+      StateHasChanged();
     }
 ```
 
@@ -31,14 +29,14 @@ public class HelloWorld : BaseVM
 }
 ```
 
-Write a C# class that inherits from **BaseVM** in your ASP.NET project, and add public properties for all the data your component will need. When the connection is established, the class instance will be serialized to JSON and sent as the initial state for the component.
+Write a C# class that inherits from **BaseVM** in your ASP.NET project, and add public properties for all the data your component will need. When the connection is established, the class instance will be serialized and sent as the initial state for the component.
 
 #### Real-Time Push
 
 With very little effort, you can make your app gets real-time data update from the server:
 
 ```jsx
-<VMContext VM="HelloWorld" OnStateChange="(IHelloWorldState newState) => { state = newState; StateHasChanged(); }">
+<VMContext VM="HelloWorld" OnStateChange="(IHelloWorldState state) => UpdateState(state)">
     <div>
       <p>@state?.Greetings</p>
       <p>Server time is: @state?ServerTime</p>
@@ -46,12 +44,18 @@ With very little effort, you can make your app gets real-time data update from t
 </VMContext>
 
 @code {
-    IHelloWorldState state;
+    private IHelloWorldState state;
 
     public interface IHelloWorldState
     {
         string Greetings { get; set; }
         string ServerTime { get; set; }
+    }
+
+    private void UpdateState(IHelloWorldState state)
+    {
+      this.state = state;
+      StateHasChanged();
     }
 }
 ```
@@ -83,7 +87,7 @@ We added two new server APIs, **Changed** that accepts the name of the property 
 At some point in your app, you probably want to send data back to the server to be persisted. Let's add to this example something to submit:
 
 ```jsx
-<VMContext VM="ServerUpdate" OnStateChange="(IServerUpdateState newState) => { state = newState; StateHasChanged(); }">
+<VMContext VM="ServerUpdate" OnStateChange="(IServerUpdateState state) => UpdateState(state)">
     <div>
         <p>@state?.Greetings</p>
         <input type="text" bind="@person.FirstName" />
@@ -93,8 +97,8 @@ At some point in your app, you probably want to send data back to the server to 
 </VMContext>
 
 @code {
-    IServerUpdateState state;
-    Person person = new Person();
+    private IServerUpdateState state;
+    private Person person = new Person();
 
     public interface IServerUpdateState
     {
@@ -102,13 +106,19 @@ At some point in your app, you probably want to send data back to the server to 
         void Submit(Person person);
     }
 
-    class Person
+    public class Person
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
 
     private void HandleSubmit() => state.Submit(person);
+
+    private void UpdateState(IServerUpdateState state)
+    {
+      this.state = state;
+      StateHasChanged();
+    }
 }
 ```
 
@@ -148,23 +158,28 @@ View model objects stay alive on the server until the browser page is closed, re
 To keep the properties in the client in sync with the server without explicit method call, add the **[Watch]** attribute on the interface property:
 
 ```jsx
-<VMContext VM="HelloWorld" OnStateChange="(IHelloWorldState newState) => { state = newState; StateHasChanged(); }">
+<VMContext VM="HelloWorld" OnStateChange="(IHelloWorldState state) => UpdateState(state)">
   <div>
-    <p>@state.Greetings</p>
+    <p>@state?.Greetings</p>
     <input type="text" bind="@state.Name" />
   </div>
 </VMContext>
 
 @code {
-    IHelloWorldState state;
-    Person person = new Person();
+    private IHelloWorldState state;
+    private Person person = new Person();
 
     public interface IHelloWorldState
     {
         string Greetings { get; set; }
         [Watch] string Name { get; set; }
     }
-}
+
+    private void UpdateState(IServerUpdateState state)
+    {
+      this.state = state;
+      StateHasChanged();
+    }
 ```
 
 ```csharp
@@ -187,6 +202,42 @@ public class HelloWorld : BaseVM
 
 [inset]
 
+#### Scoped CSS
+
+Blazor native support for component-scoped CSS isn't here yet, but these steps will allow you to have it:
+
+1. Create a separate css file for you component, e.g. \_MyComponent.razor.css\_\_.
+2. Set the _Build Action_ property of that file to <b>Embedded Resource</b>.
+3. Inside your component's razor file, inject **IStylesheet** service from _DotNetify.Blazor_ namespace.
+4. Nest the component's HTML under a `d-panel` web component from `dotNetify-Elements`.
+5. Use the indexer of _IStylesheet_ to access the css content of the file by its file name (it uses submatching, so name can be partial), and pass the string to the _css_ attribute of `d-panel`.
+
+```jsx
+@inject IStylesheet Stylesheet
+
+<VMContext VM="HelloWorld">
+  <d-panel css='@Stylesheet["HelloWorld"]'>
+    @state.Greetings
+  </d-panel>
+</VMContext>
+```
+
+At runtime you will see that a CSS class with a random name is added to the `<head>` tag, and set on `d-panel` element, which makes the style exclusive to that element and its children. Furthermore, the light CSS preprocessor used to generate it supports nesting syntax:
+
+```css
+& {
+  .some-class {
+    &:hover {
+      color: blue;
+    }
+    div {
+      font-size: 12px;
+      font-weight: bold;
+    }
+  }
+}
+```
+
 #### API Essentials
 
 ##### Client APIs
@@ -194,9 +245,11 @@ public class HelloWorld : BaseVM
 **VMContext** component attributes:
 
 - **VM**: the name of the view model type to connect to.
+- **Options**: connect options, used for passing initial values, authentication headers, or switching to Web API mode.
 - **OnStateChange**: callback when a new state is received from the server.
+- **OnElementEvent**: event callback when using web components from _Elements_.
 
-\__As(\_type_): helper extension method to deserialize the state object.
+**IStylesheet**: use its indexer to access the CSS embedded resource string.
 
 ##### Server APIs
 
@@ -205,7 +258,7 @@ On the server, inherit from **BaseVM** and use:
 - **Changed**(_propName_)
 - **PushUpdates**(): for real-time push.
 
-Not essential, but these property accessor/mutator helper **Get/Set** can make your code more concise:
+Optionally, use these property accessor/mutator helper **Get/Set** to make your code more concise:
 
 ```csharp
 public string Greetings

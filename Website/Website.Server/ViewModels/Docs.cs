@@ -5,7 +5,27 @@ namespace Website.Server
 {
    public class Overview : BaseVM
    {
-      public string Content => new Markdown("Website.Server.Docs.Overview.md");
+      public string Content => new Markdown("Website.Server.Docs.Overview.Overview.md");
+   }
+
+   public class Basics : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Overview.Basics.md");
+   }
+
+   public class DataFlow : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Overview.DataFlow.md");
+   }
+
+   public class Reactive : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Overview.Reactive.md");
+   }
+
+   public class GetStarted : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Overview.GetStarted.md");
    }
 
    #region Examples
@@ -82,6 +102,11 @@ namespace Website.Server
    public class Security : BaseVM
    {
       public string Content => new Markdown("Website.Server.Docs.Security.md");
+   }
+
+   public class WebApiMode : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.WebApiMode.md");
    }
 
    #endregion API References
