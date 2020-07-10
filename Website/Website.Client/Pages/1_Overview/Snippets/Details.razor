@@ -1,0 +1,18 @@
+﻿<VMContext VM="Details" OnStateChange="(IDetailsState state) => UpdateState(state)">
+    <img src="@state?.ItemImageUrl" style="margin:0 1rem" />
+</VMContext>
+
+@code {
+   private IDetailsState state;
+
+   public interface IDetailsState
+   {
+       string ItemImageUrl { get; set; }
+   }
+
+   private void UpdateState(IDetailsState state)
+   {
+       this.state = state;
+       StateHasChanged();
+   }
+}

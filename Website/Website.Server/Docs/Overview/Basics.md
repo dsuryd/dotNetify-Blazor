@@ -1,6 +1,6 @@
 ## Basics
 
-In the most basic form, you can just use dotNetify to quickly fetch from the server the initial state of your Blazor component. You do this by nesting your component's HTML inside a **VMContext** component, and specify its **VM** attribute value with the name of the C# view model class that will provide the state.
+In the most basic form, you can just use dotNetify to quickly fetch from the server the initial state of your Blazor component. You do this by nesting your component's HTML inside a **VMContext** component, and specify its **VM** attribute value with the name of the C# view model class that will provide the state. Add a public interface to define what that state is.
 
 ```jsx
 <VMContext VM="HelloWorld" OnStateChange="(IHelloWorldState state) => UpdateState(state)">
@@ -10,7 +10,7 @@ In the most basic form, you can just use dotNetify to quickly fetch from the ser
 @code {
     private IHelloWorldState state;
 
-    public interface HelloWorldState
+    public interface IHelloWorldState
     {
         string Greetings { get; set; }
     }
@@ -29,7 +29,7 @@ public class HelloWorld : BaseVM
 }
 ```
 
-Write a C# class that inherits from **BaseVM** in your ASP.NET project, and add public properties for all the data your component will need. When the connection is established, the class instance will be serialized and sent as the initial state for the component.
+Write a C# class that inherits from **BaseVM** in your ASP.NET project, and add public properties matching the state interface you defined. When the connection is established, the class instance will be serialized and sent as the initial state for the component.
 
 #### Real-Time Push
 
@@ -140,14 +140,13 @@ public class HelloWorld : BaseVM
 }
 ```
 
-[inset]
 Notice the `Submit` method on the client-side interface, which serves as proxy to the method of the same name in the view model. When that method is called, the argument will be dispatched to the server and used to invoke the server method. After the action modifies the Greetings property, it marks it as changed so that the new text will get sent to the front-end.
 
 Notice that we don't need to use **PushUpdates** to get the new greetings sent. That's because dotNetify employs something similar to the request-response cycle, but in this case it's _action-reaction cycle_: the front-end initiates an action that mutates the state, the server processes the action and then sends back to the front-end any other states that mutate as the reaction to that action.
 
 #### Object Lifetime
 
-You probably think of those server classes as models, but in dotNetify's scheme of things, they are considered view models. Whereas a model represents your app's business domain, a view model is an abstraction of a view, which embodies data and behavior necessary for the view to fulfill its use case.
+The server classes are referred to as view models. Whereas a model represents your app's business domain, a view model is an abstraction of a view, which embodies data and behavior necessary for the view to fulfill its use cases.
 
 View-models gets their model data from the back-end service layer and shape them to meet the needs of the views. This enforces separation of concerns, where you can keep the views dealing only with UI presentation and leave all data-driven operations to the view models. It's great for testing too, because you can test your use case independent of any UI concerns.
 
@@ -206,7 +205,7 @@ public class HelloWorld : BaseVM
 
 Blazor native support for component-scoped CSS isn't here yet, but these steps will allow you to have it:
 
-1. Create a separate css file for you component, e.g. \_MyComponent.razor.css\_\_.
+1. Create a separate css file for you component, e.g. _MyComponent.razor.css_.
 2. Set the _Build Action_ property of that file to <b>Embedded Resource</b>.
 3. Inside your component's razor file, inject **IStylesheet** service from _DotNetify.Blazor_ namespace.
 4. Nest the component's HTML under a `d-panel` web component from `dotNetify-Elements`.
@@ -222,21 +221,7 @@ Blazor native support for component-scoped CSS isn't here yet, but these steps w
 </VMContext>
 ```
 
-At runtime you will see that a CSS class with a random name is added to the `<head>` tag, and set on `d-panel` element, which makes the style exclusive to that element and its children. Furthermore, the light CSS preprocessor used to generate it supports nesting syntax:
-
-```css
-& {
-  .some-class {
-    &:hover {
-      color: blue;
-    }
-    div {
-      font-size: 12px;
-      font-weight: bold;
-    }
-  }
-}
-```
+At runtime you will see that a CSS class with a random name is added to the `<head>` tag, and set on `d-panel` element, which makes the style exclusive to that element and its children. Furthermore, the light CSS preprocessor used to generate it supports nesting syntax. For example: `& { .some-class { &:hover { color: blue; } } }`.
 
 #### API Essentials
 

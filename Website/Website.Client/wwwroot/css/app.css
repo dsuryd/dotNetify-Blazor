@@ -25,16 +25,12 @@ strong {
     border-radius: 2px;
 }
 
-b {
-    font-weight: 500;
-    background-color: rgba(255, 255, 255, .6);
-}
-
 .theme-dark strong {
     background-color: rgba(255, 255, 255, .2);
 }
 
 p,
+.markdown ol > li,
 .markdown div > ul > li {
     font-size: 1.1rem;
     line-height: 1.8rem;
@@ -42,6 +38,11 @@ p,
 
 div > h2 {
     margin-bottom: 1rem;
+}
+
+.markdown b {
+    font-weight: 500;
+    background-color: rgba(255, 255, 255, .6);
 }
 
 .markdown pre {
@@ -83,11 +84,6 @@ div > h2 {
     padding-left: 1rem;
     margin-left: 3rem;
     font-style: italic;
-}
-
-.markdown ol {
-    margin-left: -1.5rem;
-    font-weight: 600;
 }
 
 .toc-h5 {

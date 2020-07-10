@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Content Remove="Services\AFITop100.json" />
+    <Content Remove="Services\webstore.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +55,7 @@
     <EmbeddedResource Include="Docs\Security.md" />
     <EmbeddedResource Include="Docs\WebApiMode.md" />
     <EmbeddedResource Include="Services\AFITop100.json" />
+    <EmbeddedResource Include="Services\webstore.json" />
   </ItemGroup>
 
   <ItemGroup>

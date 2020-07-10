@@ -1,0 +1,45 @@
+﻿<VMContext VM="Master" OnStateChange="(IMasterState state) => UpdateState(state)">
+@if(state != null)
+{
+    foreach(var item in state?.ListItems)
+    {
+        <li key={item.Id} style="@GetItemStyle(item.Id)" @onclick="() => HandleSelect(item.Id)">@item.Title</li>
+    }
+}
+</VMContext>
+
+@code {
+   private IMasterState state;
+   private string selectedId;
+
+   public interface IMasterState
+   {
+       ListItem[] ListItems { get; set; }
+       void Select(string id);
+   }
+
+   public class ListItem
+   {
+       public string Id { get; set; }
+       public string Title { get; set; }
+   }
+
+   private string GetItemStyle(string id)
+   {
+       var color = id == this.selectedId ? "#eee" : "none";
+       return $"cursor:pointer; background:{color}";
+   }
+
+   private void HandleSelect(string id)
+   {
+       this.selectedId = id;
+       this.state.Select(id);
+   }
+
+   private void UpdateState(IMasterState state)
+   {
+       this.state = state;
+       HandleSelect(state.ListItems[0].Id);
+       StateHasChanged();
+   }
+}

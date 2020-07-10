@@ -14,7 +14,7 @@ namespace Website.Server
             {
                new NavRoute("Overview", PATH_BASE + "/"),
                new NavRoute("Basics", PATH_BASE + "/basics"),
-               new NavRoute("Data Flow", PATH_BASE + "/dataflow"),
+               new NavRoute("Data Flow Pattern", PATH_BASE + "/dataflow"),
                new NavRoute("Reactive", PATH_BASE + "/reactive"),
                new NavRoute("Get Started", PATH_BASE + "/getstarted"),
                new NavGroup

@@ -2,18 +2,17 @@
 using System.Linq;
 using Newtonsoft.Json;
 using DotNetify.Elements;
+using System.Threading.Tasks;
 
 namespace Website.Server
 {
    public interface IWebStoreService
    {
-      IEnumerable<WebStoreRecord> GetAllRecords();
+      Task<IEnumerable<WebStoreRecord>> GetAllBooksAsync();
 
-      IEnumerable<WebStoreRecord> GetAllBooks();
+      Task<WebStoreRecord> GetBookByTitleAsync(string title);
 
-      WebStoreRecord GetBookByTitle(string title);
-
-      WebStoreRecord GetBookById(int id);
+      Task<WebStoreRecord> GetBookByIdAsync(int id);
    }
 
    public class WebStoreRecord
@@ -38,13 +37,13 @@ namespace Website.Server
 
    public class WebStoreService : IWebStoreService
    {
-      public IEnumerable<WebStoreRecord> GetAllRecords() => JsonConvert.DeserializeObject<List<WebStoreRecord>>(
-         Utils.GetResource("DotNetify.DevApp.Docs.Examples.webstore.json", GetType().Assembly).Result);
+      public async Task<IEnumerable<WebStoreRecord>> GetAllRecordsAsync() => JsonConvert.DeserializeObject<List<WebStoreRecord>>(
+         await Utils.GetResource("Website.Server.Services.webstore.json", GetType().Assembly));
 
-      public IEnumerable<WebStoreRecord> GetAllBooks() => GetAllRecords().Where(i => i.Type == "Book");
+      public async Task<IEnumerable<WebStoreRecord>> GetAllBooksAsync() => (await GetAllRecordsAsync()).Where(i => i.Type == "Book");
 
-      public WebStoreRecord GetBookByTitle(string title) => GetAllBooks().FirstOrDefault(i => i.UrlSafeTitle == title);
+      public async Task<WebStoreRecord> GetBookByTitleAsync(string title) => (await GetAllBooksAsync()).FirstOrDefault(i => i.UrlSafeTitle == title);
 
-      public WebStoreRecord GetBookById(int id) => GetAllBooks().FirstOrDefault(i => i.Id == id);
+      public async Task<WebStoreRecord> GetBookByIdAsync(int id) => (await GetAllBooksAsync()).FirstOrDefault(i => i.Id == id);
    }
 }
