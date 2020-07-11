@@ -4,7 +4,7 @@
     <VMContext VM="HelloWorldVM" TState="IHelloWorldState" OnStateChange="UpdateState">
     @if (state != null)
     {
-        <StyleSheet Name="HelloWorld">
+        <StyleSheet Context="this">
             <section>
                 <div>
                     <label>First name:</label>

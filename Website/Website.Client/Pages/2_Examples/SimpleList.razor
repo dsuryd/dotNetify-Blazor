@@ -5,7 +5,7 @@
     <VMContext VM="SimpleListVM" TState="ISimpleListState" OnStateChange="UpdateState">
     @if (state != null)
     {
-        <StyleSheet Name="SimpleList">
+        <StyleSheet Context="this">
             <d-alert info="true">
                 <i class="material-icons">info_outlined</i>
                 This is a multicast list. Your edits will appear on all other browser views in real-time.

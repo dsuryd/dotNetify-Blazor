@@ -7,7 +7,7 @@
 <VMContext VM="ControlTypesVM" OnStateChange="(IControlTypesState state) => UpdateState(state)">
 @if (state != null)
 {
-    <Stylesheet Name="ControlTypes">
+    <Stylesheet Context="this">
         <table>
             <tbody>
                 <tr>

@@ -192,6 +192,8 @@ public class Details : BaseVM
 }
 ```
 
+</d-tab-item>
+</d-tab>
 <br/>
 
 Notice that in the UI view, the components are connecting to their own view models to get their state, and nothing is passed between components. It's their view models that are doing that on the back-end, and pushing the state change to the front-end.

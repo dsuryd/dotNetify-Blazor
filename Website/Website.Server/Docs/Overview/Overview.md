@@ -16,7 +16,7 @@ DotNetify's design is based on the principle of maintaining strong separation of
 
 - **[Can switch to Web API](webapimode)**: don't need real-time and don't want to use SignalR? Keep your view model stateless and switch to use built-in Web API endpoint instead.
 
-- **[Scoped CSS](scopedcss)**: Blazor's native CSS isolation is still in the future, but don't let that stop you from having it now!
+- **[Scoped CSS](scopedcss)**: Blazor's native CSS isolation is still in the future, but don't let that stop you from enjoying it now!
 
 - **[Reusable with Javascript SPAs](https://github.com/dsuryd/dotNetify/tree/master/Demo)**: Can't always use Blazor? The same view models you write for Blazor can be reused with Javascript UI frameworks without change. DotNetify has full support for React and Vue, and can be made to work with Angular and others.
 

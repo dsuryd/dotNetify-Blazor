@@ -2,7 +2,7 @@
 @inject HttpClient Http
 
 <ExampleLayout VM="SecurePageDoc">
-    <StyleSheet Name="Login">
+    <StyleSheet Context="this">
         <div>
             @if (accessToken != null)
             {

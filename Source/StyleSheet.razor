@@ -20,6 +20,11 @@ limitations under the License.*@
 
 @code {
    /// <summary>
+   /// Component where this StyleSheet component is in.  Its name is used to located the embedded resource that contains the style sheet to use.
+   /// </summary>
+   [Parameter] public object Context { get; set; }
+
+   /// <summary>
    /// Name of the embedded resource that contains the style sheet to use.
    /// </summary>
    [Parameter] public string Name { get; set; }
@@ -35,8 +40,12 @@ limitations under the License.*@
 
    protected override void OnInitialized()
    {
-       this.css = StyleSheetLoader[Name];
-       if (OnLoad != null)
-           this.css = OnLoad(this.css);
+        string resourceName = !string.IsNullOrWhiteSpace(Name) ? Name : Context?.GetType().Name;
+        if (!string.IsNullOrWhiteSpace(resourceName))
+        { 
+        this.css = StyleSheetLoader[resourceName];
+        if (OnLoad != null)
+            this.css = OnLoad(this.css);
+        }
    }
 }
