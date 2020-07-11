@@ -2,7 +2,7 @@
 @inject IStylesheet Stylesheet
 
 <ExampleLayout VM="HelloWorldDoc">
-    <VMContext VM="HelloWorldVM" OnStateChange="(IHelloWorldState state) => UpdateState(state)">
+    <VMContext VM="HelloWorldVM" TState="IHelloWorldState" OnStateChange="UpdateState">
     @if (state != null)
     {
         <d-panel css='@Stylesheet["HelloWorld"]'>

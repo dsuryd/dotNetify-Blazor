@@ -65,12 +65,20 @@ namespace DotNetify.Blazor
          });
       }
 
-      public Task HandleElementEventAsync(Action<ElementEvent> eventCallback)
+      public Task HandleElementEventAsync(Action<ElementEventArgs> eventCallback)
       {
          if (!_vmContextElemRef.HasValue)
             throw new ArgumentNullException(nameof(ElementRef));
 
          return HandleDomEventAsync("onElementEvent", ElementRef, eventCallback);
+      }
+
+      public Task HandleExceptionAsync(Action<ExceptionEventArgs> eventCallback)
+      {
+         if (!_vmContextElemRef.HasValue)
+            throw new ArgumentNullException(nameof(ElementRef));
+
+         return HandleDomEventAsync("onException", ElementRef, eventCallback);
       }
 
       public Task HandleDomEventAsync<TEventArg>(string eventName, ElementReference domElement, Action<TEventArg> eventCallback)

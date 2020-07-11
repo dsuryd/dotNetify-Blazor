@@ -39,12 +39,17 @@ limitations under the License.*@
    /// <summary>
    /// Occurs on receiving state update from the server-side view model.
    /// </summary>
-   [Parameter] public Action<TState> OnStateChange { get; set; }
+   [Parameter] public EventCallback<TState> OnStateChange { get; set; }
 
    /// <summary>
    /// Occurs on receiving a custom event from a DotNetify-Element's web component.
    /// </summary>
-   [Parameter] public Action<ElementEvent> OnElementEvent { get; set; }
+   [Parameter] public EventCallback<ElementEventArgs> OnElementEvent { get; set; }
+
+   /// <summary>
+   /// Occurs on receiving an exception from the server-side view model.
+   /// </summary>
+   [Parameter] public EventCallback<ExceptionEventArgs> OnException { get; set; }
 
    [Parameter] public RenderFragment ChildContent { get; set; }
 
@@ -61,8 +66,9 @@ limitations under the License.*@
    {
        if (firstRender)
        {
-           await vm.HandleStateChangeAsync<TState>(state => OnStateChange?.Invoke(state));
+           await vm.HandleStateChangeAsync<TState>(state => OnStateChange.InvokeAsync(state));
            await vm.HandleElementEventAsync(args => HandleElementEvent(args));
+           await vm.HandleExceptionAsync(ex => HandleException(ex));
        }
    }
 
@@ -86,8 +92,13 @@ limitations under the License.*@
        vm.HandleDomEventAsync<TEventArg>(eventName, elementRef, e => eventHandler?.Invoke(e));
    }
 
-   private void HandleElementEvent(ElementEvent args)
+   private void HandleElementEvent(ElementEventArgs args)
    {
-       OnElementEvent?.Invoke(args);
+       OnElementEvent.InvokeAsync(args);
+   }
+
+   private void HandleException(ExceptionEventArgs args)
+   {
+       OnException.InvokeAsync(args);
    }
 }

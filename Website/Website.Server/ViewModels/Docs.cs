@@ -99,6 +99,11 @@ namespace Website.Server
       public string Content => new Markdown("Website.Server.Docs.Multicast.md");
    }
 
+   public class ScopedCss : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.ScopedCss.md");
+   }
+
    public class Security : BaseVM
    {
       public string Content => new Markdown("Website.Server.Docs.Security.md");

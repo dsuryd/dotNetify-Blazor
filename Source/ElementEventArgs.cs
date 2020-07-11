@@ -16,7 +16,7 @@ limitations under the License.
 
 namespace DotNetify.Blazor
 {
-   public class ElementEvent
+   public class ElementEventArgs
    {
       /// <summary>
       /// Identifies the DOM element raising the event.

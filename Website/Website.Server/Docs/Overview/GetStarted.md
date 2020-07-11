@@ -41,7 +41,7 @@ Download the NuGet package **DotNetify.Blazor**, then add the following to the `
 <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/styled-components@4.1/dist/styled-components.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@aspnet/signalr@1.1.2/dist/browser/signalr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@aspnet/signalr@1/dist/browser/signalr.min.js"></script>
 <script src="https://unpkg.com/dotnetify@latest/dist/dotnetify-react.min.js"></script>
 <script src="https://unpkg.com/dotnetify-elements@latest/lib/dotnetify-elements.bundle.js"></script>
 <script src="_content/DotNetify.Blazor/dotnetify-blazor.js"></script>

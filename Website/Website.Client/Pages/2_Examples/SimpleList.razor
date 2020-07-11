@@ -3,7 +3,7 @@
 @inject IJSRuntime JSRuntime
 
 <ExampleLayout VM="SimpleListDoc">
-    <VMContext VM="SimpleListVM" OnStateChange="(ISimpleListState state) => UpdateState(state)">
+    <VMContext VM="SimpleListVM" TState="ISimpleListState" OnStateChange="UpdateState">
     @if (state != null)
     {
         <d-panel css="@Stylesheet["SimpleList"]">

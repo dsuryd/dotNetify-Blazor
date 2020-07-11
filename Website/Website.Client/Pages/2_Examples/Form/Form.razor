@@ -34,7 +34,7 @@
    private string IsEditing => editMode.ToString().ToLower();
    private string IsViewing => (!editMode).ToString().ToLower();
 
-   private void HandleElementEvent(ElementEvent elementEvent)
+   private void HandleElementEvent(ElementEventArgs elementEvent)
    {
        if (elementEvent.TargetId == "_Edit" || elementEvent.TargetId == "_Cancel" || elementEvent.TargetId == "Submit")
            editMode = !editMode;

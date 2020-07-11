@@ -1,9 +1,9 @@
 ## Basics
 
-In the most basic form, you can just use dotNetify to quickly fetch from the server the initial state of your Blazor component. You do this by nesting your component's HTML inside a **VMContext** component, and specify its **VM** attribute value with the name of the C# view model class that will provide the state. Add a public interface to define what that state is.
+In the most basic form, you can just use dotNetify to quickly fetch from the server the initial state of your Blazor component. You do this by nesting your component's HTML inside a **VMContext** component.  Use its **VM** attribute value to specify the name of the C# view model class that will provide the state. Add a public interface to define what that state is, and assign the type to the **TState** atribute.  
 
 ```jsx
-<VMContext VM="HelloWorld" OnStateChange="(IHelloWorldState state) => UpdateState(state)">
+<VMContext VM="HelloWorld" TState="IHelloWorldState" OnStateChange="UpdateState">
     <div>@state?.Greetings</div>
 </VMContext>
 
@@ -36,7 +36,7 @@ Write a C# class that inherits from **BaseVM** in your ASP.NET project, and add 
 With very little effort, you can make your app gets real-time data update from the server:
 
 ```jsx
-<VMContext VM="HelloWorld" OnStateChange="(IHelloWorldState state) => UpdateState(state)">
+<VMContext VM="HelloWorld" TState="IHelloWorldState" OnStateChange="UpdateState">
     <div>
       <p>@state?.Greetings</p>
       <p>Server time is: @state?ServerTime</p>
@@ -79,7 +79,6 @@ public class HelloWorld : BaseVM
 }
 ```
 
-[inset]
 We added two new server APIs, **Changed** that accepts the name of the property we want to update, and **PushUpdates** to do the actual push of all changed properties to the front-end.
 
 #### Server Update
@@ -87,7 +86,7 @@ We added two new server APIs, **Changed** that accepts the name of the property 
 At some point in your app, you probably want to send data back to the server to be persisted. Let's add to this example something to submit:
 
 ```jsx
-<VMContext VM="ServerUpdate" OnStateChange="(IServerUpdateState state) => UpdateState(state)">
+<VMContext VM="ServerUpdate" TState="IServerUpdateState" OnStateChange="UpdateState">
     <div>
         <p>@state?.Greetings</p>
         <input type="text" bind="@person.FirstName" />
@@ -157,7 +156,7 @@ View model objects stay alive on the server until the browser page is closed, re
 To keep the properties in the client in sync with the server without explicit method call, add the **[Watch]** attribute on the interface property:
 
 ```jsx
-<VMContext VM="HelloWorld" OnStateChange="(IHelloWorldState state) => UpdateState(state)">
+<VMContext VM="HelloWorld" TState="IHelloWorldState" OnStateChange="UpdateState">
   <div>
     <p>@state?.Greetings</p>
     <input type="text" bind="@state.Name" />
@@ -198,30 +197,6 @@ public class HelloWorld : BaseVM
   }
 }
 ```
-
-[inset]
-
-#### Scoped CSS
-
-Blazor native support for component-scoped CSS isn't here yet, but these steps will allow you to have it:
-
-1. Create a separate css file for you component, e.g. _MyComponent.razor.css_.
-2. Set the _Build Action_ property of that file to <b>Embedded Resource</b>.
-3. Inside your component's razor file, inject **IStylesheet** service from _DotNetify.Blazor_ namespace.
-4. Nest the component's HTML under a `d-panel` web component from `dotNetify-Elements`.
-5. Use the indexer of _IStylesheet_ to access the css content of the file by its file name (it uses submatching, so name can be partial), and pass the string to the _css_ attribute of `d-panel`.
-
-```jsx
-@inject IStylesheet Stylesheet
-
-<VMContext VM="HelloWorld">
-  <d-panel css='@Stylesheet["HelloWorld"]'>
-    @state.Greetings
-  </d-panel>
-</VMContext>
-```
-
-At runtime you will see that a CSS class with a random name is added to the `<head>` tag, and set on `d-panel` element, which makes the style exclusive to that element and its children. Furthermore, the light CSS preprocessor used to generate it supports nesting syntax. For example: `& { .some-class { &:hover { color: blue; } } }`.
 
 #### API Essentials
 

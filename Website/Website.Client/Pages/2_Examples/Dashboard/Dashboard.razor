@@ -1,7 +1,7 @@
 ﻿@page "/dashboard" 
 
 <ExampleLayout VM="DashboardDoc">
-    <VMContext VM="Dashboard" OnStateChange="(IDashboardState state) => { this.state = state; StateHasChanged(); }">
+    <VMContext VM="Dashboard" TState="IDashboardState" OnStateChange="UpdateState">
     @if (state == null)
     {
         <div class="spinner lds-hourglass" />
@@ -67,5 +67,11 @@
    public interface IDashboardState
    {
        Activity[] RecentActivities { get; set; }
+   }
+
+   private void UpdateState(IDashboardState state)
+   {
+       this.state = state;
+       StateHasChanged();
    }
 }

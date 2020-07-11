@@ -1,4 +1,4 @@
-﻿<VMContext VM="SecurePageVM" Options="@connectOptions" OnStateChange="(ISecurePageState state) => UpdateState(state)">
+﻿<VMContext VM="SecurePageVM" Options="@connectOptions" TState="ISecurePageState" OnStateChange="UpdateState" OnException="HandleException">
 @if (state != null)
 {
     <div class="card">
@@ -9,7 +9,7 @@
             <p>
                 <b>@state.SecureData</b>
             </p>
-            <AdminSecurePage AccessToken="@AccessToken" OnExpiredAccess="HandleExpiredAccess" />
+            <AdminSecurePage AccessToken="@AccessToken" />
         </div>
     </div>
 }
@@ -39,9 +39,10 @@
        };
    }
 
-   private async Task HandleExpiredAccess()
+   private void HandleException(ExceptionEventArgs e)
    {
-       await OnExpiredAccess.InvokeAsync(null);
+       if (e.Name == nameof(UnauthorizedAccessException))
+           OnExpiredAccess.InvokeAsync(null);
    }
 
    private void UpdateState(ISecurePageState state)

@@ -47,7 +47,7 @@ When the interaction grows more complex and it's getting harder to keep your com
 <h5>Master.razor</h4>
 
 ```jsx
-<VMContext VM="Master" OnStateChange="(IMasterState state) => UpdateState(state)">
+<VMContext VM="Master" TState="IMasterState" OnStateChange="UpdateState">
 @if(state != null)
 {
     foreach(var item in state?.ListItems)
@@ -98,7 +98,7 @@ When the interaction grows more complex and it's getting harder to keep your com
 <h5>Details.razor</h4>
 
 ```jsx
-<VMContext VM="Details" OnStateChange="(IDetailsState state) => UpdateState(state)">
+<VMContext VM="Details" TState="IDetailsState" OnStateChange="UpdateState">
 @if (state != null)
 {
     <img src={state.ItemImageUrl} style="margin:0 1rem" />;

@@ -1,6 +1,6 @@
 ﻿@inject IStylesheet Stylesheet
 
-<VMContext VM="@VM" OnStateChange="(object state) => UpdateState(state)" OnElementEvent="HandleElementEvent">
+<VMContext VM="@VM" TState="object" OnStateChange="UpdateState" OnElementEvent="HandleElementEvent">
 @if (state != null)
 {
     <d-panel css="@(Stylesheet["ArticleLayout"] + "&{margin-left:6%}")">
@@ -53,7 +53,7 @@
        StateHasChanged();
    }
 
-   private void HandleElementEvent(ElementEvent e)
+   private void HandleElementEvent(ElementEventArgs e)
    {
        System.Diagnostics.Trace.WriteLine(string.Format("{0} {1} {2}", e.EventName, e.EventArgs, e.TargetId));
    }

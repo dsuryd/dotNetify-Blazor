@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
+using System;
 using System.Collections.Generic;
 
 namespace DotNetify.Blazor
@@ -37,5 +38,10 @@ namespace DotNetify.Blazor
       /// Use HTTP Web API endpoint instead of SignalR hub.
       /// </summary>
       public bool WebApi { get; set; }
+
+      /// <summary>
+      /// Callback when getting exception from server-side view model.
+      /// </summary>
+      public Action<ExceptionEventArgs> ExceptionHandler { get; set; }
    }
 }

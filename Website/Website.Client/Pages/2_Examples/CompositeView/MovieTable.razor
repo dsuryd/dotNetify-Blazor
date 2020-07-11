@@ -1,4 +1,4 @@
-﻿<VMContext VM="MovieTableVM" OnStateChange="(IMovieTableState state) => UpdateState(state)">
+﻿<VMContext VM="MovieTableVM" TState="IMovieTableState" OnStateChange="UpdateState">
 @if (state != null)
 {
     <div>

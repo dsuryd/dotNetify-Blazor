@@ -1,6 +1,6 @@
 ﻿@inject HttpClient Http
 
-<VMContext VM="AdminSecurePageVM" Options="connectOptions" OnStateChange="(IAdminSecurePageState state) => UpdateState(state)">
+<VMContext VM="AdminSecurePageVM" Options="connectOptions" TState="IAdminSecurePageState" OnStateChange="UpdateState">
 @if (state != null)
 {
     <section>
@@ -16,7 +16,6 @@
 
 @code {
    [Parameter] public string AccessToken { get; set; }
-   [Parameter] public EventCallback OnExpiredAccess { get; set; }
 
    private IAdminSecurePageState state;
    private VMConnectOptions connectOptions;

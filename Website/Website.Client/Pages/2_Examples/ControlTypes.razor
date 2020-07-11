@@ -2,7 +2,7 @@
 @inject IStylesheet Stylesheet
 
 <ExampleLayout VM="ControlTypesDoc">
-    <VMContext VM="ControlTypesVM" OnStateChange="(IControlTypesState state) => UpdateState(state)">
+    <VMContext VM="ControlTypesVM" TState="IControlTypesState" OnStateChange="UpdateState">
     @if (state != null)
     {
         <d-panel css="@Stylesheet["ControlTypes"]">

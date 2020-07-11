@@ -38,7 +38,13 @@ namespace DotNetify.Blazor
       /// Listens to the events from the web component elements under this VM context.
       /// </summary>
       /// <param name="eventCallback">Gets called when an element under this VM context raises an event.</param>
-      Task HandleElementEventAsync(Action<ElementEvent> eventCallback);
+      Task HandleElementEventAsync(Action<ElementEventArgs> eventCallback);
+
+      /// <summary>
+      /// Listens to the exception event from the server-side view model.
+      /// </summary>
+      /// <param name="exceptionEventCallback">Gets called when the client receives exception from the server-side view model.</param>
+      Task HandleExceptionAsync(Action<ExceptionEventArgs> exceptionEventCallback);
 
       /// <summary>
       /// Listens to an event from a DOM element.

@@ -1,4 +1,4 @@
-﻿<VMContext VM="FilterableMovieTableVM.MovieFilterVM" OnStateChange="(IMovieFilterState state) => UpdateState(state)">
+﻿<VMContext VM="FilterableMovieTableVM.MovieFilterVM" TState="IMovieFilterState" OnStateChange="UpdateState">
 @if (state != null)
 {
     <form>

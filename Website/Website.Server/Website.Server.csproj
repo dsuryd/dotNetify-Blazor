@@ -29,12 +29,14 @@
     <None Remove="Docs\Overview\DataFlow.md" />
     <None Remove="Docs\Overview\GetStarted.md" />
     <None Remove="Docs\Overview\Reactive.md" />
+    <None Remove="Docs\ScopedCss.md" />
     <None Remove="Docs\Security.md" />
     <None Remove="Docs\WebApiMode.md" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Docs\CRUD.md" />
+    <EmbeddedResource Include="Docs\ScopedCss.md" />
     <EmbeddedResource Include="Docs\DI.md" />
     <EmbeddedResource Include="Docs\DotNetClient.md" />
     <EmbeddedResource Include="Docs\Examples\ControlTypes.md" />

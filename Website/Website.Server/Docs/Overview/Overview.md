@@ -10,15 +10,13 @@ DotNetify's design is based on the principle of maintaining strong separation of
 
 - <b>Server-side view model</b>: don't let your client download too much code; keep most processing on the back-end and only send things that change.
 
-- <b>Declarative state hydration</b>: eliminate the need to write data-fetching boilerplate services.
+- <b>Declarative state hydration</b>: eliminate the need to write data-fetching boilerplate services. Send data to the back-end by simply invoking an interface method.
 
-- <b>Strongly-typed commands</b>: want to send data or start an action on the back-end? No need to post a json, just invoke an interface method.
+- <b>Simple real-time abstraction</b>: push data to client in real-time from multiple classes with no coupling to low-level SignalR details.
 
-- **[Real-time with SignalR](dashboard)**: push data to client in real-time.
+- **[Can switch to Web API](webapimode)**: don't need real-time and don't want to use SignalR? Keep your view model stateless and switch to use built-in Web API endpoint instead.
 
-- **[Switch to standard HTTP](webapimode)**: don't need real-time and don't want to use SignalR? Keep your view model stateless and switch to use built-in Web API endpoint instead.
-
-- **[Scoped CSS](basics#scoped-css)**: Blazor's native CSS isolation is still in the future, but don't let that stop you from having it now!
+- **[Scoped CSS](scopedcss)**: Blazor's native CSS isolation is still in the future, but don't let that stop you from having it now!
 
 - **[Reusable with Javascript SPAs](https://github.com/dsuryd/dotNetify/tree/master/Demo)**: Can't always use Blazor? The same view models you write for Blazor can be reused with Javascript UI frameworks without change. DotNetify has full support for React and Vue, and can be made to work with Angular and others.
 

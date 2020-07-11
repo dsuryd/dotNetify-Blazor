@@ -51,6 +51,7 @@ namespace Website.Server
                      new NavRoute ("Filter", PATH_BASE + "/filter"),
                      new NavRoute ("Middleware", PATH_BASE + "/middleware"),
                      new NavRoute ("Multicast", PATH_BASE + "/multicast"),
+                     new NavRoute ("Scoped CSS", PATH_BASE + "/scopedcss"),
                      new NavRoute ("Security", PATH_BASE + "/security"),
                      new NavRoute ("Web API Mode", PATH_BASE + "/webapimode")
                   },
