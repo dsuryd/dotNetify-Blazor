@@ -23,7 +23,7 @@
         public string LastName { get; set; }
     }
 
-    private void UpdateState(IHelloWorldState state)
+    private void UpdateState(IServerUpdateState state)
     {
         this.state = state;
         StateHasChanged();
