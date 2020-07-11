@@ -14,9 +14,9 @@ DotNetify's design is based on the principle of maintaining strong separation of
 
 - <b>Simple real-time abstraction</b>: push data to client in real-time from multiple classes with no coupling to low-level SignalR details.
 
-- **[Can switch to Web API](webapimode)**: don't need real-time and don't want to use SignalR? Keep your view model stateless and switch to use built-in Web API endpoint instead.
-
 - **[Scoped CSS](scopedcss)**: Blazor's native CSS isolation is still in the future, but don't let that stop you from enjoying it now!
+
+- **[Web Components](https://dotnetify.net/elements?webcomponent)**: comes with a library of HTML native web components called `DotNetify-Elements` which makes it very convenient to implement layouts, online forms, charts, and more --- all supporting scoped CSS.
 
 - **[Reusable with Javascript SPAs](https://github.com/dsuryd/dotNetify/tree/master/Demo)**: Can't always use Blazor? The same view models you write for Blazor can be reused with Javascript UI frameworks without change. DotNetify has full support for React and Vue, and can be made to work with Angular and others.
 
@@ -24,12 +24,12 @@ DotNetify's design is based on the principle of maintaining strong separation of
 
 - **[Multicasting](multicast)**: send real-time data to multiple clients at once; perfect for real-time collaboration / data synchronization.
 
-- **[Reactive]()**: make your view model declarative with streaming, observable properties.
+- **[Reactive]()**: make your view model declarative with streaming, observable properties. Supports asynchronous programming.
 
-- **[Injectable view model](di)**: inject dependency objects through the class constructor. Supports asynchronous programming.
+- **[Dependency injection](di)**: inject dependency objects through the class constructor.
 
 - **[Middlewares /](middleware) [filters](filter)**: build a pipeline to do all sorts of things before reaching the view models.
 
 - **[Bearer token authentication](security)**: pass authentication header as payload instead of query string.
 
-- **[Web Components](https://dotnetify.net/elements?webcomponent)**: comes with a library of HTML native web components called `DotNetify-Elements` which makes it very convenient to implement layouts, online forms, charts, and more --- all supporting scoped CSS.
+- **[Can switch to Web API](webapimode)**: don't need real-time and don't want to use SignalR? Keep your view model stateless and switch to use built-in Web API endpoint instead.
