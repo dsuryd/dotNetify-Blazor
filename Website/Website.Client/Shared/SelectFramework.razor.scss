@@ -1,0 +1,11 @@
+﻿select {
+    width: calc(100% - 1.5rem);
+    margin-left: 0.75rem;
+    margin-top: 1rem;
+    font-weight: 500;
+    border-color: #92d050;
+    background-color: transparent;
+    &:focus {
+        background-color: transparent;
+    }
+}

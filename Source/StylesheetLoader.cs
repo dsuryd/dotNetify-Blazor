@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,14 +28,14 @@ namespace DotNetify.Blazor
       private readonly List<KeyValuePair<string, string>> _styleSheets = new List<KeyValuePair<string, string>>();
 
       /// <summary>
-      /// Gets the content of a StyleSheet embedded resource. It doesn't need the full name, only a sufficiently unique substring.
+      /// Gets the content of a style sheet embedded resource. It doesn't need the full name, only a sufficiently unique substring.
       /// </summary>
-      /// <param name="embeddedResourceName">Name of the embedded resource containing the StyleSheet.</param>
+      /// <param name="embeddedResourceName">Name of the embedded resource containing the style sheet.</param>
       public string this[string embeddedResourceName]
       {
          get
          {
-            var styleSheet = _styleSheets.FirstOrDefault(x => x.Key.Contains(embeddedResourceName));
+            var styleSheet = _styleSheets.FirstOrDefault(x => x.Key.Equals(embeddedResourceName, StringComparison.InvariantCultureIgnoreCase));
             if (string.IsNullOrEmpty(styleSheet.Key))
                throw new FileNotFoundException($"No embedded StyleSheet resource by the name of '{embeddedResourceName}'.");
 
@@ -44,17 +45,23 @@ namespace DotNetify.Blazor
       }
 
       /// <summary>
-      /// Loads all StyleSheets in an assembly.
+      /// Loads all style sheets in an assembly.
       /// </summary>
       internal void Load(Assembly assembly)
       {
          var styleSheets = assembly.GetManifestResourceNames()
             .Where(resource => resource.ToLower().EndsWith(".css") || resource.ToLower().EndsWith(".scss"))
-            .Select(StyleSheetFile =>
+            .Select(resourceName =>
             {
-               using Stream stream = assembly.GetManifestResourceStream(StyleSheetFile);
+               using Stream stream = assembly.GetManifestResourceStream(resourceName);
                using StreamReader reader = new StreamReader(stream);
-               return new KeyValuePair<string, string>(StyleSheetFile, reader.ReadToEnd());
+
+               // Use the resource name excluding namespace and extensions for the lookup key.
+               string pattern = resourceName.Contains(".razor.") ? @"(?:.+\.)+(.+)\.razor\.s?css" : @"(?:.+\.)+(.+)\.s?css";
+               var match = Regex.Match(resourceName, pattern);
+               string key = match.Success && match.Groups.Count > 1 ? match.Groups[1].Value : resourceName;
+
+               return new KeyValuePair<string, string>(key, reader.ReadToEnd());
             });
 
          _styleSheets.AddRange(styleSheets);

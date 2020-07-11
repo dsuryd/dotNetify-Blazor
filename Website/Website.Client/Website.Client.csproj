@@ -18,7 +18,15 @@
     <None Remove="Pages\2_Examples\SimpleList.razor.scss" />
     <None Remove="Shared\ArticleLayout.razor.scss" />
     <None Remove="Shared\Expander.razor.scss" />
+    <None Remove="Shared\GithubLink.razor.scss" />
     <None Remove="Shared\MainLayout.razor.scss" />
+    <None Remove="Shared\MenuLinks.razor.scss" />
+    <None Remove="Shared\SelectFramework.razor.scss" />
+    <None Remove="Shared\TwitterLink.razor.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Shared\GithubLink.razor.scss" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +46,9 @@
     <EmbeddedResource Include="Pages\2_Examples\SecurePage\Login.razor.scss" />
     <EmbeddedResource Include="Pages\2_Examples\SimpleList.razor.scss" />
     <EmbeddedResource Include="Shared\MainLayout.razor.scss" />
+    <EmbeddedResource Include="Shared\MenuLinks.razor.scss" />
+    <EmbeddedResource Include="Shared\SelectFramework.razor.scss" />
+    <EmbeddedResource Include="Shared\TwitterLink.razor.scss" />
   </ItemGroup>
 
   <ItemGroup>

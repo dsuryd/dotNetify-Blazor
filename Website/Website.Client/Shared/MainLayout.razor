@@ -4,7 +4,9 @@
 
 <d-main css="@StyleSheet["MainLayout"]">
     <d-nav>
-        <d-panel>
+        <d-panel nogap="true">
+            <GithubLink />
+            <SelectFramework />
             <VMContext VM="MainNav" TState="object">
                 <d-nav-menu id="NavMenu" selected="@selectedRoute"></d-nav-menu>
             </VMContext>
@@ -12,8 +14,12 @@
     </d-nav>
     <d-header>
         <d-nav-drawer-button css="margin-left: 1rem"></d-nav-drawer-button>
-        <d-panel css="margin-left: 1rem">
-            <a href="@("/" + basePath)"><img width="200px" src="@dotNetifyIcon"></a>
+        <div style="margin-left: 1rem">
+            <a href="@("/" + basePath)"><img width="186px" src="@dotNetifyIcon"></a>
+        </div>
+        <MenuLinks />
+        <d-panel horizontal="true" center="true" middle="true" right="true" padding="1rem">
+            <TwitterLink />
         </d-panel>
     </d-header>
     <d-section>
@@ -23,7 +29,7 @@
     </d-section>
     <d-footer>
     <div class="license-notice">
-        © 2015-2020 Dicky Suryadi. Licensed under the{" "}
+        © 2015-2020 Dicky Suryadi. Licensed under the&nbsp;
         <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache license version 2.0</a>
     </div>
     </d-footer>

@@ -1,0 +1,25 @@
+﻿& {
+    margin-left: 11%;
+
+    @media (max-width: 1170px) {
+        margin-left: 5.5rem;
+    }
+    @media (max-width: 767px) {
+        display: none;
+    }
+}
+
+a {
+    padding: .2rem .5rem;
+    font-size: medium;
+    font-weight: 500;
+    color: #aaa;
+
+    &.active {
+        color: #444;
+        &:hover {
+            background: #f3f3f3;
+            color: #666;
+        }
+    }
+}

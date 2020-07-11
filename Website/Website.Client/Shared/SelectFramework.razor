@@ -1,0 +1,19 @@
+﻿@inject NavigationManager NavigationManager
+
+<StyleSheet Context="this">
+    <select class="form-control" value="Blazor" @onchange="HandleChange">
+        <option value="React">React</option>
+        <option value="Vue">Vue</option>
+        <option value="Knockout">Knockout</option>
+        <option value="Blazor">Blazor</option>
+    </select>
+</StyleSheet>
+
+@code {
+   private void HandleChange(ChangeEventArgs args)
+   {
+       string framework = args.Value.ToString();
+       if (framework != "Blazor")
+           NavigationManager.NavigateTo("https://dotnetify.net/core?" + framework.ToLower());
+   }
+}

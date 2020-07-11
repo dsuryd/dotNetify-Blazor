@@ -1,0 +1,7 @@
+﻿a {
+    cursor: pointer;
+
+    @media (max-width: 320px) {
+        display: none;
+    }
+}

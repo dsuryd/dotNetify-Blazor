@@ -1,13 +1,13 @@
 ## Scoped CSS
 
-Blazor has no native support for component-scoped CSS yet, and so dotNetify provides the **StyleSheet** component to fill the gap. It works by looking for an embedded resource by the same name of the component where it is declared (or can be explicitly provided), loads the content as string and provides it to a custom web component called `d-style` which will apply the style sheet only to the DOM elements nested within it.
+Blazor has no native support for component-scoped CSS yet, and so dotNetify provides the **StyleSheet** component to fill the gap. It works by looking for an embedded resource by the same name of the component where it is declared (or can be explicitly provided), loads the content as string and provides it to a custom web component which will apply the style sheet only to the DOM elements nested within it.
 
 #### Basic Usage
 
-To create a style sheet for a component, first add a new file to contain the style sheet and name it the same as your component's name with a `css` or 'scss` extension. For example: _MyComponent.razor.scss\_\_. Make sure to set the build property of the file to \_Embedded Resource_. Then in your component, declare this:
+To create a style sheet for a component, first add a new file to contain the style sheet and name it the same as your component's name with a `css` or 'scss` extension. For example: _MyComponent.razor.scss_. <b>Make sure to set the build action of the file to _Embedded Resource_.</b> Then in your component, declare this:
 
 ```jsx
-<StyleSheet Context='this'>...</StyleSheet>
+<StyleSheet Context="this">...</StyleSheet>
 ```
 
 The **Context** attribute set to `this` will tell the component to find the resource matching the type name. If you want to provide a different name, use the **Name** attribute instead.
