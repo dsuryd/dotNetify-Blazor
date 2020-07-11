@@ -1,4 +1,4 @@
-﻿<VMContext VM="RealTimePush" OnStateChange="(IHelloWorldState newState) => { state = newState; StateHasChanged(); }">
+﻿<VMContext VM="RealTimePush" TState="IHelloWorldState" OnStateChange="UpdateState">
     <div>
         <p>@state?.Greetings</p>
         <p>Server time is: @state?.ServerTime</p>
@@ -6,11 +6,17 @@
 </VMContext>
 
 @code {
-    private IHelloWorldState state;
+  private IHelloWorldState state;
 
     public interface IHelloWorldState
     {
         string Greetings { get; set; }
         string ServerTime { get; set; }
+    }
+
+    private void UpdateState(IHelloWorldState state)
+    {
+        this.state = state;
+        StateHasChanged();
     }
 }

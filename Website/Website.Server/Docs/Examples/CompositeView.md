@@ -16,13 +16,13 @@
             <MovieFilter />
         </aside>
     </d-panel>
-</VMContext> 
+</VMContext>
 ```
 
 ##### MovieTable.razor
 
 ```jsx
-<VMContext VM="MovieTableVM" OnStateChange="(IMovieTableState state) => UpdateState(state)">
+<VMContext VM="MovieTableVM" TState="IMovieTableState" OnStateChange="UpdateState">
 @if (state != null)
 {
     <div>
@@ -52,7 +52,7 @@
         <div class="pagination">
             @foreach (var page in state.Pagination)
             {
-                <div @key="page" 
+                <div @key="page"
                      class="@(state.SelectedPage == page ? "current" : "")"
                      @onclick="_ => state.SelectedPage = page">
                     @(page)
@@ -95,7 +95,7 @@
 ##### MovieDetails.razor
 
 ```jsx
-<VMContext VM="MovieDetailsVM" OnStateChange="(IMovieDetailsState state) => UpdateState(state)">
+<VMContext VM="MovieDetailsVM" TState="IMovieDetailsState" OnStateChange="UpdateState">
 @if (state != null)
 {
     <div class="card">
@@ -137,15 +137,15 @@
 ##### MovieFilter.razor
 
 ```jsx
-<VMContext VM="FilterableMovieTableVM.MovieFilterVM" OnStateChange="(IMovieFilterState state) => UpdateState(state)">
+<VMContext VM="FilterableMovieTableVM.MovieFilterVM" TState="IMovieFilterState" OnStateChange="UpdateState">
 @if (state != null)
 {
     <form>
         <div class="filter card">
             <div class="card-header">Filters</div>
             <div class="card-body">
-                <select class="form-control" 
-                        value="@filter" 
+                <select class="form-control"
+                        value="@filter"
                         @onchange="e => UpdateFilterDropdown(e.Value.ToString())">
                     @foreach (var text in movieProps)
                     {

@@ -2,63 +2,61 @@
 ##### Dashboard.razor
 
 ```jsx
-<VMContext VM="Dashboard" OnStateChange="(IDashboardState state) => { this.state = state; StateHasChanged(); }">
- @if (state == null)
- {
-     <div class="spinner lds-hourglass" />
- }
- else
- {
-     <d-panel>
-         <d-panel horizontal="true" wrap="true">
-             <d-panel>
-                 <InfoCard Id="Download" Color="#1c8adb"></InfoCard>
-             </d-panel>
-             <d-panel>
-                 <InfoCard id="Upload" Color="#5cb85c"></InfoCard>
-             </d-panel>
-             <d-panel>
-                 <InfoCard id="Latency" Color="#f0ad4e"></InfoCard>
-             </d-panel>
-             <d-panel>
-                 <InfoCard id="Users" Color="#d9534f"></InfoCard>
-             </d-panel>
-         </d-panel>
-         <d-panel>
-             <d-card>
-                 <d-panel horizontal="true">
-                     <d-panel flex="70%">
-                         <h4>Network Traffic</h4>
-                         <d-line-chart id="Traffic" height="75px" streaming="true" />
-                     </d-panel>
-                     <d-panel flex="30%" css="min-width:256px">
-                         <h4>Utilization</h4>
-                         <d-pie-chart id="Utilization" />
-                     </d-panel>
-                 </d-panel>
-             </d-card>
-             <d-panel horizontal="true">
-                 <d-panel flex="40%" css="min-width:300px">
-                     <ActivitiesCard Activities="@state?.RecentActivities" />
-                 </d-panel>
-                 <d-panel flex="60%">
-                     <d-card>
-                         <h4>Server Usage</h4>
-                         <d-bar-chart id="ServerUsage" height="70px"></d-bar-chart>
-                     </d-card>
-                 </d-panel>
-             </d-panel>
-         </d-panel>
-     </d-panel>
- }
- </VMContext>
+<VMContext VM='Dashboard' TState='IDashboardState' OnStateChange='UpdateState'>
+  @if (state == null)
+  {<div class='spinner lds-hourglass' />}
+  else
+  {
+    <d-panel>
+      <d-panel horizontal='true' wrap='true'>
+        <d-panel>
+          <InfoCard Id='Download' Color='#1c8adb'></InfoCard>
+        </d-panel>
+        <d-panel>
+          <InfoCard id='Upload' Color='#5cb85c'></InfoCard>
+        </d-panel>
+        <d-panel>
+          <InfoCard id='Latency' Color='#f0ad4e'></InfoCard>
+        </d-panel>
+        <d-panel>
+          <InfoCard id='Users' Color='#d9534f'></InfoCard>
+        </d-panel>
+      </d-panel>
+      <d-panel>
+        <d-card>
+          <d-panel horizontal='true'>
+            <d-panel flex='70%'>
+              <h4>Network Traffic</h4>
+              <d-line-chart id='Traffic' height='75px' streaming='true' />
+            </d-panel>
+            <d-panel flex='30%' css='min-width:256px'>
+              <h4>Utilization</h4>
+              <d-pie-chart id='Utilization' />
+            </d-panel>
+          </d-panel>
+        </d-card>
+        <d-panel horizontal='true'>
+          <d-panel flex='40%' css='min-width:300px'>
+            <ActivitiesCard Activities='@state?.RecentActivities' />
+          </d-panel>
+          <d-panel flex='60%'>
+            <d-card>
+              <h4>Server Usage</h4>
+              <d-bar-chart id='ServerUsage' height='70px'></d-bar-chart>
+            </d-card>
+          </d-panel>
+        </d-panel>
+      </d-panel>
+    </d-panel>
+  }
+</VMContext>
 ```
 
 ##### InfoCard.razor
 
 ```jsx
 @inject IStylesheet Stylesheet
- 
+
 <d-element id="@Id" css="@getCss()">
     <d-card horizontal="true">
         <d-card-image>
@@ -184,4 +182,5 @@ public class Dashboard : BaseVM, IRoutable
    }
 }
 ```
+
 </if>

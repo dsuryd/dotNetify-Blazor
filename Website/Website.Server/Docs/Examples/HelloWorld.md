@@ -2,7 +2,7 @@
 ##### HelloWorld.razor
 
 ```jsx
-<VMContext VM="HelloWorldVM" OnStateChange="(IHelloWorldState state) => UpdateState(state)">
+<VMContext VM="HelloWorldVM" TState="IHelloWorldState" OnStateChange="UpdateState">
 @if (state != null)
 {
     <Stylesheet Context="this">

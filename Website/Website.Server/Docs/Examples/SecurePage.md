@@ -95,7 +95,7 @@
 ##### SecurePage.razor
 
 ```jsx
-<VMContext VM="SecurePageVM" Options="@connectOptions" OnStateChange="(ISecurePageState state) => UpdateState(state)">
+<VMContext VM="SecurePageVM" Options="@connectOptions" TState="ISecurePageState" OnStateChange="UpdateState">
 @if (state != null)
 {
     <div class="card">
@@ -154,7 +154,7 @@
 ```jsx
 @inject HttpClient Http
 
-<VMContext VM="AdminSecurePageVM" Options="connectOptions" OnStateChange="(IAdminSecurePageState state) => UpdateState(state)">
+<VMContext VM="AdminSecurePageVM" Options="connectOptions" TState="IAdminSecurePageState" OnStateChange="UpdateState">
 @if (state != null)
 {
     <section>
@@ -216,6 +216,7 @@
    }
 }
 ```
+
 </if>
 <if viewmodel>
 ##### SecurePage.cs
@@ -342,4 +343,5 @@ public class SetAccessTokenFilter : IVMFilter<SetAccessTokenAttribute>
    }
 }
 ```
+
 </if>

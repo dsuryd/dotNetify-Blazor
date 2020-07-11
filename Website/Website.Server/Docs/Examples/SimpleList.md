@@ -5,7 +5,7 @@
 @inject IStylesheet Stylesheet
 @inject IJSRuntime JSRuntime
 
-<VMContext VM="SimpleListVM" OnStateChange="(ISimpleListState state) => UpdateState(state)">
+<VMContext VM="SimpleListVM" TState="ISimpleListState" OnStateChange="UpdateState">
 @if (state != null)
 {
     <Stylesheet Context="this">

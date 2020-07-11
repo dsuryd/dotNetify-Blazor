@@ -1,4 +1,4 @@
-﻿<VMContext VM="Master" OnStateChange="(IMasterState state) => UpdateState(state)">
+﻿<VMContext VM="Master" TState="IMasterState" OnStateChange="UpdateState">
 @if(state != null)
 {
     foreach(var item in state?.ListItems)
@@ -9,7 +9,7 @@
 </VMContext>
 
 @code {
-   private IMasterState state;
+  private IMasterState state;
    private string selectedId;
 
    public interface IMasterState

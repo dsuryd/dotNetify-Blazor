@@ -1,4 +1,4 @@
-﻿<VMContext VM="ServerUpdate" OnStateChange="(IServerUpdateState newState) => { state = newState; StateHasChanged(); }">
+﻿<VMContext VM="ServerUpdate" TState="IServerUpdateState" OnStateChange="UpdateState">
     <div>
         <p>@state?.Greetings</p>
         <input type="text" @bind="person.FirstName" />
@@ -8,7 +8,7 @@
 </VMContext>
 
 @code {
-    private IServerUpdateState state;
+  private IServerUpdateState state;
     private Person person = new Person();
 
     public interface IServerUpdateState
@@ -22,4 +22,10 @@
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
+
+    private void UpdateState(IHelloWorldState state)
+    {
+        this.state = state;
+        StateHasChanged();
+    }    
 }
