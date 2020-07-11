@@ -29,17 +29,17 @@ namespace DotNetify.Blazor
       public static IServiceCollection AddDotNetifyBlazor(this IServiceCollection services, Action<ClientConfiguration> options = null)
       {
          var config = new ClientConfiguration();
-         var stylesheetLoader = new StylesheetLoader();
+         var styleSheetLoader = new StyleSheetLoader();
 
          services.AddTransient<IVMProxy, VMProxy>();
-         services.AddSingleton<IStylesheet>(stylesheetLoader);
+         services.AddSingleton<IStyleSheet>(styleSheetLoader);
 
          options?.Invoke(config);
 
-         // Load stylesheet files from the specified assembly(ies).
-         config.StylesheetAssemblies ??= new Assembly[] { Assembly.GetCallingAssembly() };
-         foreach (var assembly in config.StylesheetAssemblies)
-            stylesheetLoader.Load(assembly);
+         // Load StyleSheet files from the specified assembly(ies).
+         config.StyleSheetAssemblies ??= new Assembly[] { Assembly.GetCallingAssembly() };
+         foreach (var assembly in config.StyleSheetAssemblies)
+            styleSheetLoader.Load(assembly);
 
          // Execute scripts to set dotNetify configuration.
          var jsInterop = new JSInterop(services.BuildServiceProvider().GetRequiredService<IJSRuntime>());

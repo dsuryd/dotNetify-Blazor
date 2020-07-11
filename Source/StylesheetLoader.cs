@@ -22,42 +22,42 @@ using System.Text.RegularExpressions;
 
 namespace DotNetify.Blazor
 {
-   internal class StylesheetLoader : IStylesheet
+   internal class StyleSheetLoader : IStyleSheet
    {
-      private readonly List<KeyValuePair<string, string>> _stylesheets = new List<KeyValuePair<string, string>>();
+      private readonly List<KeyValuePair<string, string>> _styleSheets = new List<KeyValuePair<string, string>>();
 
       /// <summary>
-      /// Gets the content of a stylesheet embedded resource. It doesn't need the full name, only a sufficiently unique substring.
+      /// Gets the content of a StyleSheet embedded resource. It doesn't need the full name, only a sufficiently unique substring.
       /// </summary>
-      /// <param name="embeddedResourceName">Name of the embedded resource containing the stylesheet.</param>
+      /// <param name="embeddedResourceName">Name of the embedded resource containing the StyleSheet.</param>
       public string this[string embeddedResourceName]
       {
          get
          {
-            var stylesheet = _stylesheets.FirstOrDefault(x => x.Key.Contains(embeddedResourceName));
-            if (string.IsNullOrEmpty(stylesheet.Key))
-               throw new FileNotFoundException($"No embedded stylesheet resource by the name of '{embeddedResourceName}'.");
+            var styleSheet = _styleSheets.FirstOrDefault(x => x.Key.Contains(embeddedResourceName));
+            if (string.IsNullOrEmpty(styleSheet.Key))
+               throw new FileNotFoundException($"No embedded StyleSheet resource by the name of '{embeddedResourceName}'.");
 
             // Remove whitespaces, except those between words.
-            return Regex.Replace(stylesheet.Value, @"(?!\b\s+\b)(?!\s\d)(?!\s[-\+])\s+", string.Empty);
+            return Regex.Replace(styleSheet.Value, @"(?!\b\s+\b)(?!\s\d)(?!\s[-\+])\s+", string.Empty).Replace(": ", ":");
          }
       }
 
       /// <summary>
-      /// Loads all stylesheets in an assembly.
+      /// Loads all StyleSheets in an assembly.
       /// </summary>
       internal void Load(Assembly assembly)
       {
-         var stylesheets = assembly.GetManifestResourceNames()
+         var styleSheets = assembly.GetManifestResourceNames()
             .Where(resource => resource.ToLower().EndsWith(".css") || resource.ToLower().EndsWith(".scss"))
-            .Select(stylesheetFile =>
+            .Select(StyleSheetFile =>
             {
-               using Stream stream = assembly.GetManifestResourceStream(stylesheetFile);
+               using Stream stream = assembly.GetManifestResourceStream(StyleSheetFile);
                using StreamReader reader = new StreamReader(stream);
-               return new KeyValuePair<string, string>(stylesheetFile, reader.ReadToEnd());
+               return new KeyValuePair<string, string>(StyleSheetFile, reader.ReadToEnd());
             });
 
-         _stylesheets.AddRange(stylesheets);
+         _styleSheets.AddRange(styleSheets);
       }
    }
 }

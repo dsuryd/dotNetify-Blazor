@@ -1,9 +1,8 @@
 ﻿@page "/securepage"
 @inject HttpClient Http
-@inject IStylesheet Stylesheet
 
 <ExampleLayout VM="SecurePageDoc">
-    <d-panel css="@Stylesheet["Login"]">
+    <StyleSheet Name="Login">
         <div>
             @if (accessToken != null)
             {
@@ -44,7 +43,7 @@
                 </div>
             }
         </div>
-    </d-panel>
+    </StyleSheet>
 </ExampleLayout>
 
 @code {

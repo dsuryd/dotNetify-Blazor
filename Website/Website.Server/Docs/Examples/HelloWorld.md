@@ -2,12 +2,10 @@
 ##### HelloWorld.razor
 
 ```jsx
-@inject IStylesheet Stylesheet
-
 <VMContext VM="HelloWorldVM" OnStateChange="(IHelloWorldState state) => UpdateState(state)">
 @if (state != null)
 {
-    <d-panel css="@Stylesheet["HelloWorld"]">
+    <Stylesheet Name="HelloWorld">
         <section>
             <div>
                 <label>First name:</label>
@@ -21,7 +19,7 @@
         <div>
             Full name is <b>@state.FullName</b>
         </div>
-    </d-panel> 
+    </Stylesheet>
 }
 </VMContext>
 
@@ -42,6 +40,7 @@
    }
 }
 ```
+
 </if>
 <if viewmodel>
 ##### HelloWorld.cs
@@ -75,4 +74,5 @@ public class HelloWorldVM : BaseVM
     public string FullName => $"{FirstName} {LastName}";
 }
 ```
+
 </if>

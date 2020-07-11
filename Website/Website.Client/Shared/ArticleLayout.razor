@@ -1,9 +1,9 @@
-﻿@inject IStylesheet Stylesheet
+﻿@inject IStyleSheet StyleSheet
 
 <VMContext VM="@VM" TState="object" OnStateChange="UpdateState">
 @if(state != null)
 {
-    <d-panel horizontal="true" css="@Stylesheet["ArticleLayout"]" gap="10%">
+    <d-panel horizontal="true" css="@StyleSheet["ArticleLayout"]" gap="10%">
         <d-panel class="article">
             @ChildContent
         </d-panel>

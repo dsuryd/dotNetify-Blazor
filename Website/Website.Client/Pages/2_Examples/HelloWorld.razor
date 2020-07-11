@@ -1,11 +1,10 @@
 ﻿@page "/helloworld"
-@inject IStylesheet Stylesheet
 
 <ExampleLayout VM="HelloWorldDoc">
     <VMContext VM="HelloWorldVM" TState="IHelloWorldState" OnStateChange="UpdateState">
     @if (state != null)
     {
-        <d-panel css='@Stylesheet["HelloWorld"]'>
+        <StyleSheet Name="HelloWorld">
             <section>
                 <div>
                     <label>First name:</label>
@@ -19,7 +18,7 @@
             <div>
                 Full name is <b>@state.FullName</b>
             </div>
-        </d-panel> 
+        </StyleSheet> 
     }
     </VMContext>
 </ExampleLayout>

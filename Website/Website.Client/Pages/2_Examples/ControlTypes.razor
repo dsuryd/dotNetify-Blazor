@@ -1,11 +1,10 @@
 ﻿@page "/controltypes"
-@inject IStylesheet Stylesheet
 
 <ExampleLayout VM="ControlTypesDoc">
     <VMContext VM="ControlTypesVM" TState="IControlTypesState" OnStateChange="UpdateState">
     @if (state != null)
     {
-        <d-panel css="@Stylesheet["ControlTypes"]">
+        <StyleSheet Name="ControlTypes">
             <table>
                 <tbody>
                     <tr>
@@ -130,7 +129,7 @@
                     </tr>
                 </tbody>
             </table>
-        </d-panel>
+        </StyleSheet>
     }
     </VMContext>
 </ExampleLayout>

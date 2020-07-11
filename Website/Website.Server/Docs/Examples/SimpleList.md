@@ -8,7 +8,7 @@
 <VMContext VM="SimpleListVM" OnStateChange="(ISimpleListState state) => UpdateState(state)">
 @if (state != null)
 {
-    <d-panel css="@Stylesheet["SimpleList"]">
+    <Stylesheet Name="SimpleList">
         <d-alert info="true">
             <i class="material-icons">info_outlined</i>
             This is a multicast list. Your edits will appear on all other browser views in real-time.
@@ -34,17 +34,17 @@
                             <div>
                                 @if (editFirstNameId != employee.Id)
                                 {
-                                    <span class="editable" 
+                                    <span class="editable"
                                           @onclick="_ => OnEditFirstName(employee.Id)">
                                         @employee.FirstName
                                     </span>
                                 }
                                 else
-                                {                                 
+                                {
                                     <input id="input-first-name"
                                            type="text"
-                                           class="form-control" 
-                                           value="@employee.FirstName" 
+                                           class="form-control"
+                                           value="@employee.FirstName"
                                            @onblur="_ => { editFirstNameId = null; StateHasChanged(); }"
                                            @onchange="e => OnChangeFirstName(e, employee)" />
                                 }
@@ -54,7 +54,7 @@
                             <div>
                                 @if (editLastNameId != employee.Id)
                                 {
-                                    <span class="editable" 
+                                    <span class="editable"
                                           @onclick="_ => OnEditLastName(employee.Id)">
                                         @employee.LastName
                                     </span>
@@ -62,9 +62,9 @@
                                 else
                                 {
                                     <input id="input-last-name"
-                                           type="text" 
-                                           class="form-control" 
-                                           value="@employee.LastName" 
+                                           type="text"
+                                           class="form-control"
+                                           value="@employee.LastName"
                                            @onblur="_ => { editLastNameId = null; StateHasChanged(); }"
                                            @onchange="e => OnChangeLastName(e, employee)"  />
                                 }
@@ -79,7 +79,7 @@
                 }
             </tbody>
         </table>
-    </d-panel>
+    </Stylesheet>
 }
 </VMContext>
 
@@ -160,6 +160,7 @@
    }
 }
 ```
+
 </if>
 <if viewmodel>
 ##### SimpleList.cs
@@ -241,4 +242,5 @@ public class SimpleListVM : MulticastVM
    }
 }
 ```
+
 </if>

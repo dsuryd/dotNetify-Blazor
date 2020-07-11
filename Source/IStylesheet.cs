@@ -16,12 +16,12 @@ limitations under the License.
 
 namespace DotNetify.Blazor
 {
-   public interface IStylesheet
+   public interface IStyleSheet
    {
       /// <summary>
-      /// Gets the content of a stylesheet embedded resource. It doesn't need the full name, only a sufficiently unique substring.
+      /// Gets the style sheet content of an embedded resource. It doesn't need the full name, only a sufficiently unique substring.
       /// </summary>
-      /// <param name="embeddedResourceName">Name of the embedded resource containing the stylesheet.</param>
+      /// <param name="embeddedResourceName">Name of the embedded resource containing a style sheet.</param>
       string this[string embeddedResourceName] { get; }
    }
 }

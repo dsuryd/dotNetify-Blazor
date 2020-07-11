@@ -1,10 +1,8 @@
-﻿@inject IStylesheet Stylesheet
-
-<d-panel css="@Stylesheet["Expander"]">
+﻿<StyleSheet Name="Expander">
     <d-collapsible collapsed="true" label="@Label">
         @ChildContent
     </d-collapsible>
-</d-panel>
+</StyleSheet>
 
 @code {
     [Parameter] public RenderFragment ChildContent { get; set; }

@@ -4,6 +4,7 @@
 
 section {
   display: flex;
+  margin-bottom: 1rem;
   > div {
     flex: 1;
     &:last-child {

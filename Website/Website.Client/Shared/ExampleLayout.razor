@@ -1,9 +1,9 @@
-﻿@inject IStylesheet Stylesheet
+﻿@inject IStyleSheet StyleSheet
 
 <VMContext VM="@VM" TState="object" OnStateChange="UpdateState" OnElementEvent="HandleElementEvent">
 @if (state != null)
 {
-    <d-panel css="@(Stylesheet["ArticleLayout"] + "&{margin-left:6%}")">
+    <d-panel css="@(StyleSheet["ArticleLayout"] + "&{margin-left:6%}")">
         <d-tab>
             <d-tab-item itemkey="output" label="Output">
                 @ChildContent

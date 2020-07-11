@@ -32,9 +32,9 @@ namespace DotNetify.Blazor
       public string HubServerUrl { get; set; }
 
       /// <summary>
-      /// Assemblies to look for stylesheet files.
+      /// Assemblies to look for StyleSheet files.
       /// </summary>
       [JsonIgnore]
-      public Assembly[] StylesheetAssemblies { get; set; }
+      public Assembly[] StyleSheetAssemblies { get; set; }
    }
 }

@@ -7,7 +7,7 @@
 <VMContext VM="ControlTypesVM" OnStateChange="(IControlTypesState state) => UpdateState(state)">
 @if (state != null)
 {
-    <d-panel css="@Stylesheet["ControlTypes"]">
+    <Stylesheet Name="ControlTypes">
         <table>
             <tbody>
                 <tr>
@@ -16,9 +16,9 @@
                         <label>(updates on losing focus)</label>
                     </td>
                     <td>
-                        <input type="text" 
-                                class="form-control" 
-                                @bind="state.TextBoxValue" 
+                        <input type="text"
+                                class="form-control"
+                                @bind="state.TextBoxValue"
                                 placeholder="@state.TextBoxPlaceHolder">
                         <b>@state.TextBoxResult</b>
                     </td>
@@ -29,16 +29,16 @@
                         <label>(updates on keystroke)</label>
                     </td>
                     <td>
-                        <input type="text" 
-                                class="form-control" 
-                                @bind="state.SearchBox" 
-                                @bind:event="oninput" 
+                        <input type="text"
+                                class="form-control"
+                                @bind="state.SearchBox"
+                                @bind:event="oninput"
                                 placeholder="@state.SearchBoxPlaceHolder">
                         <ul class="list-group">
                             @foreach (var result in state.SearchResults)
                             {
-                                <li class="list-group-item" 
-                                    @key="result" 
+                                <li class="list-group-item"
+                                    @key="result"
                                     @onclick="_ => { state.SearchBox = result; }">
                                     @result
                                 </li>
@@ -59,7 +59,7 @@
                         </label>
                         @if (state.ShowMeCheckBox)
                         {
-                            <button class="btn btn-secondary" 
+                            <button class="btn btn-secondary"
                                     disabled="@(!state.EnableMeCheckBox)">
                                 @state.CheckBoxResult
                             </button>
@@ -97,16 +97,16 @@
                     <td>Radio button:</td>
                     <td>
                         <label>
-                            <input type="radio" 
-                                    value="green" 
-                                    checked="@state.RadioButtonValue.Equals("green")" 
+                            <input type="radio"
+                                    value="green"
+                                    checked="@state.RadioButtonValue.Equals("green")"
                                     @onchange="@(_ => state.RadioButtonValue = "green")">
                             <span>Green</span>
                         </label>
                         <label>
-                            <input type="radio" 
-                                    value="yellow" 
-                                    checked="@state.RadioButtonValue.Equals("yellow")" 
+                            <input type="radio"
+                                    value="yellow"
+                                    checked="@state.RadioButtonValue.Equals("yellow")"
                                     @onchange="@(_ => state.RadioButtonValue = "yellow")">
                             <span>Yellow</span>
                         </label>
@@ -116,8 +116,8 @@
                 <tr>
                     <td>Button:</td>
                     <td>
-                        <button class="btn btn-secondary" 
-                                type="button" 
+                        <button class="btn btn-secondary"
+                                type="button"
                                 @onclick="_ => state.ButtonClicked(true)">
                             Click me
                         </button>
@@ -132,7 +132,7 @@
                 </tr>
             </tbody>
         </table>
-    </d-panel>
+    </Stylesheet>
 }
 </VMContext>
 
@@ -182,6 +182,7 @@
    }
 }
 ```
+
 </if>
 <if viewmodel>
 ##### ControlTypes.cs
@@ -322,4 +323,5 @@ public class ControlTypesVM : BaseVM
    }
 }
 ```
+
 </if>

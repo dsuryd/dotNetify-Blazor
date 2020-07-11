@@ -1,4 +1,4 @@
-﻿@inject IStylesheet Stylesheet
+﻿@inject IStyleSheet StyleSheet
 
 <d-card css="height: 100%">
     <d-panel>
@@ -34,7 +34,7 @@
        string iconColor = userIconColors[getInitial(activity.PersonName) % 3];
        string statusColor = statusColors[activity.StatusId];
 
-       return Stylesheet["ActivitiesCard"]
+       return StyleSheet["ActivitiesCard"]
            .Replace("$icon-color", iconColor)
            .Replace("$status-color", statusColor);
    }
