@@ -5,7 +5,7 @@ namespace Website.Server
 {
    public class MainNav : BaseVM
    {
-      public const string PATH_BASE = "blazor";
+      public const string PATH_BASE = "";
 
       public MainNav()
       {

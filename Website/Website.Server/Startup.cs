@@ -83,7 +83,7 @@ namespace Website.Server
            config.RegisterAssembly(GetType().Assembly);
         });
 
-         // Real-time logging: http://localhost:8090/blazor/pulse.
+         // Real-time logging: <url>/pulse.
          app.UseDotNetifyPulse();
 
          if (env.IsDevelopment())
