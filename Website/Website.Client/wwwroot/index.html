@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>dotNetify-Blazor</title>
@@ -9,19 +9,40 @@
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
     <link href="css/prism.css" rel="stylesheet" />
-  </head>
-  <body>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109596115-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-109596115-1');
+    </script>
+    <!-- End Google Analytics -->
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@(" @dotnetify")">
+    <meta name="twitter:creator" content="@(" @dotnetify")">
+    <meta name="twitter:title" content="dotNetify-Blazor">
+    <meta name="twitter:description" content="Real-time, reactive MVVM library for Blazor web assembly apps">
+    <meta name="twitter:image" content="http://dotnetify.net/content/images/dotnetify.png">
+    <!-- End Twitter -->
+</head>
+<body>
     <app><div class="spinner lds-hourglass" /></app>
 
+    <!-- dotNetify-Blazor dependencies -->
     <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/styled-components@4.1/dist/styled-components.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@aspnet/signalr@1/dist/browser/signalr.min.js"></script>
     <script src="https://unpkg.com/dotnetify@latest/dist/dotnetify-react.min.js"></script>
-    <script src="dotnetify-elements.bundle.js"></script>
-    <script src="_content/DotNetify.Blazor/dotnetify-blazor.js"></script>
+    <script src="https://unpkg.com/dotnetify-elements@latest/lib/dotnetify-elements.bundle.js"></script>
+
+    <script src="_content/DotNetify.Blazor/dotnetify-blazor.min.js"></script>
 
     <script src="app.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
-  </body>
+</body>
 </html>
