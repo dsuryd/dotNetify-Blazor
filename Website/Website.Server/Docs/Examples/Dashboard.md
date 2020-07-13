@@ -55,23 +55,23 @@
 ##### InfoCard.razor
 
 ```jsx
-@inject IStylesheet Stylesheet
-
-<d-element id="@Id" css="@getCss()">
-    <d-card horizontal="true">
-        <d-card-image>
-            <i class="material-icons info-icon" slot="icon"></i>
-        </d-card-image>
-        <label slot="label"></label>
-        <h3 slot="value"></h3>
-    </d-card>
-</d-element>
+<StyleSheet Context="this" OnLoad="ReplaceTokenInCss">
+    <d-element id="@Id">
+        <d-card horizontal="true">
+            <d-card-image>
+                <i class="material-icons info-icon" slot="icon"></i>
+            </d-card-image>
+            <label slot="label"></label>
+            <h3 slot="value"></h3>
+        </d-card>
+    </d-element>
+</StyleSheet>
 
 @code {
     [Parameter] public string Id { get; set; }
     [Parameter] public string Color { get; set; }
 
-    public string getCss() => Stylesheet["InfoCard"].Replace("$icon-bg-color", Color);
+    public string ReplaceTokenInCss(string css) => css.Replace("$icon-bg-color", Color);
 }
 ```
 

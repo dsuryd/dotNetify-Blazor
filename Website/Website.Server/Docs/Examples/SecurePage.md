@@ -5,7 +5,7 @@
 @inject HttpClient Http
 @inject IStylesheet Stylesheet
 
-<d-panel css="@Stylesheet["Login"]">
+<StyleSheet Context="this">
     <div>
         @if (accessToken != null)
         {
@@ -24,9 +24,9 @@
                     <div>
                         <label>User name:</label>
                         <input type="text"
-                               class="form-control"
-                               placeholder="Type guest or admin"
-                               @bind="userName" />
+                                class="form-control"
+                                placeholder="Type guest or admin"
+                                @bind="userName" />
                         <b>@loginError</b>
                     </div>
                     <div>
@@ -46,7 +46,7 @@
             </div>
         }
     </div>
-</d-panel>
+</StyleSheet>
 
 @code {
    private string userName;

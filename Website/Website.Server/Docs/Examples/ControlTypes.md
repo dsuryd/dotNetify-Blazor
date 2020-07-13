@@ -2,8 +2,6 @@
 ##### ControlTypes.razor
 
 ```jsx
-@inject IStylesheet Stylesheet
-
 <VMContext VM="ControlTypesVM" TState="IControlTypesState" OnStateChange="UpdateState">
 @if (state != null)
 {

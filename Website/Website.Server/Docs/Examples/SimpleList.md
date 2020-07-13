@@ -2,7 +2,6 @@
 ##### SimpleList.razor
 
 ```jsx
-@inject IStylesheet Stylesheet
 @inject IJSRuntime JSRuntime
 
 <VMContext VM="SimpleListVM" TState="ISimpleListState" OnStateChange="UpdateState">
