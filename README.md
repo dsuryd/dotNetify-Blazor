@@ -40,7 +40,7 @@ dotnet add package DotNetify.Blazor
 
 ## Documentation
 
-Documentation and live demo can be found at [https://dotnetify-blazor.herokuapp.com/](https://dotnetify-blazor.herokuapp.com/).
+Documentation and live demo can be found at [https://dotnetify.net/blazor](https://dotnetify.net/blazor).
 
 ## License
 
