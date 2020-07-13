@@ -25,7 +25,7 @@ namespace Website.Server
       public IEnumerable<EmployeeInfo> Employees { get; private set; }
 
       // Clients from the same IP address will share the same VM instance.
-      public override string GroupName => _connectionContext.HttpConnection.RemoteIpAddress.ToString();
+      public override string GroupName => _connectionContext.HttpConnection.LocalIpAddress.ToString();
 
       public SimpleListVM(IEmployeeRepository repository, IConnectionContext connectionContext)
       {
