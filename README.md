@@ -2,8 +2,6 @@
 
 **DotNetify-Blazor** is a free, open source project that lets you create real-time, reactive, cross-platform apps with Blazor web assembly.
 
-> **Coming soon...**
-
 ## Features
 
 - <b>Server-side view model</b>: don't let your client download too much code; keep most processing on the back-end and only send things that change.
@@ -31,6 +29,12 @@
 - **Middlewares/filters**: build a pipeline to do all sorts of things before reaching the view models.
 
 - **Bearer token authentication**: pass authentication header as payload instead of query string.
+
+## Install
+
+```
+dotnet add package DotNetify.Blazor
+```
 
 ## Documentation
 
