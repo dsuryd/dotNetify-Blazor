@@ -44,7 +44,25 @@ Download the NuGet package **DotNetify.Blazor**, then add the following to the `
 <script src="https://cdn.jsdelivr.net/npm/@aspnet/signalr@1/dist/browser/signalr.min.js"></script>
 <script src="https://unpkg.com/dotnetify@latest/dist/dotnetify-react.min.js"></script>
 <script src="https://unpkg.com/dotnetify-elements@latest/lib/dotnetify-elements.bundle.js"></script>
-<script src="_content/DotNetify.Blazor/dotnetify-blazor.js"></script>
+<script src="_content/DotNetify.Blazor/dotnetify-blazor.min.js"></script>
 
 <script src="_framework/blazor.webassembly.js"></script>
+```
+
+Add the **AddDotNetifyBlazor** service extension to the _Main_ method in _Program.cs_:
+
+```csharp
+public static async Task Main(string[] args)
+{
+    ...
+    builder.Services.AddDotNetifyBlazor();
+    ...
+}
+```
+
+Add the **DotNetify.Blazor** namespace in _\_Imports.razor_:
+
+```jsx
+...
+@using DotNetify.Blazor;
 ```

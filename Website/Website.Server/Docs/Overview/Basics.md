@@ -1,6 +1,6 @@
 ## Basics
 
-In the most basic form, you can just use dotNetify to quickly fetch from the server the initial state of your Blazor component. You do this by nesting your component's HTML inside a **VMContext** component.  Use its **VM** attribute value to specify the name of the C# view model class that will provide the state. Add a public interface to define what that state is, and assign the type to the **TState** atribute.  
+In the most basic form, you can just use dotNetify to quickly fetch from the server the initial state of your Blazor component. You do this by nesting your component's HTML inside a **VMContext** component. Use its **VM** attribute value to specify the name of the C# view model class that will provide the state. Add a public interface to define what that state is, and assign the type to the **TState** atribute.
 
 ```jsx
 <VMContext VM="HelloWorld" TState="IHelloWorldState" OnStateChange="UpdateState">
@@ -39,7 +39,7 @@ With very little effort, you can make your app gets real-time data update from t
 <VMContext VM="HelloWorld" TState="IHelloWorldState" OnStateChange="UpdateState">
     <div>
       <p>@state?.Greetings</p>
-      <p>Server time is: @state?ServerTime</p>
+      <p>Server time is: @state?.ServerTime</p>
     </div>
 </VMContext>
 
@@ -131,7 +131,7 @@ public class HelloWorld : BaseVM
    }
 
    public string Greetings { get; set; } = "Hello World!";
-   public Action<Person> Submit => person =>
+   public void Submit(Person person)
    {
       Greetings = $"Hello {person.FirstName} {person.LastName}!";
       Changed(nameof(Greetings));
