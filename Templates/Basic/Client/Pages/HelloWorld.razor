@@ -1,0 +1,29 @@
+﻿@page "/helloworld"
+
+<VMContext VM="HelloWorld" TState="IHelloWorldState" OnStateChange="UpdateState">
+@if (state != null)
+{
+    <h1>@state.Greetings</h1>
+    <div>
+        <p>Server time is: <strong>@state.ServerTime</strong></p>
+        <p>Enter your name:</p>
+        <div style="display:flex">
+            <input type="text" class="form-control" placeholder="First name" @bind="person.FirstName" />
+            <input type="text" class="form-control" placeholder="Last name" @bind="person.LastName" />
+            <button class="btn btn-primary" @onclick="() => state.Submit(person)">Submit</button>
+        </div>
+        
+    </div>
+}
+</VMContext>
+
+@code {
+   private IHelloWorldState state;
+   private Person person = new Person();
+
+   private void UpdateState(IHelloWorldState state)
+   {
+       this.state = state;
+       StateHasChanged();
+   }
+}
