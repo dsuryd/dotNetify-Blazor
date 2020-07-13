@@ -1,5 +1,7 @@
 ## Get Started
 
+The quickest way to start is to download [the basic template](https://github.com/dsuryd/dotNetify-Blazor/tree/master/Templates). Use the steps below to add to an existing project.
+
 #### Server Setup
 
 Download the NuGet package **DotNetify.SignalR**, then add the following in the _Startup.cs_:
