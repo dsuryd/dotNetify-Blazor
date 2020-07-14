@@ -11,7 +11,7 @@
 - <b>Simple real-time abstraction</b>: push data to client in real-time from multiple classes with no coupling to low-level SignalR details.
 - **Can switch to Web API**: don't need real-time/SignalR? Keep your view model stateless and switch to Web API endpoint instead.
 - **Scoped CSS**: Blazor's native CSS isolation is still in the future, but don't let that stop you from enjoying it now!
-- **[Web Components](https://dotnetify.net/elements?webcomponent)**: comes a library of HTML native web components to implement layouts, online forms, charts, and more --- all supporting CSS isolation. Usage is optional!
+- **[Web Components](https://dotnetify.net/elements?webcomponent)**: comes with a library of HTML native web components to implement layouts, online forms, charts, and more --- all supporting CSS isolation. Usage is optional!
 - **Reusable with Javascript SPAs**: Can't always use Blazor? The same view models you write for Blazor can be reused with Javascript UI frameworks without change. DotNetify has full support for React and Vue, and can be made to work with Angular and others.
 - **Reusable with .NET desktop clients**: reuse the same view models with .NET-based client apps (WPF/Avalonia).
 - **Multicasting**: send real-time data to multiple clients at once; perfect for real-time collaboration/data sync.
@@ -29,6 +29,8 @@ dotnet add package DotNetify.Blazor
 ## Documentation
 
 Documentation and live demo can be found at [https://dotnetify.net/blazor](https://dotnetify.net/blazor).
+
+DotNetify core repo: [https://github.com/dsuryd/dotNetify](https://github.com/dsuryd/dotNetify).
 
 ## License
 
