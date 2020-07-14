@@ -9,7 +9,7 @@
 - <b>Server-side view model</b>: don't let your client download too much code; keep most processing on the back-end and only send things that change.
 - <b>Declarative state hydration</b>: eliminate the need to write data-fetching boilerplate services. Send data to the back-end by simply invoking an interface method.
 - <b>Simple real-time abstraction</b>: push data to client in real-time from multiple classes with no coupling to low-level SignalR details.
-- **Can switch to Web API**: don't need real-time/SignalR? Keep your view model stateless and switch to use built-in Web API endpoint instead.
+- **Can switch to Web API**: don't need real-time/SignalR? Keep your view model stateless and switch to Web API endpoint instead.
 - **Scoped CSS**: Blazor's native CSS isolation is still in the future, but don't let that stop you from enjoying it now!
 - **[Web Components](https://dotnetify.net/elements?webcomponent)**: comes a library of HTML native web components to implement layouts, online forms, charts, and more --- all supporting CSS isolation. Usage is optional!
 - **Reusable with Javascript SPAs**: Can't always use Blazor? The same view models you write for Blazor can be reused with Javascript UI frameworks without change. DotNetify has full support for React and Vue, and can be made to work with Angular and others.
