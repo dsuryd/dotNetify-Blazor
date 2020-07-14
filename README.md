@@ -2,7 +2,7 @@
 
 [![NuGet version](https://badge.fury.io/nu/DotNetify.Blazor.svg)](https://badge.fury.io/nu/DotNetify.Blazor)
 
-**DotNetify-Blazor** is a free, open source project that lets you create real-time, reactive, cross-platform apps with Blazor web assembly.
+**DotNetify-Blazor** is a free, open source project that lets you create real-time, reactive, cross-platform apps with Blazor WebAssembly.
 
 ## Features
 
