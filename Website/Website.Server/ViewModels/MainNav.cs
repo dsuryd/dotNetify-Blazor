@@ -35,8 +35,8 @@ namespace Website.Server
                   Label = "Examples with Elements",
                   Routes = new NavRoute[]
                   {
-                     new NavRoute("Dashboard", PATH_BASE + "/dashboard"),
-                     new NavRoute("Form", PATH_BASE + "/form"),
+                     new NavRoute("Customer Form", PATH_BASE + "/form"),
+                     new NavRoute("Admin Dashboard", PATH_BASE + "/dashboard"),
                   },
                   IsExpanded = true
                },
