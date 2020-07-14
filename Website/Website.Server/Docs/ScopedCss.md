@@ -4,7 +4,7 @@ Blazor has no native support for component-scoped CSS yet, and so dotNetify prov
 
 #### Basic Usage
 
-To create a style sheet for a component, first add a new file to contain the style sheet and name it the same as your component's name with a `css` or 'scss` extension. For example: _MyComponent.razor.scss_. <b>Make sure to set the build action of the file to _Embedded Resource_.</b> Then in your component, declare this:
+To create a style sheet for a component, first add a new file to contain the style sheet and name it the same as your component's name with a `css` or `scss` extension. For example: _MyComponent.razor.scss_. <b>Make sure to set the build action of the file to _Embedded Resource_.</b> Then in your component, declare this:
 
 ```jsx
 <StyleSheet Context="this">...</StyleSheet>

@@ -2,13 +2,13 @@
     <d-modal id="_Dialog" header="New Customer" open="@isOpen" large="true" style="position: fixed">
         <d-panel css="min-height: 22rem">
             <d-tab>
-                <d-tab-item key="Person" label="Person">
+                <d-tab-item itemkey="person" label="Person">
                     <PersonForm />
                 </d-tab-item>
-                <d-tab-item key="Phone" label="Phone">
+                <d-tab-item itemkey="phone" label="Phone">
                     <PhoneForm />
                 </d-tab-item>
-                <d-tab-item key="Address" label="Address">
+                <d-tab-item itemkey="address" label="Address">
                     <AddressForm />
                 </d-tab-item>
             </d-tab>
@@ -23,7 +23,7 @@
 </VMContext>
 
 @code {
-   [Parameter] public EventCallback OnClosed { get; set; }
+  [Parameter] public EventCallback OnClosed { get; set; }
 
    private string isOpen = "true";
 

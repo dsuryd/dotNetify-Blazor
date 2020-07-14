@@ -18,7 +18,7 @@ DotNetify's design is based on the principle of maintaining strong separation of
 
 - **[Scoped CSS](scopedcss)**: Blazor's native CSS isolation is still in the future, but don't let that stop you from enjoying it now!
 
-- **[Web Components](https://dotnetify.net/elements?webcomponent)**: comes with _Elements_, a library of HTML native web components which makes it very convenient to implement layouts, online forms, charts, and more --- all supporting CSS isolation.
+- **[Web Components](https://dotnetify.net/elements?webcomponent)**: comes with _Elements_, a library of HTML native web components which makes it very convenient to implement layouts, online forms, charts, and more --- all supporting CSS isolation. Usage is optional!
 
 - **[Reusable with Javascript SPAs](https://github.com/dsuryd/dotNetify/tree/master/Demo)**: Can't always use Blazor? The same view models you write for Blazor can be reused with Javascript UI frameworks without change. DotNetify has full support for React and Vue, and can be made to work with Angular and others.
 

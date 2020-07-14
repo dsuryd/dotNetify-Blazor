@@ -56,25 +56,25 @@
 
 ```jsx
 <d-tab margin="1.5rem 0">
-    <d-tab-item itemkey="basic" label="Basic Info">
-        <d-panel horizontal="true" nogap="true">
-            <d-panel horizontal="true">
-                <d-cell header="Person" flex="true">
-                    <PersonForm />
-                </d-cell>
-                <d-cell header="Phone" flex="1" borders="top, right, bottom">
-                    <PhoneForm />
-                </d-cell>
-            </d-panel>
-        </d-panel>
-    </d-tab-item>
-    <d-tab-item itemkey="address" label="Address">
-        <d-panel>
-            <d-cell header="Primary Address">
-                <AddressForm />
-            </d-cell>
-        </d-panel>
-    </d-tab-item>
+  <d-tab-item itemkey="basic" label="Basic Info">
+    <d-panel horizontal="true" nogap="true">
+      <d-panel horizontal="true">
+        <d-cell header="Person" flex="true">
+          <PersonForm />
+        </d-cell>
+        <d-cell header="Phone" flex="1" borders="top, right, bottom">
+          <PhoneForm />
+        </d-cell>
+      </d-panel>
+    </d-panel>
+  </d-tab-item>
+  <d-tab-item itemkey="address" label="Address">
+    <d-panel>
+      <d-cell header="Primary Address">
+        <AddressForm />
+      </d-cell>
+    </d-panel>
+  </d-tab-item>
 </d-tab>
 ```
 
@@ -82,15 +82,15 @@
 
 ```jsx
 <VMContext VM="PersonForm" TState="object">
-    <d-form id="Person">
-        <d-panel>
-            <d-dropdown-list id="Prefix" horizontal="true"></d-dropdown-list>
-            <d-text-field id="FirstName" horizontal="true"></d-text-field>
-            <d-text-field id="MiddleName" horizontal="true"></d-text-field>
-            <d-text-field id="LastName" horizontal="true"></d-text-field>
-            <d-dropdown-list id="Suffix" horizontal="true"></d-dropdown-list>
-        </d-panel>
-    </d-form>
+  <d-form id="Person">
+    <d-panel>
+      <d-dropdown-list id="Prefix" horizontal="true"></d-dropdown-list>
+      <d-text-field id="FirstName" horizontal="true"></d-text-field>
+      <d-text-field id="MiddleName" horizontal="true"></d-text-field>
+      <d-text-field id="LastName" horizontal="true"></d-text-field>
+      <d-dropdown-list id="Suffix" horizontal="true"></d-dropdown-list>
+    </d-panel>
+  </d-form>
 </VMContext>
 ```
 
@@ -98,14 +98,14 @@
 
 ```jsx
 <VMContext VM="PhoneForm" TState="object">
-    <d-form id="Phone">
-        <d-panel>
-            <d-text-field id="Work" horizontal="true"></d-text-field>
-            <d-text-field id="Home" horizontal="true"></d-text-field>
-            <d-text-field id="Mobile" horizontal="true"></d-text-field>
-            <drop-down-list id="Primary" horizontal="true"></drop-down-list>
-        </d-panel>
-    </d-form>
+  <d-form id="Phone">
+    <d-panel>
+      <d-text-field id="Work" horizontal="true"></d-text-field>
+      <d-text-field id="Home" horizontal="true"></d-text-field>
+      <d-text-field id="Mobile" horizontal="true"></d-text-field>
+      <drop-down-list id="Primary" horizontal="true"></drop-down-list>
+    </d-panel>
+  </d-form>
 </VMContext>
 ```
 
@@ -113,15 +113,15 @@
 
 ```jsx
 <VMContext VM="AddressForm" TState="object">
-    <d-form id="Address">
-        <d-panel>
-            <d-text-field id="Address1" horizontal="true"></d-text-field>
-            <d-text-field id="Address2" horizontal="true"></d-text-field>
-            <d-text-field id="City" horizontal="true"></d-text-field>
-            <d-dropdown-list id="State" horizontal="true"></d-dropdown-list>
-            <d-number-field id="ZipCode" horizontal="true"></d-number-field>
-        </d-panel>
-    </d-form>
+  <d-form id="Address">
+    <d-panel>
+      <d-text-field id="Address1" horizontal="true"></d-text-field>
+      <d-text-field id="Address2" horizontal="true"></d-text-field>
+      <d-text-field id="City" horizontal="true"></d-text-field>
+      <d-dropdown-list id="State" horizontal="true"></d-dropdown-list>
+      <d-number-field id="ZipCode" horizontal="true"></d-number-field>
+    </d-panel>
+  </d-form>
 </VMContext>
 ```
 
@@ -132,13 +132,13 @@
     <d-modal id="_Dialog" header="New Customer" open="@isOpen" large="true" style="position: fixed">
         <d-panel css="min-height: 22rem">
             <d-tab>
-                <d-tab-item key="Person" label="Person">
+                <d-tab-item itemkey="Person" label="Person">
                     <PersonForm />
                 </d-tab-item>
-                <d-tab-item key="Phone" label="Phone">
+                <d-tab-item itemkey="Phone" label="Phone">
                     <PhoneForm />
                 </d-tab-item>
-                <d-tab-item key="Address" label="Address">
+                <d-tab-item itemkey="Address" label="Address">
                     <AddressForm />
                 </d-tab-item>
             </d-tab>
@@ -397,4 +397,5 @@ public class CustomerFormData
     public StringDictionary Address { get; set; }
 }
 ```
+
 </if>
