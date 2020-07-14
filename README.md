@@ -1,8 +1,8 @@
 <p align="center"><img width="300px" src="http://dotnetify.net/content/images/dotnetify-logo.png"></p>
 
-**DotNetify-Blazor** is a free, open source project that lets you create real-time, reactive, cross-platform apps with Blazor web assembly.
+[![NuGet version](https://badge.fury.io/nu/DotNetify.Blazor.svg)](https://badge.fury.io/nu/DotNetify.Blazor)
 
-> **Coming soon...**
+**DotNetify-Blazor** is a free, open source project that lets you create real-time, reactive, cross-platform apps with Blazor web assembly.
 
 ## Features
 
@@ -32,9 +32,15 @@
 
 - **Bearer token authentication**: pass authentication header as payload instead of query string.
 
+## Install
+
+```
+dotnet add package DotNetify.Blazor
+```
+
 ## Documentation
 
-Documentation and live demo can be found at [https://dotnetify-blazor.herokuapp.com/](https://dotnetify-blazor.herokuapp.com/).
+Documentation and live demo can be found at [https://dotnetify.net/blazor](https://dotnetify.net/blazor).
 
 ## License
 
