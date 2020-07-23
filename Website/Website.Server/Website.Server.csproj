@@ -32,6 +32,21 @@
     <None Remove="Docs\ScopedCss.md" />
     <None Remove="Docs\Security.md" />
     <None Remove="Docs\WebApiMode.md" />
+    <None Remove="pulse-ui\index.html" />
+    <None Remove="pulse-ui\section.html" />
+    <None Remove="pulse-ui\style.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="pulse-ui\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pulse-ui\section.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pulse-ui\style.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
