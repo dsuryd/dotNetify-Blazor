@@ -38,7 +38,7 @@ namespace Website.Server
                      new NavRoute("Customer Form", PATH_BASE + "/form"),
                      new NavRoute("Admin Dashboard", PATH_BASE + "/dashboard"),
                   },
-                  IsExpanded = true
+                  IsExpanded = false
                },
                new NavGroup
                {
@@ -56,6 +56,15 @@ namespace Website.Server
                      new NavRoute ("Web API Mode", PATH_BASE + "/webapimode")
                   },
                   IsExpanded = false
+               },
+               new NavGroup
+               {
+                  Label = "Premium Feature",
+                  Routes = new NavRoute[]
+                  {
+                     new NavRoute ("DotNetify-Testing", PATH_BASE + "/dotnetify-testing")
+                  },
+                  IsExpanded = true
                }
             })
          );

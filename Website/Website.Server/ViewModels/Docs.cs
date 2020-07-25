@@ -115,4 +115,13 @@ namespace Website.Server
    }
 
    #endregion API References
+
+   #region Premium
+
+   public class DotNetifyTesting : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Premium.DotNetifyTesting.md");
+   }
+
+   #endregion Premium
 }
