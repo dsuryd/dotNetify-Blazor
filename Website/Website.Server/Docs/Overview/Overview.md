@@ -16,7 +16,7 @@ DotNetify's design is based on the principle of maintaining strong separation of
 
 - **[Can switch to Web API](webapimode)**: don't need real-time and don't want to use SignalR? Keep your view model stateless and switch to use built-in Web API endpoint instead.
 
-- **[Scoped CSS](scopedcss)**: Blazor's native CSS isolation is still in the future, but don't let that stop you from enjoying it now!
+- **[Scoped CSS](scopedcss)**: built-in support for SASS-like syntax and replacing styles at runtime!
 
 - **[Web Components](https://dotnetify.net/elements?webcomponent)**: comes with _Elements_, a library of HTML native web components which makes it very convenient to implement layouts, online forms, charts, and more --- all supporting CSS isolation. Usage is optional!
 

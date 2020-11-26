@@ -1,6 +1,6 @@
 ## Scoped CSS
 
-Blazor has no native support for component-scoped CSS yet, and so dotNetify provides the **StyleSheet** component to fill the gap. It works by looking for an embedded resource by the same name of the component where it is declared (or can be explicitly provided), loads the content as string and provides it to a custom web component which will apply the style sheet only to the DOM elements nested within it.
+While Blazor has native support for component-scoped CSS, dotNetify offers its own powerful implementation via the **StyleSheet** component. It works by looking for an embedded resource by the same name of the component where it is declared (or can be explicitly provided), loads the content as string and provides it to a custom web component which will apply the style sheet only to the DOM elements nested within it.
 
 #### Basic Usage
 
