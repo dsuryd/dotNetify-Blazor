@@ -143,6 +143,31 @@ Notice the `Submit` method on the client-side interface, which serves as proxy t
 
 Notice that we don't need to use **PushUpdates** to get the new greetings sent. That's because dotNetify employs something similar to the request-response cycle, but in this case it's _action-reaction cycle_: the front-end initiates an action that mutates the state, the server processes the action and then sends back to the front-end any other states that mutate as the reaction to that action.
 
+#### Asynchronous Methods
+
+If you need to do an asynchronous method call in order to initialize the view model, override the **OnCreatedAsync** method and await the call there:
+
+```csharp
+public class HelloWorld: BaseVM
+{
+   public string Greetings { get; set; }
+
+   public override async Task OnCreatedAsync()
+   {
+      Greetings = await BuildGreetingsAsync();
+   }
+}
+```
+
+Action methods like the _Submit_ method in the previous example can also be made awaitable by changing the return type to _Task_:
+
+```csharp
+   public async Task Submit(Person person)
+   {
+      await SomeAsyncMethod(person);
+   }
+```
+
 #### Object Lifetime
 
 The server classes are referred to as view models. Whereas a model represents your app's business domain, a view model is an abstraction of a view, which embodies data and behavior necessary for the view to fulfill its use cases.
