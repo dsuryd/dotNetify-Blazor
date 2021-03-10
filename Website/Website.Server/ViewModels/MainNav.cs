@@ -62,7 +62,8 @@ namespace Website.Server
                   Label = "Premium Feature",
                   Routes = new NavRoute[]
                   {
-                     new NavRoute ("DotNetify-Testing", PATH_BASE + "/dotnetify-testing")
+                     new NavRoute ("DotNetify-Testing", PATH_BASE + "/dotnetify-testing"),
+                     new NavRoute ("DotNetify-LoadTester", PATH_BASE + "/dotnetify-loadtester")
                   },
                   IsExpanded = true
                }

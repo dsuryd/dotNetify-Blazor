@@ -123,5 +123,10 @@ namespace Website.Server
       public string Content => new Markdown("Website.Server.Docs.Premium.DotNetifyTesting.md");
    }
 
+   public class DotNetifyLoadTester : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Premium.DotNetifyLoadTester.md");
+   }
+
    #endregion Premium
 }
