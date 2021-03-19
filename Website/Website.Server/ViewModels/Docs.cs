@@ -23,6 +23,11 @@ namespace Website.Server
       public string Content => new Markdown("Website.Server.Docs.Overview.Reactive.md");
    }
 
+   public class Scaleout : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Overview.Scaleout.md");
+   }
+
    public class GetStarted : BaseVM
    {
       public string Content => new Markdown("Website.Server.Docs.Overview.GetStarted.md");
@@ -126,6 +131,11 @@ namespace Website.Server
    public class DotNetifyLoadTester : BaseVM
    {
       public string Content => new Markdown("Website.Server.Docs.Premium.DotNetifyLoadTester.md");
+   }
+
+   public class DotNetifyObserver : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Premium.DotNetifyObserver.md");
    }
 
    #endregion Premium

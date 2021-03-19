@@ -30,7 +30,9 @@
     <None Remove="Docs\Overview\GetStarted.md" />
     <None Remove="Docs\Overview\Reactive.md" />
     <None Remove="Docs\Premium\DotNetifyLoadTester.md" />
+    <None Remove="Docs\Premium\DotNetifyObserver.md" />
     <None Remove="Docs\Premium\DotNetifyTesting.md" />
+    <None Remove="Docs\Scaleout.md" />
     <None Remove="Docs\ScopedCss.md" />
     <None Remove="Docs\Security.md" />
     <None Remove="Docs\WebApiMode.md" />
@@ -54,7 +56,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Docs\CRUD.md" />
     <EmbeddedResource Include="Docs\Premium\DotNetifyLoadTester.md" />
+    <EmbeddedResource Include="Docs\Premium\DotNetifyObserver.md" />
     <EmbeddedResource Include="Docs\Premium\DotNetifyTesting.md" />
+    <EmbeddedResource Include="Docs\Overview\Scaleout.md" />
     <EmbeddedResource Include="Docs\ScopedCss.md" />
     <EmbeddedResource Include="Docs\DI.md" />
     <EmbeddedResource Include="Docs\DotNetClient.md" />
@@ -82,9 +86,9 @@
   <ItemGroup>
      <PackageReference Include="AspNet.Security.OpenIdConnect.Server" Version="2.0.0" />
      <PackageReference Include="Bogus" Version="22.1.3" />
-     <PackageReference Include="DotNetify.Elements" Version="1.3.0" />
+     <PackageReference Include="DotNetify.Elements" Version="1.5.1" />
      <PackageReference Include="DotNetify.Pulse" Version="1.0.0" />
-     <PackageReference Include="DotNetify.SignalR" Version="4.1.0" />
+     <PackageReference Include="DotNetify.SignalR" Version="5.0.0" />
      <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.0" />
      <PackageReference Include="System.Linq.Dynamic.Core" Version="1.1.5" />
      <PackageReference Include="UAParser" Version="3.1.44" />

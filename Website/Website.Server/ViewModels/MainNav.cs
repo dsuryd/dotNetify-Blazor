@@ -16,6 +16,7 @@ namespace Website.Server
                new NavRoute("Basics", PATH_BASE + "/basics"),
                new NavRoute("Data Flow Pattern", PATH_BASE + "/dataflow"),
                new NavRoute("Reactive Programming", PATH_BASE + "/reactive"),
+               new NavRoute("Scale-Out", PATH_BASE + "/scaleout"),
                new NavRoute("Get Started", PATH_BASE + "/getstarted"),
                new NavGroup
                {
@@ -59,11 +60,12 @@ namespace Website.Server
                },
                new NavGroup
                {
-                  Label = "Premium Feature",
+                  Label = "Premium Features",
                   Routes = new NavRoute[]
                   {
+                     new NavRoute ("DotNetify-Observer", PATH_BASE + "/dotnetify-observer"),
+                     new NavRoute ("DotNetify-LoadTester", PATH_BASE + "/dotnetify-loadtester"),
                      new NavRoute ("DotNetify-Testing", PATH_BASE + "/dotnetify-testing"),
-                     new NavRoute ("DotNetify-LoadTester", PATH_BASE + "/dotnetify-loadtester")
                   },
                   IsExpanded = true
                }
