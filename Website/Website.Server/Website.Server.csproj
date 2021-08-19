@@ -29,6 +29,7 @@
     <None Remove="Docs\Overview\DataFlow.md" />
     <None Remove="Docs\Overview\GetStarted.md" />
     <None Remove="Docs\Overview\Reactive.md" />
+    <None Remove="Docs\Overview\RealtimePostgres.md" />
     <None Remove="Docs\Premium\DotNetifyLoadTester.md" />
     <None Remove="Docs\Premium\DotNetifyObserver.md" />
     <None Remove="Docs\Premium\DotNetifyTesting.md" />
@@ -55,6 +56,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Docs\CRUD.md" />
+    <EmbeddedResource Include="Docs\Overview\RealtimePostgres.md" />
     <EmbeddedResource Include="Docs\Premium\DotNetifyLoadTester.md" />
     <EmbeddedResource Include="Docs\Premium\DotNetifyObserver.md" />
     <EmbeddedResource Include="Docs\Premium\DotNetifyTesting.md" />

@@ -14,10 +14,19 @@ namespace Website.Server
             {
                new NavRoute("Overview", PATH_BASE + "/"),
                new NavRoute("Basics", PATH_BASE + "/basics"),
-               new NavRoute("Data Flow Pattern", PATH_BASE + "/dataflow"),
-               new NavRoute("Reactive Programming", PATH_BASE + "/reactive"),
-               new NavRoute("Scale-Out", PATH_BASE + "/scaleout"),
                new NavRoute("Get Started", PATH_BASE + "/getstarted"),
+               new NavGroup
+               {
+                  Label = "Topics",
+                  Routes = new NavRoute[]
+                  {
+                     new NavRoute("Data Flow Pattern", PATH_BASE + "/dataflow"),
+                     new NavRoute("Reactive Programming", PATH_BASE + "/reactive"),
+                     new NavRoute("Real-time PostgreSQL", PATH_BASE + "/postgres"),
+                     new NavRoute("Scale-Out", PATH_BASE + "/scaleout"),
+                  },
+                  IsExpanded = false
+               },
                new NavGroup
                {
                   Label = "Examples",
@@ -60,14 +69,15 @@ namespace Website.Server
                },
                new NavGroup
                {
-                  Label = "Premium Features",
+                  Label = "For Sponsors",
+                  Icon = "material-icons volunteer_activism",
                   Routes = new NavRoute[]
                   {
                      new NavRoute ("DotNetify-Observer", PATH_BASE + "/dotnetify-observer"),
                      new NavRoute ("DotNetify-LoadTester", PATH_BASE + "/dotnetify-loadtester"),
                      new NavRoute ("DotNetify-Testing", PATH_BASE + "/dotnetify-testing"),
                   },
-                  IsExpanded = true
+                  IsExpanded = false
                }
             })
          );

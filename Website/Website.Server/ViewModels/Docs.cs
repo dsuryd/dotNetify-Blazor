@@ -23,6 +23,11 @@ namespace Website.Server
       public string Content => new Markdown("Website.Server.Docs.Overview.Reactive.md");
    }
 
+   public class RealtimePostgres : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Overview.RealtimePostgres.md");
+   }
+
    public class Scaleout : BaseVM
    {
       public string Content => new Markdown("Website.Server.Docs.Overview.Scaleout.md");
