@@ -12,9 +12,9 @@
     <Authors>Dicky Suryadi</Authors>
     <Product>DotNetify.Blazor</Product>
     <Description>Real-time, reactive MVVM library for Blazor web assembly apps.</Description>
-    <Copyright>Copyright 2019-2020</Copyright>
+    <Copyright>Copyright 2019-2022</Copyright>
     <PackageProjectUrl>https://dotnetify.net</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/dsuryd/dotNetify</RepositoryUrl>
+    <RepositoryUrl>https://github.com/dsuryd/dotNetify-Blazor</RepositoryUrl>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>dotnetify.png</PackageIcon>
