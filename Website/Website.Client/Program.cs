@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using DotNetify.Blazor;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,12 +21,13 @@ namespace Website.Client
                config.Debug = true;
 #endif
             })
-            .AddTransient(_ => new HttpClient
+            .AddScoped(_ => new HttpClient
             {
                BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
             });
 
          builder.RootComponents.Add<App>("app");
+         builder.RootComponents.Add<HeadOutlet>("head::after");
          await builder.Build().RunAsync();
       }
    }

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <IsPackable>true</IsPackable>
     <LangVersion>8.0</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
@@ -25,26 +25,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="bundleconfig.json" />
+	 <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.1" />
+     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.5" />
-     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.5" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.1.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+	 <Content Remove="bundleconfig.json" />
   </ItemGroup>
-
+	
   <ItemGroup>
      <None Include="bundleconfig.json" />
      <None Include="wwwroot\dotnetify-blazor.js" />
-     <None Include="LICENSE.md">
-        <Pack>True</Pack>
-        <PackagePath></PackagePath>
-     </None>
-     <None Include="wwwroot\dotnetify.png">
-       <Pack>True</Pack>
-       <PackagePath></PackagePath>
-     </None>
+     <None Include="LICENSE.md" Pack="true" PackagePath="" />
+	 <None Include="Properties\dotnetify.png" Pack="true" PackagePath="" />
   </ItemGroup>
 </Project>
