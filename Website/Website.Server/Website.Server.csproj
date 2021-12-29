@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +15,7 @@
     <None Remove="Docs\CRUD.md" />
     <None Remove="Docs\DI.md" />
     <None Remove="Docs\DotNetClient.md" />
+    <None Remove="Docs\Examples\ChatRoom.md" />
     <None Remove="Docs\Examples\CompositeView.md" />
     <None Remove="Docs\Examples\ControlTypes.md" />
     <None Remove="Docs\Examples\Dashboard.md" />
@@ -56,6 +57,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Docs\CRUD.md" />
+    <EmbeddedResource Include="Docs\Examples\ChatRoom.md" />
     <EmbeddedResource Include="Docs\Overview\RealtimePostgres.md" />
     <EmbeddedResource Include="Docs\Premium\DotNetifyLoadTester.md" />
     <EmbeddedResource Include="Docs\Premium\DotNetifyObserver.md" />

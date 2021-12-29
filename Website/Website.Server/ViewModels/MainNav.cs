@@ -36,7 +36,8 @@ namespace Website.Server
                      new NavRoute("Control Types", PATH_BASE + "/controltypes"),
                      new NavRoute("Simple List", PATH_BASE + "/simplelist"),
                      new NavRoute("Composite View", PATH_BASE + "/compositeview"),
-                     new NavRoute("Secure Page", PATH_BASE + "/securepage")
+                     new NavRoute("Secure Page", PATH_BASE + "/securepage"),
+                     new NavRoute("Chat Room", PATH_BASE + "/chatroom"),
                   },
                   IsExpanded = true
                },

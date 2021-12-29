@@ -3,40 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <OutputType>Exe</OutputType>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>latest</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Pages\2_Examples\CompositeView\CompositeView.razor.scss" />
-    <None Remove="Pages\2_Examples\ControlTypes.razor.scss" />
-    <None Remove="Pages\2_Examples\Dashboard\ActivitiesCard.razor.scss" />
-    <None Remove="Pages\2_Examples\Dashboard\InfoCard.razor.scss" />
-    <None Remove="Pages\2_Examples\HelloWorld.razor.scss" />
-    <None Remove="Pages\2_Examples\SecurePage\Login.razor.scss" />
-    <None Remove="Pages\2_Examples\SimpleList.razor.css" />
-    <None Remove="Pages\2_Examples\SimpleList.razor.scss" />
-    <None Remove="Shared\ArticleLayout.razor.scss" />
-    <None Remove="Shared\Expander.razor.scss" />
-    <None Remove="Shared\GithubLink.razor.scss" />
-    <None Remove="Shared\MainLayout.razor.scss" />
-    <None Remove="Shared\MenuLinks.razor.scss" />
-    <None Remove="Shared\SelectFramework.razor.scss" />
-    <None Remove="Shared\TwitterLink.razor.scss" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Shared\GithubLink.razor.scss" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Shared\Expander.razor.scss" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Shared\ArticleLayout.razor.scss" />
-  </ItemGroup>
-
+ 
   <ItemGroup>
     <EmbeddedResource Include="Pages\2_Examples\CompositeView\CompositeView.razor.scss" />
     <EmbeddedResource Include="Pages\2_Examples\ControlTypes.razor.scss" />
@@ -45,10 +15,14 @@
     <EmbeddedResource Include="Pages\2_Examples\HelloWorld.razor.scss" />
     <EmbeddedResource Include="Pages\2_Examples\SecurePage\Login.razor.scss" />
     <EmbeddedResource Include="Pages\2_Examples\SimpleList.razor.scss" />
-    <EmbeddedResource Include="Shared\MainLayout.razor.scss" />
+	<EmbeddedResource Include="Pages\2_Examples\Chatroom.razor.scss" />
+	<EmbeddedResource Include="Shared\MainLayout.razor.scss" />
     <EmbeddedResource Include="Shared\MenuLinks.razor.scss" />
     <EmbeddedResource Include="Shared\SelectFramework.razor.scss" />
     <EmbeddedResource Include="Shared\TwitterLink.razor.scss" />
+	<EmbeddedResource Include="Shared\GithubLink.razor.scss" />
+	<EmbeddedResource Include="Shared\ArticleLayout.razor.scss" />
+	<EmbeddedResource Include="Shared\Expander.razor.scss" />
   </ItemGroup>
 
   <ItemGroup>

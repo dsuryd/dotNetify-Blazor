@@ -28,7 +28,7 @@
     "Website.Server.Debug": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:8090/blazor",
+      "launchUrl": "http://localhost:8090/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

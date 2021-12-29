@@ -75,11 +75,16 @@ namespace Website.Server
       public string Content => new Markdown("Website.Server.Docs.Examples.Form.md");
    }
 
-   #endregion Examples
+    public class ChatRoomDoc : BaseVM
+    {
+        public string Content => new Markdown("Website.Server.Docs.Examples.ChatRoom.md");
+    }
 
-   #region API References
+    #endregion Examples
 
-   public class CRUD : BaseVM
+    #region API References
+
+    public class CRUD : BaseVM
    {
       public string Content => new Markdown("Website.Server.Docs.CRUD.md");
    }
