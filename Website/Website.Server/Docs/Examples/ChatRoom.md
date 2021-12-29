@@ -23,20 +23,17 @@
                 </nav>
                 <section>
                 <div>
-                    @if (state.Messages != null)
+                    @foreach (var msg in messages)
                     {
-                        @foreach (var msg in state.Messages)
-                        {
+                        <div>
                             <div>
-                                <div>
-                                    <span>@(GetUserName(msg.UserId) ?? msg.UserName)</span>
-                                    <span>@msg.Date.ToString("g")</span>
-                                </div>
-                                <div class="@(msg.Private ? "private" : "")">@msg.Text</div>
+                                <span>@(GetUserName(msg.UserId) ?? msg.UserName)</span>
+                                <span>@msg.Date.ToString("g")</span>
                             </div>
-                        }
-                    }
+                            <div class="@(msg.Private ? "private" : "")">@msg.Text</div>
                         </div>
+                    }
+                </div>
                 <div style="float: left; clear: both;" />
                 <input type="text" class="form-control" placeholder="Type your message here" @bind="message" @bind:event="oninput" @onkeypress="e => OnKeypress(e)" />
                 </section>
@@ -55,8 +52,9 @@
 
 @code {
     private IChatRoomState state;
-    private string message;
     private string correlationId;
+    private string message;
+    private List<Message> messages = new List<Message>();
 
     public class User 
     {
@@ -76,11 +74,17 @@
         public bool Private { get; set; }
     }
 
+    public class MessageComparer : IEqualityComparer<Message>
+    {
+        public bool Equals(Message x, Message y) => x.UserId.Equals(y.UserId) && x.Date.Equals(y.Date);
+        public int GetHashCode(Message obj) => obj.UserId.GetHashCode() + obj.Date.GetHashCode();
+    }
+
     public interface IChatRoomState
     {
         string CorrelationId { get; set; }
-        List<User> Users { get; set;  }
-        List<Message> Messages { get; set; }
+        IEnumerable<User> Users { get; set;  }
+        IEnumerable<Message> Messages { get; set; }
         Message PrivateMessage { get; set; }
 
         void AddUser(string correlationId);
@@ -94,7 +98,6 @@
             this.correlationId = new Random().Next().ToString();
             this.state.AddUser(this.correlationId);
         }
-
     }
 
     private string GetUserName(string userId) 
@@ -127,8 +130,14 @@
             var message = state.PrivateMessage;
             message.Text = "(private) " + message.Text;
             message.Private = true;
-            this.state.Messages.Add(message);
-            this.state.PrivateMessage = null;
+            if (!this.messages.Contains(message, new MessageComparer()))
+                this.messages.Add(message);
+        }
+
+        if (this.state.Messages?.Count() > 0)
+        {
+            var newMessages = this.state.Messages.Except(this.messages, new MessageComparer());
+            this.messages.AddRange(newMessages);
         }
 
         StateHasChanged();
