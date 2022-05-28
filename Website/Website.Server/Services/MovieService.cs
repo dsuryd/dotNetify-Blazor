@@ -18,6 +18,8 @@ namespace Website.Server
       public string Movie { get; set; }
       public int Year { get; set; }
       public string Cast { get; set; }
+
+      public string MovieCast => Cast;
       public string Director { get; set; }
    }
 
