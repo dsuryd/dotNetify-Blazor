@@ -6,6 +6,7 @@ using DotNetify.Security;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -15,6 +16,13 @@ namespace Website.Server
 {
    public class Startup
    {
+      public Startup(IConfiguration configuration)
+      {
+         Configuration = configuration;
+      }
+
+      public IConfiguration Configuration { get; }
+
       // This method gets called by the runtime. Use this method to add services to the container.
       // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
       public void ConfigureServices(IServiceCollection services)
@@ -31,6 +39,10 @@ namespace Website.Server
          services.AddSignalR();
          services.AddDotNetify();
          services.AddDotNetifyPulse();
+
+         // Configure intergration with an external websocket server.
+         if (!string.IsNullOrWhiteSpace(Configuration["WSServer:ConnectionUrl"]))
+            services.AddDotNetifyIntegrationWebApi(client => client.BaseAddress = new Uri(Configuration["WSServer:ConnectionUrl"]));
 
          services.AddMvc();
          services.AddLogging();

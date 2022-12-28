@@ -20,6 +20,7 @@ namespace Website.Client
 #if DEBUG
                config.Debug = true;
 #endif
+               //config.WebSocketServerUrl = "ws://localhost:3000";
             })
             .AddScoped(_ => new HttpClient
             {

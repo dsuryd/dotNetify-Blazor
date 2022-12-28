@@ -1,5 +1,6 @@
 ﻿### App ###
 wwwroot/dist
+appsettings.development.json
 
 ### Code ###
 # Visual Studio Code - https://code.visualstudio.com/

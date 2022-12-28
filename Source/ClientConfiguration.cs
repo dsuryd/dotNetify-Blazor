@@ -36,5 +36,10 @@ namespace DotNetify.Blazor
       /// </summary>
       [JsonIgnore]
       public Assembly[] StyleSheetAssemblies { get; set; }
+
+      /// <summary>
+      /// Web socket server URL (ws://).
+      /// </summary>
+      public string WebSocketServerUrl { get; set; }
    }
 }
