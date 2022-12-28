@@ -20,6 +20,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 
 [assembly: InternalsVisibleTo("DotNetify.Blazor.UnitTests")]
 
@@ -42,6 +43,7 @@ namespace DotNetify.Blazor
          Dispose
       }
 
+      [JsonIgnore]
       public IVMProxy VMProxy { get; set; }
 
       public T Get<T>(string propName)
