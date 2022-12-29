@@ -10,7 +10,7 @@ _DotNetify-Observer_ is a visualization dashboard that lets you see and inspect 
 
 <d-alert info="true">
 
-<b>This is a closed source library for Pro, Team, and Enterprise sponsors.</b> If you are one, send an email to _admin@dotnetify.net_ with your username to get your license key.  
+<b>This is a closed-source library for Pro, Team, and Enterprise sponsors.</b> If you are one, send an email to _admin@dotnetify.net_ with your username to get your license key.  
 
 - Pro sponsor: single developer, web endpoint only.
 - Team sponsor: up to 10 developers, up to 5 server nodes + private email support.

@@ -20,6 +20,7 @@ namespace Website.Server
                   Label = "Topics",
                   Routes = new NavRoute[]
                   {
+                     new NavRoute("AWS Integration", PATH_BASE + "/aws-integration"),
                      new NavRoute("Data Flow Pattern", PATH_BASE + "/dataflow"),
                      new NavRoute("Reactive Programming", PATH_BASE + "/reactive"),
                      new NavRoute("Real-time PostgreSQL", PATH_BASE + "/postgres"),
@@ -74,6 +75,7 @@ namespace Website.Server
                   Icon = "material-icons volunteer_activism",
                   Routes = new NavRoute[]
                   {
+                     new NavRoute ("DotNetify-ResiliencyAddon", PATH_BASE + "/dotnetify-resiliencyaddon"),
                      new NavRoute ("DotNetify-Observer", PATH_BASE + "/dotnetify-observer"),
                      new NavRoute ("DotNetify-LoadTester", PATH_BASE + "/dotnetify-loadtester"),
                      new NavRoute ("DotNetify-Testing", PATH_BASE + "/dotnetify-testing"),

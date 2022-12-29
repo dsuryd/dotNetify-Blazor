@@ -33,6 +33,11 @@ namespace Website.Server
       public string Content => new Markdown("Website.Server.Docs.Overview.Scaleout.md");
    }
 
+   public class AWSIntegration : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Overview.AWSIntegration.md");
+   }
+
    public class GetStarted : BaseVM
    {
       public string Content => new Markdown("Website.Server.Docs.Overview.GetStarted.md");
@@ -146,6 +151,11 @@ namespace Website.Server
    public class DotNetifyObserver : BaseVM
    {
       public string Content => new Markdown("Website.Server.Docs.Premium.DotNetifyObserver.md");
+   }
+
+   public class DotNetifyResiliencyAddon : BaseVM
+   {
+      public string Content => new Markdown("Website.Server.Docs.Premium.DotNetifyResiliencyAddon.md");
    }
 
    #endregion Premium

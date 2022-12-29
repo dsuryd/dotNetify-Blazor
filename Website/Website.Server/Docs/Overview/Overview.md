@@ -14,7 +14,7 @@ DotNetify's design is based on the principle of maintaining strong separation of
 
 - <b>Simple real-time abstraction</b>: push data to client in real-time from multiple classes with no coupling to low-level SignalR details.
 
-- **[Can switch to Web API](webapimode)**: don't need real-time and don't want to use SignalR? Keep your view model stateless and switch to use built-in Web API endpoint instead.
+- **[Portable to AWS](aws-integration)**: switch from self-hosted SignalR to using the Amazon WebSocket API Gateway with HTTP back-end integration with a few simple steps.
 
 - **[Scoped CSS](scopedcss)**: built-in support for SASS-like syntax and replacing styles at runtime!
 

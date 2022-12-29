@@ -10,33 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Docs\Basics.md" />
-    <None Remove="Docs\CRUD.md" />
-    <None Remove="Docs\DI.md" />
-    <None Remove="Docs\DotNetClient.md" />
-    <None Remove="Docs\Examples\ChatRoom.md" />
-    <None Remove="Docs\Examples\CompositeView.md" />
-    <None Remove="Docs\Examples\ControlTypes.md" />
-    <None Remove="Docs\Examples\Dashboard.md" />
-    <None Remove="Docs\Examples\Form.md" />
-    <None Remove="Docs\Examples\HelloWorld.md" />
-    <None Remove="Docs\Examples\SecurePage.md" />
-    <None Remove="Docs\Examples\SimpleList.md" />
-    <None Remove="Docs\Filter.md" />
-    <None Remove="Docs\Middleware.md" />
-    <None Remove="Docs\Multicast.md" />
-    <None Remove="Docs\Overview.md" />
-    <None Remove="Docs\Overview\DataFlow.md" />
-    <None Remove="Docs\Overview\GetStarted.md" />
-    <None Remove="Docs\Overview\Reactive.md" />
-    <None Remove="Docs\Overview\RealtimePostgres.md" />
-    <None Remove="Docs\Premium\DotNetifyLoadTester.md" />
-    <None Remove="Docs\Premium\DotNetifyObserver.md" />
-    <None Remove="Docs\Premium\DotNetifyTesting.md" />
-    <None Remove="Docs\Scaleout.md" />
-    <None Remove="Docs\ScopedCss.md" />
-    <None Remove="Docs\Security.md" />
-    <None Remove="Docs\WebApiMode.md" />
     <None Remove="pulse-ui\index.html" />
     <None Remove="pulse-ui\section.html" />
     <None Remove="pulse-ui\style.css" />
@@ -61,7 +34,9 @@
     <EmbeddedResource Include="Docs\Premium\DotNetifyLoadTester.md" />
     <EmbeddedResource Include="Docs\Premium\DotNetifyObserver.md" />
     <EmbeddedResource Include="Docs\Premium\DotNetifyTesting.md" />
+	<EmbeddedResource Include="Docs\Premium\DotNetifyResiliencyAddon.md" />
     <EmbeddedResource Include="Docs\Overview\Scaleout.md" />
+	<EmbeddedResource Include="Docs\Overview\AWSIntegration.md" />
     <EmbeddedResource Include="Docs\ScopedCss.md" />
     <EmbeddedResource Include="Docs\DI.md" />
     <EmbeddedResource Include="Docs\DotNetClient.md" />
