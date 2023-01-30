@@ -39,6 +39,13 @@ namespace DotNetify.Blazor
       {
          ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
          ContractResolver = new CamelCasePropertyNamesContractResolver()
+         {
+            NamingStrategy = new CamelCaseNamingStrategy()
+            {
+               ProcessDictionaryKeys = false,
+               OverrideSpecifiedNames = true
+            }
+         }
       };
 
       public JSInterop(IJSRuntime jsRuntime)
