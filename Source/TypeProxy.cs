@@ -20,6 +20,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 [assembly: InternalsVisibleTo("DotNetify.Blazor.UnitTests")]
@@ -77,6 +78,22 @@ namespace DotNetify.Blazor
          }
          else
             VMProxy?.DispatchAsync(methodName, value);
+      }
+
+      public T DispatchMethodWithReturnType<T>(string methodName, List<object> args)
+      {
+         DispatchMethod(methodName, args);
+
+         Type type = typeof(T);
+         if (type == typeof(Task))
+            return (T) (object) Task.CompletedTask;
+         else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Task<>))
+         {
+            Type genericType = type.GetGenericArguments().First();
+            var fromResultMethod = typeof(Task).GetMethod(nameof(Task.FromResult));
+            return (T) fromResultMethod.MakeGenericMethod(genericType).Invoke(null, new[] { genericType.IsValueType ? Activator.CreateInstance(genericType) : null });
+         }
+         else return default;
       }
    }
 
@@ -202,10 +219,12 @@ namespace DotNetify.Blazor
       {
          foreach (MethodInfo method in ifaceType.GetMethods(BindingFlags.Instance | BindingFlags.Public).Where(method => !method.IsSpecialName))
          {
-            if (method.ReturnType != typeof(void))
-               throw new TypeProxyException($"Could not create proxy for '{ifaceType.Name}' because method '{method.Name}' is not a void method.");
+            MethodInfo baseMethod;
+            if (method.ReturnType == typeof(void))
+               baseMethod = baseType.GetMethod(nameof(BaseObject<object>.DispatchMethod));
+            else
+               baseMethod = baseType.GetMethod(nameof(BaseObject<object>.DispatchMethodWithReturnType)).MakeGenericMethod(method.ReturnType);
 
-            var baseMethod = baseType.GetMethod("DispatchMethod");
             var paramTypes = method.GetParameters().Select(paramInfo => paramInfo.ParameterType).ToArray();
             var methodBuilder = typeBuilder.DefineMethod(method.Name, MethodAttributes.Public | MethodAttributes.Virtual, method.ReturnType, paramTypes);
 

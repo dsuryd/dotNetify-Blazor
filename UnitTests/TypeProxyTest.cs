@@ -40,6 +40,12 @@ namespace UnitTests
          public void SubmitList(List<string> arg);
 
          public void SubmitDynamic(dynamic arg);
+
+         public Task SubmitAsync();
+
+         public Task<string> SubmitReturningRefTypeAsync();
+
+         public Task<int> SubmitReturningValueTypeAsync();
       }
 
       [TestMethod]
@@ -113,7 +119,7 @@ namespace UnitTests
       }
 
       [TestMethod]
-      public void TypeProxy_CanCreateObjectMethod()
+      public async Task TypeProxy_CanCreateObjectMethod()
       {
          var obj = TypeProxy.Create<IStateWithMethods>();
          string name = null;
@@ -156,6 +162,16 @@ namespace UnitTests
          obj.SubmitDynamic(dynamicValue);
          Assert.AreEqual(nameof(IStateWithMethods.SubmitDynamic), name);
          Assert.AreEqual(dynamicValue, value);
+
+         await obj.SubmitAsync();
+         Assert.AreEqual(nameof(IStateWithMethods.SubmitAsync), name);
+         Assert.IsNull(value);
+
+         await obj.SubmitReturningRefTypeAsync();
+         Assert.AreEqual(nameof(IStateWithMethods.SubmitReturningRefTypeAsync), name);
+
+         await obj.SubmitReturningValueTypeAsync();
+         Assert.AreEqual(nameof(IStateWithMethods.SubmitReturningValueTypeAsync), name);
       }
    }
 }
