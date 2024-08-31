@@ -16,6 +16,7 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace DotNetify.Blazor
 {
@@ -42,6 +43,7 @@ namespace DotNetify.Blazor
       /// <summary>
       /// Callback when getting exception from server-side view model.
       /// </summary>
+      [JsonIgnore]
       public Action<ExceptionEventArgs> ExceptionHandler { get; set; }
    }
 }
